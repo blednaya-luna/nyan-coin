@@ -1,26 +1,38 @@
-import React from "react";
-import { Counter } from "../../features/counter";
-import logo from "./images/logo.svg";
-import "./home.css";
+import React, { FC } from 'react';
+import { Container } from '@material-ui/core';
 
-export const Home: React.FC = () => {
+import { Account } from 'features/Account';
+import { SignUp } from 'features/SignUp';
+import { IssueNyanToken } from 'features/IssueNyanToken';
+import { ReissueNyanToken } from 'features/ReissueNyanToken';
+import { TransferNyanToken } from 'features/TransferNyanToken';
+import { IssueAssetToken } from 'features/IssueAssetToken';
+import { ReissueAssetToken } from 'features/ReissueAssetToken';
+import { UserList } from 'features/UserList';
+import { AssetList } from 'dev/AssetList';
+
+import { useStyles } from './styles';
+
+const Home: FC = () => {
+  const classes = useStyles();
+
   return (
-    <main className="page page--home">
-      <section className="hero">
-        <img src={logo} className="hero__logo" alt="logo" />
-        <Counter className="hero__counter" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="hero__link"
-          href="https://effector.now.sh/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Effector
-        </a>
+    <main>
+      <section>
+        <Account />
+        <AssetList />
+        <UserList />
+        <Container className={classes.root} maxWidth="sm">
+          <SignUp />
+          <IssueNyanToken />
+          <ReissueNyanToken />
+          <TransferNyanToken />
+          <IssueAssetToken />
+          <ReissueAssetToken />
+        </Container>
       </section>
     </main>
   );
 };
+
+export default Home;
