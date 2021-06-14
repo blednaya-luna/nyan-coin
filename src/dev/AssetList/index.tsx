@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
-import { Grid, Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { useGate, useStore } from 'effector-react';
 
 import { AssetItem } from './AssetItem';
+import { AssetsSearchField } from './components';
 import { AssetListGate, $assets } from './model';
+import './init.model';
 import { useStyles } from './styles';
 
 export const AssetList: FC = () => {
@@ -12,8 +14,11 @@ export const AssetList: FC = () => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.root}>
-      <Grid container justify="center">
+    <Grid className={classes.root} container direction="column">
+      <Grid container justify="flex-end">
+        <AssetsSearchField fullWidth={false} />
+      </Grid>
+      <Grid container justify="flex-start">
         {assets.map((asset) => (
           <Grid key={asset.assetId} item>
             <AssetItem
@@ -24,6 +29,6 @@ export const AssetList: FC = () => {
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </Grid>
   );
 };

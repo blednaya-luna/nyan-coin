@@ -1,21 +1,27 @@
-import { createEffect, forward, createStore, combine } from 'effector';
+import {
+  combine,
+  createEffect,
+  createStore,
+  createEvent,
+  restore,
+} from 'effector';
 import { createGate } from 'effector-react';
 
-import { dAppDataByPatter, dAppAssetsBalance } from 'api';
-import { dAppScopeKeys } from 'api/constants';
-import { buildPattern, extractValueFromKey } from 'api/utils';
+import { dAppAssetsBalance, dAppDataByPatter } from 'api';
 import { RawDAppDataItem } from 'api/types';
+import { buildPattern, extractValueFromKey } from 'api/utils';
+import { dAppScopeKeys } from 'api/constants';
+
+import {
+  AssetBalanceItem,
+  AssetDataItem,
+  AssetItem,
+  RawAssetBalance,
+} from './types';
 
 export const AssetListGate = createGate();
 
-type AssetDataItem = {
-  assetId: string;
-  name: string;
-  description: string;
-  price: number;
-};
-
-const fetchAssetsDataFx = createEffect<void, RawDAppDataItem[]>(() =>
+export const fetchAssetsDataFx = createEffect<void, RawDAppDataItem[]>(() =>
   dAppDataByPatter(buildPattern(dAppScopeKeys.asset.data)),
 );
 
@@ -36,20 +42,8 @@ const $assetsData = createStore<AssetDataItem[]>([]).on(
     }, []),
 );
 
-type RawAssetBalance = {
-  balances: {
-    assetId: string;
-    balance: number;
-  }[];
-};
-
-type AssetBalanceItem = {
-  assetId: string;
-  balance: number;
-};
-
-const fetchDAppAssetsBalanceFx = createEffect<void, RawAssetBalance>(() =>
-  dAppAssetsBalance(),
+export const fetchDAppAssetsBalanceFx = createEffect<void, RawAssetBalance>(
+  () => dAppAssetsBalance(),
 );
 
 const $assetsBalance = createStore<AssetBalanceItem[]>([]).on(
@@ -60,8 +54,6 @@ const $assetsBalance = createStore<AssetBalanceItem[]>([]).on(
       balance: assetBalanceItem.balance,
     })),
 );
-
-type AssetItem = AssetDataItem & AssetBalanceItem;
 
 export const $assets = combine(
   [$assetsData, $assetsBalance],
@@ -83,12 +75,5 @@ export const $assets = combine(
     }, []),
 );
 
-forward({
-  from: AssetListGate.open,
-  to: fetchAssetsDataFx,
-});
-
-forward({
-  from: AssetListGate.open,
-  to: fetchDAppAssetsBalanceFx,
-});
+export const setSearchQuery = createEvent<string>();
+export const $searchQuery = restore(setSearchQuery, '');

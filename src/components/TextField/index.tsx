@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FC } from 'react';
-import { TextField as MuiTextField } from '@material-ui/core';
-import { StandardTextFieldProps } from '@material-ui/core/TextField';
+import {
+  TextField as MuiTextField,
+  StandardTextFieldProps,
+} from '@material-ui/core';
 
 export const textFieldOnChangePrepend = (
   event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
