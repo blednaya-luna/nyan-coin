@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "@eslint-kit/patch",
+    "@eslint-kit/base",
+    "@eslint-kit/typescript",
+    "@eslint-kit/prettier",
+    "./.config/eslint.config.json"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
+  "env": {
+    "node": true
+  }
+}

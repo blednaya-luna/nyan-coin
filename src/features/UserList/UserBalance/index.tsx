@@ -4,12 +4,8 @@ import { IconButton, Typography, Box } from '@material-ui/core';
 import { Refresh } from '@material-ui/icons';
 
 import { UserBalanceGate, loadUserBalance, $userBalances } from './model';
+import { UserBalanceProps } from './types';
 import { useStyles } from './styles';
-
-export type UserBalanceProps = {
-  address: string;
-  fetchOnMount?: boolean;
-};
 
 export const UserBalance: FC<UserBalanceProps> = ({
   address,
@@ -22,9 +18,9 @@ export const UserBalance: FC<UserBalanceProps> = ({
   const balance = useStoreMap({
     store: $userBalances,
     keys: [address],
-    fn: (userBalances, [address]) => userBalances[address] ?? null,
+    fn: (userBalances, [address]) => userBalances[address] || null,
   });
-  const userBalance = balance !== null ? `${balance} NT` : '? NT';
+  const userBalance = balance ? `${balance} NT` : '? NT';
   const classes = useStyles();
 
   return (

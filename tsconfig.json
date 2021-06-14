@@ -20,12 +20,11 @@
     "noEmit": true,
     "jsx": "react",
     "baseUrl": "src",
-    "types": ["./node_modules/@waves/waveskeeper-types"]
+    "types": [
+      "./node_modules/@waves/waveskeeper-types"
+    ]
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
+  ]
 }

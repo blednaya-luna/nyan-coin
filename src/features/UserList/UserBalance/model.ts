@@ -10,7 +10,8 @@ import {
 } from 'effector';
 
 import { accountAssetBalance } from 'api';
-import { UserBalanceProps } from './index';
+
+import { UserBalanceProps } from './types';
 
 export const UserBalanceGate = createGate<Required<UserBalanceProps>>();
 

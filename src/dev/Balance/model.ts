@@ -11,7 +11,7 @@ export const fetchDAppBalanceFx = createEffect(() =>
     .then((json) => json),
 );
 
-export const $dAppBalance = createStore(null).on(
+export const $dAppBalance = createStore<number | null>(null).on(
   fetchDAppBalanceFx.doneData,
   (_, response) => response.balance,
 );

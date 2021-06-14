@@ -1,9 +1,4 @@
-import {
-  dAppDataByPatter,
-  buildPattern,
-  buildPatterns,
-  extractValueFromKey,
-} from '..';
+import { buildPattern, buildPatterns, extractValueFromKey } from 'api/utils';
 
 test('buildPattern', () => {
   const actual = buildPattern({ scope: 'asset', key: 'data' });
@@ -20,12 +15,6 @@ test('buildPatterns', () => {
   const expected = '^asset_.*_data$|^asset_.*_price$';
 
   expect(actual).toBe(expected);
-});
-
-test('accountDataByPattern', async () => {
-  const pattern = '^asset_.*_data$';
-
-  const result = await dAppDataByPatter(pattern);
 });
 
 test('extractValueFromKey', () => {
