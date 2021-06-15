@@ -20,7 +20,6 @@ const Home: FC = () => {
     <main>
       <section>
         <Account />
-        <AssetList />
         <UserList />
         <Container className={classes.root} maxWidth="sm">
           <SignUp />
