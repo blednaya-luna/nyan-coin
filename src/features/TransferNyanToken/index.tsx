@@ -7,6 +7,7 @@ import {
   AmountTextField,
 } from './components';
 import { useStyles } from './styles';
+import { CheckboxesTags } from 'components/CheckboxesTags';
 
 export const TransferNyanToken: FC = () => {
   const classes = useStyles();
@@ -25,11 +26,12 @@ export const TransferNyanToken: FC = () => {
       <Grid container direction="column" spacing={1}>
         <Grid item>
           {/* TODO select field */}
-          <RecipientTextField
+          <CheckboxesTags />
+          {/* <RecipientTextField
             required
             label="recipient"
             helperText="Enter the recipient address"
-          />
+          /> */}
         </Grid>
         <Grid item>
           <AmountTextField

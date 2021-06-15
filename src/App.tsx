@@ -1,22 +1,29 @@
 import React, { FC, StrictMode, Suspense } from 'react';
-import { Router } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
-import { createBrowserHistory } from 'history';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+// import { renderRoutes } from 'react-router-config';
+// import { createBrowserHistory } from 'history';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CircularProgress } from '@material-ui/core';
 
-import { routes } from './routes';
+import { Navigation } from 'components/Navigation';
+import { RouteComponents } from 'components/Navigation/RouteComponents';
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 export const App: FC = () => {
   return (
     <StrictMode>
       <ToastContainer />
-      <Router history={history}>
+      <Router>
+        <Navigation />
         <Suspense fallback={<CircularProgress />}>
-          {renderRoutes(routes)}
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+            <RouteComponents />
+          </Switch>
         </Suspense>
       </Router>
     </StrictMode>
