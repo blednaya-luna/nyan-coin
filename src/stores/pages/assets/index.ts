@@ -1,25 +1,20 @@
+import { createGate } from 'effector-react';
 import {
   combine,
   createEffect,
-  createStore,
   createEvent,
+  createStore,
   restore,
 } from 'effector';
-import { createGate } from 'effector-react';
 
 import { dAppAssetsBalance, dAppDataByPatter } from 'api';
-import { RawDAppDataItem } from 'api/types';
 import { buildPattern, extractValueFromKey } from 'api/utils';
 import { dAppScopeKeys } from 'api/constants';
+import { RawDAppDataItem, RawAssetBalance } from 'api/types';
 
-import {
-  AssetBalanceItem,
-  AssetDataItem,
-  AssetItem,
-  RawAssetBalance,
-} from './types';
+import { AssetDataItem, AssetBalanceItem, AssetItem } from './types';
 
-export const AssetListGate = createGate();
+export const AssetsPageGate = createGate();
 
 export const fetchAssetsDataFx = createEffect<void, RawDAppDataItem[]>(() =>
   dAppDataByPatter(buildPattern(dAppScopeKeys.asset.data)),
