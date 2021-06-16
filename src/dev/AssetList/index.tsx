@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
-import { Grid } from '@material-ui/core';
 import { useList } from 'effector-react';
+import { Grid } from '@material-ui/core';
 
-import { $assets } from 'stores/pages/assets';
+import { $assets, selectAssetToExchange } from 'stores/pages/assets';
 
-import { AssetItem } from './AssetItem';
+import { Asset } from './AssetItem';
 
 export const AssetList: FC = () => {
   return (
     <Grid container justify="flex-start">
-      {useList($assets, ({ name, description, price }) => (
+      {useList($assets, (asset) => (
         <Grid item>
-          <AssetItem name={name} description={description} price={price} />
+          <Asset {...asset} onClick={() => selectAssetToExchange(asset)} />
         </Grid>
       ))}
     </Grid>

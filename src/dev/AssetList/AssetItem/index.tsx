@@ -2,23 +2,26 @@ import React, { FC } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 
+import { AssetItem } from 'stores/pages/assets/types';
+
 import { useStyles } from './styles';
 
-type AssetItemProps = {
-  name: string;
-  description: string;
-  price: number;
+type AssetItemProps = AssetItem & {
+  onClick?: () => void;
 };
 
-// TODO add modal with confirm exchange NT to asset
-export const AssetItem: FC<AssetItemProps> = ({ name, description, price }) => {
+export const Asset: FC<AssetItemProps> = ({
+  name,
+  description,
+  price,
+  onClick,
+}) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.card}>
+    <Box className={classes.card} onClick={onClick}>
       <Box className={clsx(classes.cardLeftSide, classes.moveLeft)}>
         <Box className={clsx(classes.cardContent, classes.cardLeftContent)}>
-          <Typography variant="body1">Buy</Typography>
           <Typography variant="body2" color="primary" noWrap>
             {`${price} NT`}
           </Typography>

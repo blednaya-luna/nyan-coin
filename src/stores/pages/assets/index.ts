@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { createGate } from 'effector-react';
 import {
   combine,
@@ -69,6 +70,13 @@ export const $assets = combine(
         : assets;
     }, []),
 );
+
+export const selectAssetToExchange = createEvent<AssetItem>();
+export const resetSelectedAssetToExchange = createEvent<MouseEvent>();
+export const $selectedAssetToExchange = restore(
+  selectAssetToExchange,
+  null,
+).reset(resetSelectedAssetToExchange);
 
 export const setSearchQuery = createEvent<string>();
 export const $searchQuery = restore(setSearchQuery, '');
