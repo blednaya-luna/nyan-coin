@@ -3,7 +3,6 @@ import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 
 import {
   TransferNyanTokenButton,
-  RecipientTextField,
   AmountTextField,
 } from './components';
 import { useStyles } from './styles';
@@ -25,13 +24,7 @@ export const TransferNyanToken: FC = () => {
       <Divider className={classes.divider} />
       <Grid container direction="column" spacing={1}>
         <Grid item>
-          {/* TODO select field */}
           <CheckboxesTags />
-          {/* <RecipientTextField
-            required
-            label="recipient"
-            helperText="Enter the recipient address"
-          /> */}
         </Grid>
         <Grid item>
           <AmountTextField

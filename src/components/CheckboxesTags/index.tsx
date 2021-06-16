@@ -1,41 +1,53 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { useStyles } from './styles';
+import { Chip } from '@material-ui/core';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export const CheckboxesTags = () => {
+    const classes = useStyles()
     return (
         <Autocomplete
             multiple
-            id="checkboxes-tags-demo"
-            options={top100Films}
+            id="checkboxes-tags"
+            options={top100Films} // TODO - use store from props
             disableCloseOnSelect
             getOptionLabel={(option) => option.title}
+
+            renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                    <Chip
+                        {...getTagProps({ index })}
+                        className={classes.chip}
+                        variant='outlined'
+                        label={`${option.title}`}
+                    />
+                ))
+            }
             renderOption={(option, { selected }) => (
-                <React.Fragment>
+                <Fragment>
                     <Checkbox
                         icon={icon}
-                        checkedIcon={checkedIcon}
-                        style={{ marginRight: 8 }}
+                        checkedIcon={<CheckBoxIcon fontSize="small" />}
                         checked={selected}
+                        className={classes.checkbox}
                     />
                     {option.title}
-                </React.Fragment>
+                </Fragment>
             )}
-            // style={}
             renderInput={(params) => (
-                <TextField {...params} variant="outlined" label="recipient" placeholder="Favorites" helperText='Enter the recipient addres' />
+                <TextField {...params} variant="outlined" label="recipient" helperText='Enter the recipient addres' />
             )}
         />
     );
 }
 
-const top100Films = [
+export const top100Films = [
     { title: 'The Shawshank Redemption', year: 1994 },
     { title: 'The Godfather', year: 1972 },
     { title: 'Saving Private Ryan', year: 1998 },
