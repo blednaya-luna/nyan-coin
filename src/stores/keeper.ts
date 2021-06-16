@@ -2,9 +2,10 @@ import { combine, createEffect, createEvent, guard, restore } from 'effector';
 import { createGate } from 'effector-react';
 import { delay } from 'patronum';
 import { nodeInteraction } from '@waves/waves-transactions';
-import { toast } from 'react-toastify';
 
 import { signInWithKeeper } from 'features/SignIn/model';
+import { notify } from 'utils/notify';
+import { getExplorerLink } from 'utils/getExplorerLink';
 
 import {
   setAddress,
@@ -45,44 +46,63 @@ const updateWavesKeeper = async (
 };
 
 const setupWavesKeeperFx = createEffect(() => {
-  if (window.WavesKeeper) {
+  if ('WavesKeeper' in window) {
     setIsWavesKeeperInstalled(true);
-    console.info('WavesKeeper is installed');
   } else {
-    console.error('WavesKeeper is not installed');
-    toast.warn('Install WavesKeeper');
+    notify.warning({
+      title: 'Install WavesKeeper',
+      link: {
+        url: 'https://docs.waves.tech/en/ecosystem/waves-keeper',
+        text: 'WavesKeeper',
+      },
+    });
   }
 });
 
 const setupSynchronizationWithWavesKeeperFx = createEffect(async () => {
   // needed because types from WavesKeeper definitions is incorrect
-  const wavesKeeperAPI = (await window.WavesKeeper
-    .initialPromise) as unknown as WavesKeeper.TWavesKeeperApi;
+  const wavesKeeperInitialPromise = window.WavesKeeper
+    .initialPromise as unknown as Promise<WavesKeeper.TWavesKeeperApi>;
+  const wavesKeeperAPI = await wavesKeeperInitialPromise;
+  setIsWavesKeeperInitialized(true);
 
-  if (wavesKeeperAPI) {
-    setIsWavesKeeperInitialized(true);
-    console.info('WavesKeeper is initialized');
+  const wavesKeeperPublicState = await wavesKeeperAPI.publicState();
+  setIsAuthorized(true);
 
-    const wavesKeeperPublicState = await wavesKeeperAPI.publicState();
-    if (wavesKeeperPublicState) {
-      setIsAuthorized(true);
-      console.info('Application is authorized in WavesKeeper');
-
-      await updateWavesKeeper(wavesKeeperPublicState);
-      window.WavesKeeper.on('update', updateWavesKeeper);
-    }
-  }
+  await updateWavesKeeper(wavesKeeperPublicState);
+  window.WavesKeeper.on('update', updateWavesKeeper);
 });
 
-export const sendTx = createEffect((tx: WavesKeeper.TSignTransactionData) =>
-  window.WavesKeeper.signAndPublishTransaction(tx)
-    .then((tx) => {
-      const transaction = JSON.parse(tx);
-      console.log('Hurray! Ive invoked the script!!!', transaction);
-    })
-    .catch((error) => {
-      console.error('Something went wrong', error);
-    }),
+export const sendTx = createEffect(
+  async (tx: WavesKeeper.TSignTransactionData) => {
+    try {
+      const rawTx = await WavesKeeper.signAndPublishTransaction(tx);
+      const parsedTx = JSON.parse(rawTx);
+
+      const wavesKeeperPublicState = await WavesKeeper.publicState();
+      notify.info({
+        title: 'Transaction sent',
+        link: {
+          url: getExplorerLink(
+            wavesKeeperPublicState.network.code,
+            parsedTx.id,
+            'tx',
+          ),
+          text: 'View transaction',
+        },
+      });
+
+      return parsedTx;
+    } catch (error) {
+      notify.error({
+        title: error.message,
+        description: error.data,
+        code: error.code,
+      });
+
+      return error;
+    }
+  },
 );
 
 delay({

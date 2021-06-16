@@ -1,6 +1,7 @@
 import { createEvent, restore, createEffect } from 'effector';
 import copyToClipboard from 'copy-to-clipboard';
-import { toast } from 'react-toastify';
+
+import { notify } from 'utils/notify';
 
 export const setAddress = createEvent<string>();
 export const $address = restore(setAddress, null);
@@ -20,5 +21,7 @@ export const $fee = $isScripted.map(($isScripted) =>
 
 export const copyAddressToClipboardFx = createEffect((address: string) => {
   copyToClipboard(address);
-  toast.info('Address copied!');
+  notify.info({
+    title: 'Address copied!',
+  });
 });

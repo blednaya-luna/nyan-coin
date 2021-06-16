@@ -1,5 +1,5 @@
-export const getNetwork = (url: string) => {
-  switch (url) {
+export const getNetwork = (networkCode: string) => {
+  switch (networkCode) {
     case 'T':
       return 'Testnet';
     case 'W':
