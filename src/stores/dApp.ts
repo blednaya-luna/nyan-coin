@@ -7,8 +7,8 @@ import { sendTx } from './keeper';
 
 type CallCallableFunctionFxPayload = {
   func: string;
-  args: any;
-  payment?: any;
+  args: WavesKeeper.TCallArgs[];
+  payment?: WavesKeeper.TMoney[];
   fee: number;
 };
 

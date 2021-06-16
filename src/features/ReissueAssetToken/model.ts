@@ -1,6 +1,7 @@
 import { attach, createEvent, restore } from 'effector';
 
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
+import { argType } from 'api/constants';
 
 export const setAssetId = createEvent<string>();
 export const $assetId = restore(setAssetId, '');
@@ -18,11 +19,11 @@ export const reissueAssetTokenFx = attach({
     func: 'reissueAssetToken',
     args: [
       {
-        type: 'string',
+        type: argType.string,
         value: assetId,
       },
       {
-        type: 'integer',
+        type: argType.integer,
         value: quantity,
       },
     ],

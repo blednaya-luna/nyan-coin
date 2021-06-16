@@ -1,6 +1,7 @@
 import { attach, createEvent, restore } from 'effector';
 
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
+import { argType } from 'api/constants';
 
 export const setEmail = createEvent<string>();
 export const $email = restore(setEmail, '');
@@ -14,7 +15,7 @@ export const signUpFx = attach({
     func: 'signUp',
     args: [
       {
-        type: 'string',
+        type: argType.string,
         value: email,
       },
     ],

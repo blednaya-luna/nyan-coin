@@ -9,7 +9,6 @@ import { TransferNyanToken } from 'features/TransferNyanToken';
 import { IssueAssetToken } from 'features/IssueAssetToken';
 import { ReissueAssetToken } from 'features/ReissueAssetToken';
 import { UserList } from 'features/UserList';
-import { AssetList } from 'dev/AssetList';
 
 import { useStyles } from './styles';
 

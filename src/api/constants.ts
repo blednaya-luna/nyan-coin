@@ -17,3 +17,8 @@ export const dAppScopeKeys = {
     email: { scope: 'user', key: 'email' },
   },
 };
+
+export const argType = {
+  string: 'string',
+  integer: 'integer',
+} as const;
