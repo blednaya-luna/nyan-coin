@@ -8,7 +8,7 @@ import { Asset } from './AssetItem';
 
 export const AssetList: FC = () => {
   return (
-    <Grid container justify="flex-start">
+    <Grid container justify="center">
       {useList($filteredAssets, (asset) => (
         <Grid item>
           <Asset {...asset} onClick={() => selectAssetToExchange(asset)} />

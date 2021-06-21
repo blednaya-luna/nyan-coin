@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useGate } from 'effector-react';
-import { Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 
 import { AssetsSearchField } from 'dev/AssetList/AssetsSearchField';
 import { AssetList } from 'dev/AssetList';
@@ -15,16 +15,18 @@ const Assets: FC = () => {
   const classes = useStyles();
 
   return (
-    <section>
-      <Grid className={classes.root} container direction="column">
-        <Grid container justify="space-between" alignItems="center">
-          <Typography variant="h6">Assets</Typography>
-          <AssetsSearchField fullWidth={false} />
+    <>
+      <Box className={classes.root}>
+        <Grid container direction="column">
+          <Grid container justify="space-between" alignItems="center">
+            <Typography variant="h6">Assets</Typography>
+            <AssetsSearchField fullWidth={false} />
+          </Grid>
+          <AssetList />
         </Grid>
-        <AssetList />
-        <ExchangeAssetModal />
-      </Grid>
-    </section>
+      </Box>
+      <ExchangeAssetModal />
+    </>
   );
 };
 
