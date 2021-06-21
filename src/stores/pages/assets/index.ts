@@ -11,7 +11,7 @@ import { debounce, combineEvents } from 'patronum';
 
 import { dAppAssetsBalance, dAppDataByPatter } from 'api';
 import { buildPattern } from 'api/utils';
-import { dAppScopeKeys, dAppScript } from 'api/constants';
+import { dAppScopeKeys, dAppScript, nyanCoin } from 'api/constants';
 import { RawDAppDataItem, RawAssetBalance } from 'api/types';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 
@@ -81,6 +81,12 @@ forward({
         {
           type: 'integer',
           value: 1,
+        },
+      ],
+      payment: [
+        {
+          assetId: nyanCoin,
+          amount: asset.price,
         },
       ],
     }),
