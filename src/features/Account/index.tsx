@@ -28,40 +28,36 @@ export const Account: FC = () => {
 
   return (
     <>
-      <Grid
-        className={classes.root}
-        container
-        alignItems="center"
-        justify="flex-end"
-        spacing={1}
-      >
-        {isAuthorized ? (
-          <>
-            <Grid item>
-              {address && <Address address={address} />}
-              {email && <Email email={email} />}
-              {network && <Network network={network} />}
-            </Grid>
-            <Grid item>{address && <Avatar address={address} />}</Grid>
-            <Grid item>
-              <IconButton size="small">
-                <ExitToApp fontSize="small" />
-              </IconButton>
-            </Grid>
-          </>
-        ) : (
-          <>
-            <Grid item>
-              <Button
-                endIcon={<AccountCircle />}
-                onClick={() => toggleOpenSignInModal()}
-              >
-                Sign in
-              </Button>
-            </Grid>
-          </>
-        )}
-      </Grid>
+      <Box className={classes.root}>
+        <Grid container alignItems="center" justify="flex-end" spacing={1}>
+          {isAuthorized ? (
+            <>
+              <Grid item>
+                {address && <Address address={address} />}
+                {email && <Email email={email} />}
+                {network && <Network network={network} />}
+              </Grid>
+              <Grid item>{address && <Avatar address={address} />}</Grid>
+              <Grid item>
+                <IconButton size="small">
+                  <ExitToApp fontSize="small" />
+                </IconButton>
+              </Grid>
+            </>
+          ) : (
+            <>
+              <Grid item>
+                <Button
+                  endIcon={<AccountCircle />}
+                  onClick={() => toggleOpenSignInModal()}
+                >
+                  Sign in
+                </Button>
+              </Grid>
+            </>
+          )}
+        </Grid>
+      </Box>
       <SignIn />
       <SignUp />
     </>
