@@ -3,10 +3,11 @@ export const fetcher = (url: string) => fetch(url);
 type Match = {
   scope: string;
   key: string;
+  value?: string;
 };
 
-export const buildPattern = ({ scope, key }: Match) => {
-  return `^${scope}_.*_${key}$`;
+export const buildPattern = ({ scope, key, value = '.*' }: Match) => {
+  return `^${scope}_${value}_${key}$`;
 };
 
 export const buildPatterns = (matches: Match[]) => {
