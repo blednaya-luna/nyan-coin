@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Container } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
-import { Account } from 'features/Account';
+import { SignInWithKeeper } from 'features/admin/SignInWithKeeper';
 import { IssueNyanToken } from 'features/admin/IssueNyanToken';
 import { ReissueNyanToken } from 'features/admin/ReissueNyanToken';
 import { TransferNyanToken } from 'features/admin/TransferNyanToken';
@@ -10,23 +10,33 @@ import { ReissueAssetToken } from 'features/admin/ReissueAssetToken';
 
 import { useStyles } from './styles';
 
-const Home: FC = () => {
+const Admin: FC = () => {
   const classes = useStyles();
 
   return (
-    <main>
-      <section>
-        <Account />
-        <Container className={classes.root} maxWidth="sm">
+    <Container className={classes.root} maxWidth="sm">
+      <Grid container direction="column" spacing={2}>
+        <Grid item>
+          <SignInWithKeeper />
+        </Grid>
+        <Grid item>
           <IssueNyanToken />
+        </Grid>
+        <Grid item>
           <ReissueNyanToken />
+        </Grid>
+        <Grid item>
           <TransferNyanToken />
+        </Grid>
+        <Grid item>
           <IssueAssetToken />
+        </Grid>
+        <Grid item>
           <ReissueAssetToken />
-        </Container>
-      </section>
-    </main>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
-export default Home;
+export default Admin;

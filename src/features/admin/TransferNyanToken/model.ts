@@ -1,7 +1,7 @@
 import { attach, createEvent, restore } from 'effector';
 
+import { argType, dAppScript } from 'api/constants';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { argType } from 'api/constants';
 
 export const setRecipient = createEvent<string>();
 export const $recipient = restore(setRecipient, '');
@@ -16,7 +16,7 @@ export const transferNyanTokenFx = attach({
     amount: $amount,
   },
   mapParams: (_: void, { recipient, amount }) => ({
-    func: 'transferNyanToken',
+    func: dAppScript.transferToken,
     args: [
       {
         type: argType.string,

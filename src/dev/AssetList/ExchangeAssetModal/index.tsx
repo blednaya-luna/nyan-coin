@@ -14,6 +14,7 @@ import { Close } from '@material-ui/icons';
 import {
   $selectedAssetToExchange,
   resetSelectedAssetToExchange,
+  exchangeAssetToken,
 } from 'stores/pages/assets';
 import { Button } from 'components/Button';
 
@@ -25,14 +26,14 @@ export const ExchangeAssetModal: FC = () => {
   const classes = useStyles();
 
   return selectedAsset ? (
-    <Dialog open={true} onClose={resetSelectedAssetToExchange}>
+    <Dialog open={true} onClose={() => resetSelectedAssetToExchange()}>
       <DialogTitle disableTypography>
         <Grid container justify="center">
           <Typography variant="h6">Confirm exchange</Typography>
           <IconButton
             className={classes.closeButton}
             size="small"
-            onClick={resetSelectedAssetToExchange}
+            onClick={() => resetSelectedAssetToExchange()}
           >
             <Close />
           </IconButton>
@@ -47,8 +48,10 @@ export const ExchangeAssetModal: FC = () => {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button onClick={resetSelectedAssetToExchange}>Cancel</Button>
-        <Button>Exchange</Button>
+        <Button onClick={() => resetSelectedAssetToExchange()}>Cancel</Button>
+        <Button onClick={() => exchangeAssetToken(selectedAsset)}>
+          Exchange
+        </Button>
       </DialogActions>
     </Dialog>
   ) : null;

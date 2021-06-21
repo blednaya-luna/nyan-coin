@@ -1,20 +1,15 @@
-import { combine, createEffect, createEvent, guard, restore } from 'effector';
+import { createEffect, createEvent, restore } from 'effector';
 import { createGate } from 'effector-react';
-import { delay } from 'patronum';
-import { nodeInteraction } from '@waves/waves-transactions';
 
-import { signInWithKeeper } from 'features/SignIn/model';
 import { notify } from 'utils/notify';
 import { getExplorerLink } from 'utils/getExplorerLink';
 
-import {
-  setAddress,
-  setIsAuthorized,
-  setIsScripted,
-  setNetwork,
-} from './account';
+import { setIsAuthorized } from '../account';
+import { updateWavesKeeper } from './utils';
 
 export const WavesKeeperGate = createGate();
+
+export const signInWithKeeper = createEvent();
 
 export const setIsWavesKeeperInstalled = createEvent<boolean>();
 export const $isWavesKeeperInstalled = restore(
@@ -22,30 +17,7 @@ export const $isWavesKeeperInstalled = restore(
   false,
 );
 
-export const setIsWavesKeeperInitialized = createEvent<boolean>();
-export const $isWavesKeeperInitialized = restore(
-  setIsWavesKeeperInitialized,
-  false,
-);
-
-const updateWavesKeeper = async (
-  publicState: WavesKeeper.IPublicStateResponse,
-) => {
-  setNetwork(publicState.network);
-
-  if (publicState.account) {
-    setAddress(publicState.account.address);
-
-    const scriptInfo = await nodeInteraction.scriptInfo(
-      publicState.account.address,
-      publicState.network.server,
-    );
-    const isScripted = scriptInfo.script !== null;
-    setIsScripted(isScripted);
-  }
-};
-
-const setupWavesKeeperFx = createEffect(() => {
+export const setupWavesKeeperFx = createEffect(() => {
   if ('WavesKeeper' in window) {
     setIsWavesKeeperInstalled(true);
   } else {
@@ -59,18 +31,15 @@ const setupWavesKeeperFx = createEffect(() => {
   }
 });
 
-const setupSynchronizationWithWavesKeeperFx = createEffect(async () => {
+export const setupSynchronizationWithWavesKeeperFx = createEffect(async () => {
   // needed because types from WavesKeeper definitions is incorrect
   const wavesKeeperInitialPromise = window.WavesKeeper
     .initialPromise as unknown as Promise<WavesKeeper.TWavesKeeperApi>;
   const wavesKeeperAPI = await wavesKeeperInitialPromise;
-  setIsWavesKeeperInitialized(true);
-
   const wavesKeeperPublicState = await wavesKeeperAPI.publicState();
-  setIsAuthorized(true);
-
   await updateWavesKeeper(wavesKeeperPublicState);
   window.WavesKeeper.on('update', updateWavesKeeper);
+  setIsAuthorized(true);
 });
 
 export const sendTx = createEffect(
@@ -104,19 +73,3 @@ export const sendTx = createEffect(
     }
   },
 );
-
-delay({
-  source: WavesKeeperGate.open,
-  timeout: 1000,
-  target: setupWavesKeeperFx,
-});
-
-guard({
-  source: signInWithKeeper,
-  filter: combine(
-    [$isWavesKeeperInstalled, $isWavesKeeperInitialized],
-    ([isWavesKeeperInstalled, isWavesKeeperInitialized]) =>
-      isWavesKeeperInstalled && !isWavesKeeperInitialized,
-  ),
-  target: setupSynchronizationWithWavesKeeperFx,
-});

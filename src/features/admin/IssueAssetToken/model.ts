@@ -1,7 +1,8 @@
 import { attach, combine, createEvent, restore } from 'effector';
 
+import { argType, dAppScript } from 'api/constants';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { argType } from 'api/constants';
+import { calcFee } from 'utils/calcFee';
 
 export const setAssetName = createEvent<string>();
 export const $assetName = restore(setAssetName, '');
@@ -40,7 +41,7 @@ export const issueAssetTokenFx = attach({
       assetData,
     },
   ) => ({
-    func: 'issueAssetToken',
+    func: dAppScript.issueAssetToken,
     args: [
       {
         type: argType.string,
@@ -63,6 +64,6 @@ export const issueAssetTokenFx = attach({
         value: assetData,
       },
     ],
-    additionalFee: 1,
+    additionalFee: calcFee({ issue: true }),
   }),
 });

@@ -1,27 +1,19 @@
 import { attach, createEvent, restore } from 'effector';
 
+import { argType, dAppScript } from 'api/constants';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { argType } from 'api/constants';
-
-export const setAssetId = createEvent<string>();
-export const $assetId = restore(setAssetId, '');
 
 export const setQuantity = createEvent<number>();
 export const $quantity = restore(setQuantity, 0);
 
-export const reissueAssetTokenFx = attach({
+export const reissueNyanTokenFx = attach({
   effect: callCallableFunctionWithFeeFx,
   source: {
-    assetId: $assetId,
     quantity: $quantity,
   },
-  mapParams: (_: void, { quantity, assetId }) => ({
-    func: 'reissueAssetToken',
+  mapParams: (_: void, { quantity }) => ({
+    func: dAppScript.reissueToken,
     args: [
-      {
-        type: argType.string,
-        value: assetId,
-      },
       {
         type: argType.integer,
         value: quantity,
