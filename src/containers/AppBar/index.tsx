@@ -11,7 +11,7 @@ import { GoHomeButton } from 'containers/GoHomeButton';
 import { ToggleThemeButton } from 'containers/ToggleThemeButton';
 import { UserAccount } from 'containers/UserAccount';
 import { SignIn } from 'features/SignIn';
-import { SignUp } from 'dev/SignUp';
+import { SignUp } from 'features/SignUp';
 import { $isAuthorized } from 'stores/account';
 import 'stores/account/init';
 
