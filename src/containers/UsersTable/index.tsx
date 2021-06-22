@@ -51,7 +51,11 @@ export const UsersTable: FC = () => {
                 </IconButton>
               </TableCell>
               <TableCell>
-                <UserBalance address={user.address} fetchOnMount />
+                <UserBalance
+                  address={user.address}
+                  fetchOnMount
+                  disableTypography
+                />
               </TableCell>
             </TableRow>
           ))}

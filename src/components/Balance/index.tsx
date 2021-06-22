@@ -4,18 +4,27 @@ import { Refresh } from '@material-ui/icons';
 
 import { useStyles } from './styles';
 
-type BalanceProps = {
+export type BalanceProps = {
   balance: number | null;
   refreshBalance?: () => void;
+  disableTypography?: boolean;
 };
 
-export const Balance: FC<BalanceProps> = ({ balance, refreshBalance }) => {
+export const Balance: FC<BalanceProps> = ({
+  balance,
+  refreshBalance,
+  disableTypography,
+}) => {
   const classes = useStyles();
   const userBalance = balance ? `${balance} NT` : '0 NT';
 
   return (
     <Box className={classes.root}>
-      <Typography variant="caption">{userBalance}</Typography>
+      {disableTypography ? (
+        userBalance
+      ) : (
+        <Typography variant="caption">{userBalance}</Typography>
+      )}
       <IconButton size="small" color="inherit" onClick={refreshBalance}>
         <Refresh fontSize="small" />
       </IconButton>
