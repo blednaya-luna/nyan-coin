@@ -5,8 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { CircularProgress } from 'components/CircularProgress';
-
-import { routes } from './routes';
+import { routes } from 'routes/routes';
 
 export const App: FC = () => {
   return (
