@@ -1,25 +1,26 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router';
-import { Container, Grid, Link, Typography } from '@material-ui/core';
+import { Box, Grid, Link } from '@material-ui/core';
 
 import { APP_LOCATION } from 'routes/constants';
-import { Account } from 'features/Account';
+import { AppBar } from 'containers/AppBar';
+
+import { useStyles } from '../styles';
 
 const Home: FC = () => {
   const { push } = useHistory();
+  const classes = useStyles();
 
   return (
     <>
-      <Account />
-      <Container maxWidth="sm">
+      <AppBar title="Home" />
+      <Box className={classes.root}>
         <Grid container direction="column" alignItems="flex-start" spacing={1}>
-          <Grid item>
-            <Typography variant="body2">Home page</Typography>
-          </Grid>
           <Grid item>
             <Link
               component="button"
               variant="body2"
+              color="inherit"
               onClick={() => {
                 push(APP_LOCATION.assets);
               }}
@@ -31,6 +32,7 @@ const Home: FC = () => {
             <Link
               component="button"
               variant="body2"
+              color="inherit"
               onClick={() => {
                 push(APP_LOCATION.users);
               }}
@@ -42,6 +44,7 @@ const Home: FC = () => {
             <Link
               component="button"
               variant="body2"
+              color="inherit"
               onClick={() => {
                 push(APP_LOCATION.admin);
               }}
@@ -50,7 +53,7 @@ const Home: FC = () => {
             </Link>
           </Grid>
         </Grid>
-      </Container>
+      </Box>
     </>
   );
 };

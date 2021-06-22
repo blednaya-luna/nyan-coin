@@ -1,7 +1,7 @@
 import { forward, guard } from 'effector';
 
-import { toggleOpenSignInModal } from 'features/Auth/SignIn/model';
-import { signUpFx, toggleOpenSignUpModal } from 'features/Auth/SignUp/model';
+import { toggleOpenSignInModal } from 'features/SignIn/model';
+import { signUpFx, toggleOpenSignUpModal } from 'dev/SignUp/model';
 
 import { $address, getUserDataFx, setIsAuthorized } from '.';
 

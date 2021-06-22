@@ -1,15 +1,14 @@
 import React, { FC } from 'react';
 import { Container, Grid } from '@material-ui/core';
 
-import { AppBar } from 'components/AppBar';
-import { SignInWithKeeper } from 'features/SignInWithKeeper';
+import { AppBar } from 'containers/AppBar';
 import { IssueNyanToken } from 'features/IssueNyanToken';
 import { ReissueNyanToken } from 'features/ReissueNyanToken';
 import { TransferNyanToken } from 'features/TransferNyanToken';
 import { IssueAssetToken } from 'features/IssueAssetToken';
 import { ReissueAssetToken } from 'features/ReissueAssetToken';
 
-import { useStyles } from './styles';
+import { useStyles } from '../styles';
 
 const Admin: FC = () => {
   const classes = useStyles();
@@ -19,9 +18,6 @@ const Admin: FC = () => {
       <AppBar title="Admin panel" />
       <Container className={classes.root} maxWidth="sm">
         <Grid container direction="column" spacing={2}>
-          <Grid item>
-            <SignInWithKeeper />
-          </Grid>
           <Grid item>
             <IssueNyanToken />
           </Grid>

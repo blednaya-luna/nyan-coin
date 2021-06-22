@@ -4,7 +4,8 @@ import { renderRoutes } from 'react-router-config';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ThemeProvider } from 'themes/ThemeProvider';
+import { ThemeProvider } from 'containers/ThemeProvider';
+import { ConnectWavesKeeper } from 'containers/ConnectWavesKeeper';
 import { CircularProgress } from 'components/CircularProgress';
 import { routes } from 'routes/routes';
 
@@ -12,12 +13,12 @@ export const App: FC = () => {
   return (
     <StrictMode>
       <ThemeProvider>
-        <ToastContainer />
         <BrowserRouter>
           <Suspense fallback={<CircularProgress />}>
-            {renderRoutes(routes)}
+            <ConnectWavesKeeper>{renderRoutes(routes)}</ConnectWavesKeeper>
           </Suspense>
         </BrowserRouter>
+        <ToastContainer />
       </ThemeProvider>
     </StrictMode>
   );

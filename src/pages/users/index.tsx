@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import { useGate } from 'effector-react';
 import { Box } from '@material-ui/core';
 
-import { AppBar } from 'components/AppBar';
-import { UsersSearchField } from 'features/UsersTable/UsersSearchField';
-import { UsersTable } from 'features/UsersTable';
+import { AppBar } from 'containers/AppBar';
+import { UsersSearchField } from 'containers/UsersSearchField';
+import { UsersTable } from 'containers/UsersTable';
 import { UsersPageGate } from 'stores/pages/users';
 import 'stores/pages/users/init';
 
-import { useStyles } from './styles';
+import { useStyles } from '../styles';
 
 const Users: FC = () => {
   useGate(UsersPageGate);
@@ -16,7 +16,7 @@ const Users: FC = () => {
 
   return (
     <>
-      <AppBar title="Registered users" search={<UsersSearchField />} />
+      <AppBar title="Registered users" searchComponent={<UsersSearchField />} />
       <Box className={classes.root}>
         <UsersTable />
       </Box>
