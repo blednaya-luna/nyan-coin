@@ -7,10 +7,10 @@ import { UserBalanceItem, UserBalanceProps } from './types';
 
 export const UserBalanceGate = createGate<UserBalanceProps>();
 
-export const loadUserBalance = createEvent();
+export const loadUserBalance = createEvent<Pick<UserBalanceProps, 'address'>>();
 
 export const fetchUserBalanceFx = createEffect<
-  UserBalanceProps,
+  Pick<UserBalanceProps, 'address'>,
   UserBalanceItem
 >(({ address }) => accountAssetBalance({ address }));
 

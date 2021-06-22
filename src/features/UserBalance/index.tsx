@@ -24,7 +24,7 @@ export const UserBalance: FC<
   return (
     <Balance
       balance={balance}
-      refreshBalance={refreshUserBalance}
+      refreshBalance={() => refreshUserBalance({ address: props.address })}
       disableTypography={disableTypography}
     />
   );

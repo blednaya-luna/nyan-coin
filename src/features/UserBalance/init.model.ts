@@ -1,4 +1,4 @@
-import { attach, forward, guard } from 'effector';
+import { forward, guard } from 'effector';
 
 import { fetchUserBalanceFx, loadUserBalance, UserBalanceGate } from './model';
 
@@ -12,8 +12,5 @@ guard({
 
 forward({
   from: loadUserBalance,
-  to: attach({
-    effect: fetchUserBalanceFx,
-    source: UserBalanceGate.state,
-  }),
+  to: fetchUserBalanceFx,
 });
