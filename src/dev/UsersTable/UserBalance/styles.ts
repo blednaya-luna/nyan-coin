@@ -4,6 +4,5 @@ export const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    flexShrink: 0,
   },
 }));

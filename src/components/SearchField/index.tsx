@@ -1,22 +1,37 @@
 import React, { FC } from 'react';
-import { StandardTextFieldProps } from '@material-ui/core';
+import { Box, InputBase, InputBaseProps } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 
 import {
-  TextField,
   textFieldOnChangePrepend,
   textFieldOnChangePrependToNumber,
 } from 'components/TextField';
 
-export const SearchField: FC<StandardTextFieldProps> = (props) => {
+import { useStyles } from './styles';
+
+type SearchProps = {
+  value: InputBaseProps['value'];
+  onChange: InputBaseProps['onChange'];
+};
+
+export const SearchField: FC<SearchProps> = ({ value, onChange }) => {
+  const classes = useStyles();
+
   return (
-    <TextField
-      placeholder="Search…"
-      InputProps={{
-        startAdornment: <Search />,
-      }}
-      {...props}
-    />
+    <Box className={classes.search}>
+      <Box className={classes.searchIcon}>
+        <Search />
+      </Box>
+      <InputBase
+        value={value}
+        onChange={onChange}
+        placeholder="Search…"
+        classes={{
+          root: classes.inputRoot,
+          input: classes.inputInput,
+        }}
+      />
+    </Box>
   );
 };
 

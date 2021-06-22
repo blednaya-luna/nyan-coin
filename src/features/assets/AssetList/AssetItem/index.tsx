@@ -22,7 +22,7 @@ export const Asset: FC<AssetItemProps> = ({
     <Box className={classes.card} onClick={onClick}>
       <Box className={clsx(classes.cardLeftSide, classes.moveLeft)}>
         <Box className={clsx(classes.cardContent, classes.cardLeftContent)}>
-          <Typography variant="body2" color="primary" noWrap>
+          <Typography variant="body2" noWrap>
             {`${price} NT`}
           </Typography>
         </Box>

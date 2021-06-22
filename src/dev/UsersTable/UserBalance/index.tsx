@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useGate, useStoreMap } from 'effector-react';
-import { IconButton, Typography, Box } from '@material-ui/core';
+import { IconButton, Box } from '@material-ui/core';
 import { Refresh } from '@material-ui/icons';
 
 import { UserBalanceGate, loadUserBalance, $userBalances } from './model';
@@ -20,14 +20,12 @@ export const UserBalance: FC<UserBalanceProps> = ({
     keys: [address],
     fn: (userBalances, [address]) => userBalances[address] || null,
   });
-  const userBalance = balance ? `${balance} NT` : '? NT';
+  const userBalance = balance ? `${balance} NT` : '0 NT';
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
-      <Typography variant="body2" color="primary">
-        {userBalance}
-      </Typography>
+      {userBalance}
       <IconButton size="small" onClick={loadUserBalance}>
         <Refresh fontSize="small" />
       </IconButton>

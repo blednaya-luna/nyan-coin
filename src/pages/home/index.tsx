@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router';
 import { Container, Grid, Link, Typography } from '@material-ui/core';
 
+import { APP_LOCATION } from 'routes/constants';
 import { Account } from 'features/Account';
 
 const Home: FC = () => {
@@ -20,7 +21,7 @@ const Home: FC = () => {
               component="button"
               variant="body2"
               onClick={() => {
-                push('/assets');
+                push(APP_LOCATION.assets);
               }}
             >
               Assets
@@ -31,7 +32,18 @@ const Home: FC = () => {
               component="button"
               variant="body2"
               onClick={() => {
-                push('/admin');
+                push(APP_LOCATION.users);
+              }}
+            >
+              Registered users
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link
+              component="button"
+              variant="body2"
+              onClick={() => {
+                push(APP_LOCATION.admin);
               }}
             >
               Admin

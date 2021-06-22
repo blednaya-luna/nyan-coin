@@ -1,0 +1,23 @@
+import React, { FC } from 'react';
+import { useList } from 'effector-react';
+import { Grid } from '@material-ui/core';
+
+import { $filteredAssets, selectAssetToExchange } from 'stores/pages/assets';
+
+import { Asset } from './AssetItem';
+import { ExchangeAssetModal } from './ExchangeAssetModal';
+
+export const AssetList: FC = () => {
+  return (
+    <>
+      <Grid container justify="center">
+        {useList($filteredAssets, (asset) => (
+          <Grid item>
+            <Asset {...asset} onClick={() => selectAssetToExchange(asset)} />
+          </Grid>
+        ))}
+      </Grid>
+      <ExchangeAssetModal />
+    </>
+  );
+};
