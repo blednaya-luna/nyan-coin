@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { Container, Grid } from '@material-ui/core';
 
 import { AppBar } from 'components/AppBar';
-import { SignInWithKeeper } from 'features/admin/SignInWithKeeper';
-import { IssueNyanToken } from 'features/admin/IssueNyanToken';
-import { ReissueNyanToken } from 'features/admin/ReissueNyanToken';
-import { TransferNyanToken } from 'features/admin/TransferNyanToken';
-import { IssueAssetToken } from 'features/admin/IssueAssetToken';
-import { ReissueAssetToken } from 'features/admin/ReissueAssetToken';
+import { SignInWithKeeper } from 'features/SignInWithKeeper';
+import { IssueNyanToken } from 'features/IssueNyanToken';
+import { ReissueNyanToken } from 'features/ReissueNyanToken';
+import { TransferNyanToken } from 'features/TransferNyanToken';
+import { IssueAssetToken } from 'features/IssueAssetToken';
+import { ReissueAssetToken } from 'features/ReissueAssetToken';
 
 import { useStyles } from './styles';
 

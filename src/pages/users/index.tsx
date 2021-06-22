@@ -3,7 +3,7 @@ import { useGate } from 'effector-react';
 import { Box } from '@material-ui/core';
 
 import { AppBar } from 'components/AppBar';
-import { UsersTable } from 'dev/UsersTable';
+import { UsersTable } from 'features/UsersTable';
 import { UsersPageGate } from 'stores/pages/users';
 import 'stores/pages/users/init';
 
