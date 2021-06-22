@@ -43,7 +43,7 @@ export const ExchangeAssetModal: FC = () => {
         <Grid container>
           <Typography>{`Do you want to exchange ${selectedAsset.price} NT tokens for "${selectedAsset.name}"?`}</Typography>
         </Grid>
-        <Grid container justify="center">
+        <Grid className={classes.assetContainer} container justify="center">
           <Asset {...selectedAsset} />
         </Grid>
       </DialogContent>

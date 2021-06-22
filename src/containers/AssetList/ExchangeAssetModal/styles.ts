@@ -1,4 +1,4 @@
-import { fade, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   closeButton: {
@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
     top: theme.spacing(1),
   },
   assetContainer: {
-    backgroundColor: fade(theme.palette.primary.light, 0.2),
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.getContrastText(
+      theme.palette.background.default,
+    ),
   },
 }));
