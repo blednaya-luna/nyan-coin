@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { useHistory } from 'react-router';
+import { useStore } from 'effector-react';
 import {
   AppBar as MuiAppBar,
   Box,
@@ -7,10 +8,10 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import { Brightness7, Home } from '@material-ui/icons';
+import { Brightness4, Brightness7, Home } from '@material-ui/icons';
 
 import { APP_LOCATION } from 'routes/constants';
-import { toggleTheme } from 'themes/model';
+import { $theme, toggleTheme } from 'themes/model';
 
 import { useStyles } from './styles';
 
@@ -20,6 +21,7 @@ type AppBarProps = {
 };
 
 export const AppBar: FC<AppBarProps> = ({ title, search }) => {
+  const theme = useStore($theme);
   const { push } = useHistory();
   const classes = useStyles();
 
@@ -47,7 +49,7 @@ export const AppBar: FC<AppBarProps> = ({ title, search }) => {
             color="inherit"
             onClick={() => toggleTheme()}
           >
-            <Brightness7 />
+            {theme === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
         </Toolbar>
       </MuiAppBar>
