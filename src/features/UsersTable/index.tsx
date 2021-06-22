@@ -14,7 +14,7 @@ import { FileCopy } from '@material-ui/icons';
 
 import { Avatar } from 'components/Avatar';
 import { copyAddressToClipboardFx } from 'stores/account';
-import { $users } from 'stores/pages/users';
+import { $filteredUsers } from 'stores/pages/users';
 
 import { UserBalance } from './UserBalance';
 import { useStyles } from './styles';
@@ -34,7 +34,7 @@ export const UsersTable: FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {useList($users, (user) => (
+          {useList($filteredUsers, (user) => (
             <TableRow>
               <TableCell>
                 <Avatar address={user.address} />

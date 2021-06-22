@@ -3,6 +3,7 @@ import { useGate } from 'effector-react';
 import { Box } from '@material-ui/core';
 
 import { AppBar } from 'components/AppBar';
+import { UsersSearchField } from 'features/UsersTable/UsersSearchField';
 import { UsersTable } from 'features/UsersTable';
 import { UsersPageGate } from 'stores/pages/users';
 import 'stores/pages/users/init';
@@ -15,7 +16,7 @@ const Users: FC = () => {
 
   return (
     <>
-      <AppBar title="Registered users" />
+      <AppBar title="Registered users" search={<UsersSearchField />} />
       <Box className={classes.root}>
         <UsersTable />
       </Box>
