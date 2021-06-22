@@ -48,9 +48,11 @@ export const filterAssetsByText = ({
 }: {
   assets: AssetItem[];
   searchQuery: string;
-}) =>
-  assets.filter(
+}) => {
+  const query = searchQuery.toLowerCase();
+  return assets.filter(
     (asset) =>
-      asset.name.includes(searchQuery) ||
-      asset.description.includes(searchQuery),
+      asset.name.toLowerCase().includes(query) ||
+      asset.description.toLowerCase().includes(query),
   );
+};
