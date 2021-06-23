@@ -2,9 +2,9 @@ import { buildPattern, buildPatterns, extractValueFromKey } from 'api/utils';
 
 test('buildPattern', () => {
   const actual = buildPattern({ scope: 'asset', key: 'data' });
-  const expected = '^asset_.*_data$';
+  const expected = { pattern: '^asset_.*_data$' };
 
-  expect(actual).toBe(expected);
+  expect(actual).toEqual(expected);
 });
 
 test('buildPatterns', () => {
@@ -12,9 +12,9 @@ test('buildPatterns', () => {
     { scope: 'asset', key: 'data' },
     { scope: 'asset', key: 'price' },
   ]);
-  const expected = '^asset_.*_data$|^asset_.*_price$';
+  const expected = { pattern: '^asset_.*_data$|^asset_.*_price$' };
 
-  expect(actual).toBe(expected);
+  expect(actual).toEqual(expected);
 });
 
 test('extractValueFromKey', () => {

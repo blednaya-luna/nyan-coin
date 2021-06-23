@@ -8,7 +8,7 @@ import { buildPattern } from 'api/utils';
 import { RawDAppDataItem } from 'api/dApp/types';
 
 import { filterUsersByText, parseUsersData } from './utils';
-import { UserItem } from './types';
+import { User } from './types';
 
 export const UsersPageGate = createGate();
 
@@ -16,7 +16,7 @@ export const fetchUsersDataFx = createEffect<void, RawDAppDataItem[]>(() =>
   dAppDataByPatter(buildPattern(dAppScopeKeys.user.email)),
 );
 
-export const $users = restore<UserItem[]>(
+export const $users = restore<User[]>(
   fetchUsersDataFx.doneData.map(parseUsersData),
   [],
 );

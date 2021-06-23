@@ -69,7 +69,7 @@ export const sendTx = createEffect(
         code: error.code,
       });
 
-      return error;
+      throw error;
     }
   },
 );

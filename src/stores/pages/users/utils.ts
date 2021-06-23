@@ -1,7 +1,7 @@
 import { extractValueFromKey } from 'api/utils';
 import { RawDAppDataItem } from 'api/dApp/types';
 
-import { UserItem } from './types';
+import { User } from './types';
 
 export const parseUsersData = (usersData: RawDAppDataItem[]) =>
   usersData.map((userDataItem) => ({
@@ -13,7 +13,7 @@ export const filterUsersByText = ({
   users,
   searchQuery,
 }: {
-  users: UserItem[];
+  users: User[];
   searchQuery: string;
 }) =>
   users.filter(
