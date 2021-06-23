@@ -1,5 +1,5 @@
 import { extractValueFromKey } from 'api/utils';
-import { RawDAppDataItem } from 'api/types';
+import { RawDAppDataItem } from 'api/dApp/types';
 
 import { UserItem } from './types';
 

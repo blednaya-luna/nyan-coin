@@ -2,10 +2,10 @@ import { createGate } from 'effector-react';
 import { combine, createEffect, createEvent, restore } from 'effector';
 import { debounce } from 'patronum';
 
-import { dAppDataByPatter } from 'api';
+import { dAppDataByPatter } from 'api/dApp';
 import { dAppScopeKeys } from 'api/constants';
 import { buildPattern } from 'api/utils';
-import { RawDAppDataItem } from 'api/types';
+import { RawDAppDataItem } from 'api/dApp/types';
 
 import { filterUsersByText, parseUsersData } from './utils';
 import { UserItem } from './types';

@@ -1,5 +1,5 @@
 import { extractValueFromKey } from 'api/utils';
-import { RawAssetBalance, RawDAppDataItem } from 'api/types';
+import { RawDAppAssetsBalance, RawDAppDataItem } from 'api/dApp/types';
 
 import { AssetBalanceItem, AssetDataItem, AssetItem } from './types';
 
@@ -14,7 +14,7 @@ export const parseAssetsData = (assetsData: RawDAppDataItem[]) =>
     };
   });
 
-export const parseAssetsBalance = (assetsBalance: RawAssetBalance) =>
+export const parseAssetsBalance = (assetsBalance: RawDAppAssetsBalance) =>
   assetsBalance.balances.map<AssetBalanceItem>((assetBalanceItem) => ({
     assetId: assetBalanceItem.assetId,
     balance: assetBalanceItem.balance,

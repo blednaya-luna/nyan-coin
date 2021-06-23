@@ -1,4 +1,7 @@
-export const fetcher = (url: string) => fetch(url);
+export const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  return response.json();
+};
 
 type Match = {
   scope: string;
@@ -6,15 +9,15 @@ type Match = {
   value?: string;
 };
 
-export const buildPattern = ({ scope, key, value = '.*' }: Match) => {
-  return `^${scope}_${value}_${key}$`;
-};
+export const buildPattern = ({ scope, key, value = '.*' }: Match) => ({
+  pattern: `^${scope}_${value}_${key}$`,
+});
 
-export const buildPatterns = (matches: Match[]) => {
-  return matches
-    .reduce<string[]>((acc, match) => [...acc, buildPattern(match)], [])
-    .join('|');
-};
+export const buildPatterns = (matches: Match[]) => ({
+  pattern: matches
+    .reduce<string[]>((acc, match) => [...acc, buildPattern(match).pattern], [])
+    .join('|'),
+});
 
 export const extractValueFromKey = (key: string) => {
   const extractedValue = key.match('_(.*?)_');

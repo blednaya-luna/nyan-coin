@@ -31,6 +31,7 @@ export const UsersTable: FC = () => {
             <TableCell>Email</TableCell>
             <TableCell>Address</TableCell>
             <TableCell>Balance</TableCell>
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -57,6 +58,7 @@ export const UsersTable: FC = () => {
                   disableTypography
                 />
               </TableCell>
+              <TableCell />
             </TableRow>
           ))}
         </TableBody>

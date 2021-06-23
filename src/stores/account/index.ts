@@ -1,7 +1,7 @@
 import { createEvent, restore, createEffect, createStore } from 'effector';
 
-import { RawDAppDataItem } from 'api/types';
-import { dAppDataByPatter } from 'api';
+import { dAppDataByPatter } from 'api/dApp';
+import { RawDAppDataItem } from 'api/dApp/types';
 import { buildPattern } from 'api/utils';
 import { dAppScopeKeys } from 'api/constants';
 

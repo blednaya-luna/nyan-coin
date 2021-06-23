@@ -9,10 +9,10 @@ import {
 import { createGate } from 'effector-react';
 import { debounce, combineEvents } from 'patronum';
 
-import { dAppAssetsBalance, dAppDataByPatter } from 'api';
+import { dAppAssetsBalance, dAppDataByPatter } from 'api/dApp';
 import { buildPattern } from 'api/utils';
 import { dAppScopeKeys, dAppScript, nyanCoin } from 'api/constants';
-import { RawDAppDataItem, RawAssetBalance } from 'api/types';
+import { RawDAppDataItem, RawDAppAssetsBalance } from 'api/dApp/types';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 
 import { AssetItem } from './types';
@@ -29,9 +29,8 @@ export const fetchAssetsDataFx = createEffect<void, RawDAppDataItem[]>(() =>
   dAppDataByPatter(buildPattern(dAppScopeKeys.asset.data)),
 );
 
-export const fetchDAppAssetsBalanceFx = createEffect<void, RawAssetBalance>(
-  () => dAppAssetsBalance(),
-);
+export const fetchDAppAssetsBalanceFx =
+  createEffect<void, RawDAppAssetsBalance>(dAppAssetsBalance);
 
 const assetsLoaded = combineEvents({
   events: {
