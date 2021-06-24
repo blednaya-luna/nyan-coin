@@ -1,34 +1,42 @@
 import React from 'react';
-import { toast } from 'react-toastify';
+import { toast, ToastOptions } from 'react-toastify';
 
 import { Notification, NotificationProps } from 'components/Notification';
 
-export const notify = (props: NotificationProps) =>
+type NotifyOptions = ToastOptions & NotificationProps;
+
+export const notify = ({ autoClose, ...props }: NotifyOptions) =>
   toast(<Notification {...props} />, {
     type: toast.TYPE.DEFAULT,
+    autoClose,
   });
 
-notify.info = (props: NotificationProps) =>
+notify.info = ({ autoClose, ...props }: NotifyOptions) =>
   toast(<Notification {...props} />, {
     type: toast.TYPE.INFO,
+    autoClose,
   });
 
-notify.success = (props: NotificationProps) =>
+notify.success = ({ autoClose, ...props }: NotifyOptions) =>
   toast(<Notification {...props} />, {
     type: toast.TYPE.SUCCESS,
+    autoClose,
   });
 
-notify.warning = (props: NotificationProps) =>
+notify.warning = ({ autoClose, ...props }: NotifyOptions) =>
   toast(<Notification {...props} />, {
     type: toast.TYPE.WARNING,
+    autoClose,
   });
 
-notify.error = (props: NotificationProps) =>
+notify.error = ({ autoClose, ...props }: NotifyOptions) =>
   toast(<Notification {...props} />, {
     type: toast.TYPE.ERROR,
+    autoClose,
   });
 
-notify.dark = (props: NotificationProps) =>
+notify.dark = ({ autoClose, ...props }: NotifyOptions) =>
   toast(<Notification {...props} />, {
     type: toast.TYPE.DARK,
+    autoClose,
   });

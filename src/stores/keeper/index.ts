@@ -27,6 +27,7 @@ export const setupWavesKeeperFx = createEffect(() => {
         url: 'https://docs.waves.tech/en/ecosystem/waves-keeper',
         text: 'WavesKeeper',
       },
+      autoClose: false,
     });
   }
 });
