@@ -1,8 +1,8 @@
 import { createEffect, createEvent, restore } from 'effector';
 import { createGate } from 'effector-react';
 
-import { notify } from 'utils/notify';
 import { getExplorerLink } from 'utils/getExplorerLink';
+import { notify } from 'utils/notify';
 
 import { setIsAuthorized } from '../account';
 import { updateWavesKeeper } from './utils';

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { useGate } from 'effector-react';
 import { Box } from '@material-ui/core';
+import { useGate } from 'effector-react';
+import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
 import { UsersSearchField } from 'containers/UsersSearchField';

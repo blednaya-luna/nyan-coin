@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Grid, Divider, Typography, Paper } from '@material-ui/core';
+import React, { FC } from 'react';
 
 import {
   AssetNameTextField,

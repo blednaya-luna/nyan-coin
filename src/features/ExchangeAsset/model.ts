@@ -1,8 +1,8 @@
 import { attach, createEvent, forward, guard, restore } from 'effector';
 
-import { AssetItem } from 'stores/pages/assets/types';
-import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 import { argType, dAppScript, nyanCoin } from 'api/constants';
+import { callCallableFunctionWithFeeFx } from 'stores/dApp';
+import { AssetItem } from 'stores/pages/assets/types';
 
 export const selectAssetToExchange = createEvent<AssetItem>();
 export const resetAssetToExchange = createEvent();

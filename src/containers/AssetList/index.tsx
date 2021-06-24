@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import { useList } from 'effector-react';
 import { Grid } from '@material-ui/core';
+import { useList } from 'effector-react';
+import React, { FC } from 'react';
 
-import { $filteredAssets } from 'stores/pages/assets';
 import { ExchangeAssetModal } from 'features/ExchangeAsset/ExchangeAssetModal';
 import { selectAssetToExchange } from 'features/ExchangeAsset/model';
+import { $filteredAssets } from 'stores/pages/assets';
 
 import { Asset } from '../../components/Asset';
 

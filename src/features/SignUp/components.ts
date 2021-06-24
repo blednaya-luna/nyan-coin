@@ -1,7 +1,7 @@
 import { reflect } from '@effector/reflect';
 
-import { TextField, textFieldOnChangePrepend } from 'components/TextField';
 import { Button } from 'components/Button';
+import { TextField, textFieldOnChangePrepend } from 'components/TextField';
 
 import { $email, setEmail, signUpFx } from './model';
 

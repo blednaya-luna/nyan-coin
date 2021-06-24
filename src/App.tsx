@@ -1,12 +1,12 @@
 import React, { FC, StrictMode, Suspense } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ThemeProvider } from 'containers/ThemeProvider';
-import { ConnectWavesKeeper } from 'containers/ConnectWavesKeeper';
 import { CircularProgress } from 'components/CircularProgress';
+import { ConnectWavesKeeper } from 'containers/ConnectWavesKeeper';
+import { ThemeProvider } from 'containers/ThemeProvider';
 import { routes } from 'routes/routes';
 
 export const App: FC = () => {

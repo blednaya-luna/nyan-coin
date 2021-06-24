@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
 import { Box, InputBase, InputBaseProps } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
+import React, { FC } from 'react';
 
 import {
   textFieldOnChangePrepend,

@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import { useStore } from 'effector-react';
 import { Box, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
 
-import { Dialog } from 'components/Dialog';
 import { Button } from 'components/Button';
+import { Dialog } from 'components/Dialog';
 import { IconButton } from 'components/IconButton';
 import { signInWithKeeper } from 'stores/keeper';
 

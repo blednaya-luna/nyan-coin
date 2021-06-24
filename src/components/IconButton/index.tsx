@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import {
   IconButton as MuiIconButton,
   IconButtonProps as MuiIconButtonProps,
@@ -6,6 +5,7 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import { SvgIconComponent } from '@material-ui/icons';
+import React, { FC } from 'react';
 
 export type IconButtonProps = MuiIconButtonProps & {
   title?: string;

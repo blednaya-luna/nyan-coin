@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { useStore } from 'effector-react';
 import { IconButtonProps } from '@material-ui/core';
 import { Brightness4, Brightness7 } from '@material-ui/icons';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
 import { $theme, toggleTheme } from 'stores/ThemeProvider';

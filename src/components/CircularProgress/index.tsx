@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
 import {
   Box,
   CircularProgress as MuiCircularProgress,
   Typography,
 } from '@material-ui/core';
+import React, { FC } from 'react';
 
 import { useStyles } from './styles';
 

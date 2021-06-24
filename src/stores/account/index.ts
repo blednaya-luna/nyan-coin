@@ -1,9 +1,9 @@
 import { createEvent, restore, createEffect, createStore } from 'effector';
 
+import { dAppScopeKeys } from 'api/constants';
 import { dAppDataByPatter } from 'api/dApp';
 import { RawDAppDataItem } from 'api/dApp/types';
 import { buildPattern } from 'api/utils';
-import { dAppScopeKeys } from 'api/constants';
 
 import { copyAddressToClipboard } from './utils';
 

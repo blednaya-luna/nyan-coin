@@ -1,11 +1,11 @@
-import React, { FC, ReactNode } from 'react';
-import { useStore } from 'effector-react';
 import {
   AppBar as MuiAppBar,
   Box,
   Toolbar,
   Typography,
 } from '@material-ui/core';
+import { useStore } from 'effector-react';
+import React, { FC, ReactNode } from 'react';
 
 import { GoHomeButton } from 'containers/GoHomeButton';
 import { ToggleThemeButton } from 'containers/ToggleThemeButton';

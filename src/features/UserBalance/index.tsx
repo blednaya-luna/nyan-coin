@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { useGate, useStoreMap } from 'effector-react';
+import React, { FC } from 'react';
 
 import { Balance, BalanceProps } from 'components/Balance';
 

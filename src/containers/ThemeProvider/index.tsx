@@ -1,10 +1,10 @@
-import React, { FC, ReactNode } from 'react';
-import { useStore } from 'effector-react';
 import {
   ThemeProvider as MuiThemeProvider,
   CssBaseline,
   createMuiTheme,
 } from '@material-ui/core';
+import { useStore } from 'effector-react';
+import React, { FC, ReactNode } from 'react';
 
 import { $theme } from 'stores/ThemeProvider';
 

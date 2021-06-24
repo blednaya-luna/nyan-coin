@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import { useHistory } from 'react-router';
 import { IconButtonProps } from '@material-ui/core';
 import { Home } from '@material-ui/icons';
+import React, { FC } from 'react';
+import { useHistory } from 'react-router';
 
-import { APP_LOCATION } from 'routes/constants';
 import { IconButton } from 'components/IconButton';
+import { APP_LOCATION } from 'routes/constants';
 
 export const GoHomeButton: FC<IconButtonProps> = ({ ...props }) => {
   const { push } = useHistory();

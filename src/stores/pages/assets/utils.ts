@@ -1,5 +1,5 @@
-import { extractValueFromKey } from 'api/utils';
 import { RawDAppAssetsBalance, RawDAppDataItem } from 'api/dApp/types';
+import { extractValueFromKey } from 'api/utils';
 
 import { AssetBalanceItem, AssetDataItem, AssetItem } from './types';
 

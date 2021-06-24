@@ -9,10 +9,10 @@ import {
 import { createGate } from 'effector-react';
 import { debounce, combineEvents } from 'patronum';
 
-import { dAppAssetsBalance, dAppDataByPatter } from 'api/dApp';
-import { buildPattern } from 'api/utils';
 import { dAppScopeKeys, dAppScript, nyanCoin } from 'api/constants';
+import { dAppAssetsBalance, dAppDataByPatter } from 'api/dApp';
 import { RawDAppDataItem, RawDAppAssetsBalance } from 'api/dApp/types';
+import { buildPattern } from 'api/utils';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 
 import { AssetItem } from './types';

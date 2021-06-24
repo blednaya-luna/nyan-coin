@@ -8,8 +8,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "prettier --write '*/**/*.{js,ts,jsx,tsx}'",
-    "eslint": "eslint ./",
+    "prettier": "yarn prettier:code && yarn prettier:json",
+    "prettier:code": "prettier --write '*/**/*.{js,ts,jsx,tsx}'",
+    "prettier:json": "prettier --write --parser json {*.json,.eslintrc,.huskyrc,.lintstagedrc}",
+    "lint": "eslint . --cache",
+    "lint:fix": "yarn lint --fix",
     "commit": "git-cz"
   },
   "dependencies": {
@@ -65,11 +68,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import { useStore } from 'effector-react';
 import { Box } from '@material-ui/core';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
 
-import { Dialog } from 'components/Dialog';
 import { Button } from 'components/Button';
+import { Dialog } from 'components/Dialog';
 
-import { $transferModalIsOpen, $recipient, resetRecipient } from './model';
 import { AmountTextField, TransferTokensButton } from './components';
+import { $transferModalIsOpen, $recipient, resetRecipient } from './model';
 import { useStyles } from './styles';
 
 export const TransferTokensModal: FC = () => {

@@ -1,5 +1,3 @@
-import React, { FC } from 'react';
-import { useList } from 'effector-react';
 import {
   Paper,
   Table,
@@ -9,13 +7,15 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
+import { useList } from 'effector-react';
+import React, { FC } from 'react';
 
-import { Avatar } from 'components/Avatar';
 import { Address } from 'components/Address';
-import { UserBalance } from 'features/UserBalance';
-import { $filteredUsers } from 'stores/pages/users';
+import { Avatar } from 'components/Avatar';
 import { TransferTokensButton } from 'features/TransferTokens/TransferTokensButton';
 import { TransferTokensModal } from 'features/TransferTokens/TransferTokensModal';
+import { UserBalance } from 'features/UserBalance';
+import { $filteredUsers } from 'stores/pages/users';
 
 export const UsersTable: FC = () => {
   return (

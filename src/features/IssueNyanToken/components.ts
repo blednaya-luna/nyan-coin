@@ -1,11 +1,11 @@
-import { combine } from 'effector';
 import { reflect } from '@effector/reflect';
+import { combine } from 'effector';
 
+import { Button } from 'components/Button';
 import {
   TextField,
   textFieldOnChangePrependToNumber,
 } from 'components/TextField';
-import { Button } from 'components/Button';
 import { $isAuthorized } from 'stores/account';
 
 import { $quantity, setQuantity, issueNyanTokenFx } from './model';

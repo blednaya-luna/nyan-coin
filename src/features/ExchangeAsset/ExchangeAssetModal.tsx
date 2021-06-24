@@ -1,17 +1,17 @@
-import React, { FC } from 'react';
-import { useStore } from 'effector-react';
 import { Box } from '@material-ui/core';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
 
-import { Dialog } from 'components/Dialog';
-import { Button } from 'components/Button';
 import { Asset } from 'components/Asset';
+import { Button } from 'components/Button';
+import { Dialog } from 'components/Dialog';
 
+import { AmountTextField, TransferTokensButton } from './components';
 import {
   $exchangeModalIsOpen,
   $assetToExchange,
   resetAssetToExchange,
 } from './model';
-import { AmountTextField, TransferTokensButton } from './components';
 import { useStyles } from './styles';
 
 export const ExchangeAssetModal: FC = () => {

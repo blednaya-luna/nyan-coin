@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
 import { Avatar as MuiAvatar } from '@material-ui/core';
 import * as avatar from 'identity-img';
+import React, { FC } from 'react';
 
 avatar.config({ rows: 8, cells: 8 });
 

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { Wifi } from '@material-ui/icons';
+import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
 import { getNetwork } from 'utils/getNetwork';

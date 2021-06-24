@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import { useStore } from 'effector-react';
 import { Box, Typography } from '@material-ui/core';
 import { ExitToApp } from '@material-ui/icons';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
 
-import { UserBalance } from 'features/UserBalance';
-import { Network } from 'components/Network';
-import { Avatar } from 'components/Avatar';
 import { Address } from 'components/Address';
+import { Avatar } from 'components/Avatar';
 import { IconButton } from 'components/IconButton';
+import { Network } from 'components/Network';
+import { UserBalance } from 'features/UserBalance';
 import { $address, $email, $network } from 'stores/account';
 import 'stores/account/init';
 

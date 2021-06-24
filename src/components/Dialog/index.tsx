@@ -1,4 +1,3 @@
-import React, { FC, ReactNode } from 'react';
 import {
   Dialog as MuiDialog,
   DialogTitle,
@@ -8,6 +7,7 @@ import {
   DialogActions,
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
+import React, { FC, ReactNode } from 'react';
 
 import { IconButton } from 'components/IconButton';
 

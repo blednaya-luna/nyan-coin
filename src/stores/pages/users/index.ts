@@ -1,14 +1,14 @@
-import { createGate } from 'effector-react';
 import { combine, createEffect, createEvent, restore } from 'effector';
+import { createGate } from 'effector-react';
 import { debounce } from 'patronum';
 
-import { dAppDataByPatter } from 'api/dApp';
 import { dAppScopeKeys } from 'api/constants';
-import { buildPattern } from 'api/utils';
+import { dAppDataByPatter } from 'api/dApp';
 import { RawDAppDataItem } from 'api/dApp/types';
+import { buildPattern } from 'api/utils';
 
-import { filterUsersByText, parseUsersData } from './utils';
 import { User } from './types';
+import { filterUsersByText, parseUsersData } from './utils';
 
 export const UsersPageGate = createGate();
 

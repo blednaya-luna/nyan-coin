@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import clsx from 'clsx';
+import React, { FC } from 'react';
 
 import { AssetItem } from 'stores/pages/assets/types';
 

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { FileCopy } from '@material-ui/icons';
+import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
 import { copyAddressToClipboardFx } from 'stores/account';

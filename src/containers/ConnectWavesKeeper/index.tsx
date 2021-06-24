@@ -1,5 +1,5 @@
-import React, { FC, ReactNode } from 'react';
 import { useGate } from 'effector-react';
+import React, { FC, ReactNode } from 'react';
 
 import { WavesKeeperGate } from 'stores/keeper';
 import 'stores/keeper/init';

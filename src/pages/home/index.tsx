@@ -1,9 +1,9 @@
+import { Box, Grid, Link } from '@material-ui/core';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router';
-import { Box, Grid, Link } from '@material-ui/core';
 
-import { APP_LOCATION } from 'routes/constants';
 import { AppBar } from 'containers/AppBar';
+import { APP_LOCATION } from 'routes/constants';
 
 import { useStyles } from '../styles';
 

@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import { useGate } from 'effector-react';
 import { Box } from '@material-ui/core';
+import { useGate } from 'effector-react';
+import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
-import { AssetsSearchField } from 'containers/AssetsSearchField';
 import { AssetList } from 'containers/AssetList';
+import { AssetsSearchField } from 'containers/AssetsSearchField';
 import { AssetsPageGate } from 'stores/pages/assets';
 import 'stores/pages/assets/init';
 

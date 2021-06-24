@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Divider, Grid, Paper, Typography } from '@material-ui/core';
+import React, { FC } from 'react';
 
 import { ReissueNyanTokenButton, QuantityTextField } from './components';
 import { useStyles } from './styles';

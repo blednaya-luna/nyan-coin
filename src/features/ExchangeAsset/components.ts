@@ -1,10 +1,10 @@
 import { reflect } from '@effector/reflect';
 
+import { Button } from 'components/Button';
 import {
   TextField,
   textFieldOnChangePrependToNumber,
 } from 'components/TextField';
-import { Button } from 'components/Button';
 
 import { $amount, setAmount, exchangeAsset } from './model';
 

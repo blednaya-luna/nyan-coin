@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import { useStore } from 'effector-react';
 import { Typography } from '@material-ui/core';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
 
-import { Dialog } from 'components/Dialog';
 import { Button } from 'components/Button';
+import { Dialog } from 'components/Dialog';
 
-import { $signUpModalIsOpen, toggleOpenSignUpModal } from './model';
 import { EmailTextField, SignUpButton } from './components';
+import { $signUpModalIsOpen, toggleOpenSignUpModal } from './model';
 import { useStyles } from './styles';
 
 export const SignUp: FC = () => {

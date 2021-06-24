@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Typography, Box, Link } from '@material-ui/core';
+import React, { FC } from 'react';
 
 export type NotificationProps = {
   title: string;
