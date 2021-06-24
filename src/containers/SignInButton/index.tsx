@@ -7,11 +7,9 @@ import { signInWithKeeper } from 'stores/keeper';
 export const SignInButton: FC = () => {
   return (
     <Button
-      color="inherit"
+      label="Sign In"
       endIcon={<Person />}
       onClick={() => signInWithKeeper()}
-    >
-      Sign In
-    </Button>
+    />
   );
 };

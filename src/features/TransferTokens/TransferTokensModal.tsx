@@ -32,8 +32,8 @@ export const TransferTokensModal: FC = () => {
       }
       actions={
         <>
-          <Button onClick={() => resetRecipient()}>Cancel</Button>
-          <TransferTokensButton>Transfer</TransferTokensButton>
+          <Button label="Cancel" onClick={() => resetRecipient()} />
+          <TransferTokensButton label="Transfer" />
         </>
       }
     />

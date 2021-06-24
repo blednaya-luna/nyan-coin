@@ -40,8 +40,8 @@ export const ExchangeAssetModal: FC = () => {
       }
       actions={
         <>
-          <Button onClick={() => resetAssetToExchange()}>Cancel</Button>
-          <TransferTokensButton>Exchange</TransferTokensButton>
+          <Button label="Cancel" onClick={() => resetAssetToExchange()} />
+          <TransferTokensButton label="Exchange" />
         </>
       }
     />

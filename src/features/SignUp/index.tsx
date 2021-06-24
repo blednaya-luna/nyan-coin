@@ -32,8 +32,8 @@ export const SignUp: FC = () => {
       }
       actions={
         <>
-          <Button onClick={() => toggleOpenSignUpModal()}>Cancel</Button>
-          <SignUpButton>Sign Up</SignUpButton>
+          <Button label="Cancel" onClick={() => toggleOpenSignUpModal()} />
+          <SignUpButton label="Sign Up" />
         </>
       }
     />
