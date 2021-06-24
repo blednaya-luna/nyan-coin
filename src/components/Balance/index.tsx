@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, Tooltip, Typography } from '@material-ui/core';
 import { Refresh } from '@material-ui/icons';
+
+import { IconButton } from 'components/IconButton';
 
 import { useStyles } from './styles';
 
@@ -25,9 +27,14 @@ export const Balance: FC<BalanceProps> = ({
       ) : (
         <Typography variant="caption">{userBalance}</Typography>
       )}
-      <IconButton size="small" color="inherit" onClick={refreshBalance}>
-        <Refresh fontSize="small" />
-      </IconButton>
+      <Tooltip title="Refresh balance">
+        <IconButton
+          className={classes.iconButton}
+          title="Refresh balance"
+          Icon={Refresh}
+          onClick={refreshBalance}
+        />
+      </Tooltip>
     </Box>
   );
 };

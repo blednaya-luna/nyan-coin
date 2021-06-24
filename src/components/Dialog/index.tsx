@@ -5,11 +5,12 @@ import {
   DialogContent,
   Typography,
   Grid,
-  IconButton,
   DialogActions,
 } from '@material-ui/core';
-
 import { Close } from '@material-ui/icons';
+
+import { IconButton } from 'components/IconButton';
+
 import { useStyles } from './styles';
 
 type DialogProps = {
@@ -36,11 +37,10 @@ export const Dialog: FC<DialogProps> = ({
           <Typography variant="h6">{title}</Typography>
           <IconButton
             className={classes.closeButton}
-            size="small"
+            Icon={Close}
+            iconFontSize="default"
             onClick={onClose}
-          >
-            <Close />
-          </IconButton>
+          />
         </Grid>
       </DialogTitle>
       <DialogContent>{content}</DialogContent>

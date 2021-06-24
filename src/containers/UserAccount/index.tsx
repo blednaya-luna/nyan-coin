@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { useStore } from 'effector-react';
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { ExitToApp } from '@material-ui/icons';
 
 import { UserBalance } from 'features/UserBalance';
 import { Network } from 'components/Network';
 import { Avatar } from 'components/Avatar';
 import { Address } from 'components/Address';
+import { IconButton } from 'components/IconButton';
 import { $address, $email, $network } from 'stores/account';
 import 'stores/account/init';
 
@@ -33,9 +34,13 @@ export const UserAccount: FC = () => {
           {email && <Typography variant="caption">{email}</Typography>}
         </Box>
       )}
-      <IconButton color="inherit">
-        <ExitToApp />
-      </IconButton>
+      <IconButton
+        title="Sign out"
+        size="medium"
+        Icon={ExitToApp}
+        iconFontSize="default"
+        // TODO onClick
+      />
     </>
   );
 };

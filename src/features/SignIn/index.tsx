@@ -1,24 +1,30 @@
 import React, { FC } from 'react';
 import { useStore } from 'effector-react';
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
 
 import { Dialog } from 'components/Dialog';
 import { Button } from 'components/Button';
+import { IconButton } from 'components/IconButton';
 import { signInWithKeeper } from 'stores/keeper';
 
 import { $signInModalIsOpen, toggleOpenSignInModal } from './model';
 import { useStyles } from './styles';
 
+// TODO replace to use Dialog from components
 export const SignIn: FC = () => {
   const signInModalIsOpen = useStore($signInModalIsOpen);
   const classes = useStyles();
 
   return (
     <>
-      <IconButton color="inherit" onClick={() => toggleOpenSignInModal()}>
-        <Person />
-      </IconButton>
+      <IconButton
+        title="Sign in"
+        size="medium"
+        Icon={Person}
+        iconFontSize="default"
+        onClick={() => toggleOpenSignInModal()}
+      />
       <Dialog
         open={signInModalIsOpen}
         onClose={toggleOpenSignInModal}

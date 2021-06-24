@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { IconButton } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 
+import { IconButton } from 'components/IconButton';
 import { User } from 'stores/pages/users/types';
 
 import { setRecipient } from './model';
@@ -14,8 +14,10 @@ export const TransferTokensButton: FC<TransferTokensButtonProps> = ({
   recipient,
 }) => {
   return (
-    <IconButton size="small" onClick={() => setRecipient(recipient)}>
-      <Send fontSize="small" />
-    </IconButton>
+    <IconButton
+      title="Transfer NT Tokens to user"
+      Icon={Send}
+      onClick={() => setRecipient(recipient)}
+    />
   );
 };

@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router';
-import { IconButton, IconButtonProps } from '@material-ui/core';
+import { IconButtonProps } from '@material-ui/core';
 import { Home } from '@material-ui/icons';
 
 import { APP_LOCATION } from 'routes/constants';
+import { IconButton } from 'components/IconButton';
 
 export const GoHomeButton: FC<IconButtonProps> = ({ ...props }) => {
   const { push } = useHistory();
@@ -11,12 +12,13 @@ export const GoHomeButton: FC<IconButtonProps> = ({ ...props }) => {
   return (
     <IconButton
       {...props}
-      color="inherit"
+      title="Go to home page"
+      size="medium"
+      Icon={Home}
+      iconFontSize="default"
       onClick={() => {
         push(APP_LOCATION.home);
       }}
-    >
-      <Home />
-    </IconButton>
+    />
   );
 };

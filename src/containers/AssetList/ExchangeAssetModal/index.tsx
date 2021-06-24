@@ -4,23 +4,24 @@ import {
   Dialog,
   DialogTitle,
   Grid,
-  IconButton,
   Typography,
   DialogContent,
   DialogActions,
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
+import { Button } from 'components/Button';
+import { IconButton } from 'components/IconButton';
 import {
   $selectedAssetToExchange,
   resetSelectedAssetToExchange,
   exchangeAssetToken,
 } from 'stores/pages/assets';
-import { Button } from 'components/Button';
 
 import { Asset } from '../AssetItem';
 import { useStyles } from './styles';
 
+// TODO replace to use Dialog from components
 export const ExchangeAssetModal: FC = () => {
   const selectedAsset = useStore($selectedAssetToExchange);
   const classes = useStyles();
@@ -32,11 +33,10 @@ export const ExchangeAssetModal: FC = () => {
           <Typography variant="h6">Confirm exchange</Typography>
           <IconButton
             className={classes.closeButton}
-            size="small"
+            Icon={Close}
+            iconFontSize="default"
             onClick={() => resetSelectedAssetToExchange()}
-          >
-            <Close />
-          </IconButton>
+          />
         </Grid>
       </DialogTitle>
       <DialogContent>
