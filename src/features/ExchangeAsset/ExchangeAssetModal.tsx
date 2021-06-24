@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 
 import { Dialog } from 'components/Dialog';
 import { Button } from 'components/Button';
-import { Asset } from 'containers/AssetList/AssetItem';
+import { Asset } from 'components/Asset';
 
 import {
   $exchangeModalIsOpen,

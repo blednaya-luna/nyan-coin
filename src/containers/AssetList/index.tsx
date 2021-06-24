@@ -6,7 +6,7 @@ import { $filteredAssets } from 'stores/pages/assets';
 import { ExchangeAssetModal } from 'features/ExchangeAsset/ExchangeAssetModal';
 import { selectAssetToExchange } from 'features/ExchangeAsset/model';
 
-import { Asset } from './AssetItem';
+import { Asset } from '../../components/Asset';
 
 export const AssetList: FC = () => {
   return (
