@@ -4,15 +4,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
-  goHomeButton: {
-    marginRight: theme.spacing(2),
+  iconButton: {
+    marginRight: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
   },
   search: {
     margin: theme.spacing(0, 1),

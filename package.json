@@ -11,7 +11,7 @@
     "prettier": "yarn prettier:code && yarn prettier:json",
     "prettier:code": "prettier --write '*/**/*.{js,ts,jsx,tsx}'",
     "prettier:json": "prettier --write --parser json {*.json,.eslintrc,.huskyrc,.lintstagedrc}",
-    "lint": "eslint . --cache",
+    "lint": "eslint .",
     "lint:fix": "yarn lint --fix",
     "commit": "git-cz"
   },

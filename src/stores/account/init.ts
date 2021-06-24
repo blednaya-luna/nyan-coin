@@ -1,14 +1,8 @@
 import { forward, guard } from 'effector';
 
-import { toggleOpenSignInModal } from 'features/SignIn/model';
 import { signUpFx, toggleOpenSignUpModal } from 'features/SignUp/model';
 
 import { $address, getUserDataFx, setIsAuthorized } from '.';
-
-forward({
-  from: setIsAuthorized,
-  to: toggleOpenSignInModal,
-});
 
 guard({
   clock: setIsAuthorized,

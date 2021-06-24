@@ -8,9 +8,9 @@ import { useStore } from 'effector-react';
 import React, { FC, ReactNode } from 'react';
 
 import { GoHomeButton } from 'containers/GoHomeButton';
+import { SignInButton } from 'containers/SignInButton';
 import { ToggleThemeButton } from 'containers/ToggleThemeButton';
 import { UserAccount } from 'containers/UserAccount';
-import { SignIn } from 'features/SignIn';
 import { SignUp } from 'features/SignUp';
 import { $isAuthorized } from 'stores/account';
 import 'stores/account/init';
@@ -30,13 +30,13 @@ export const AppBar: FC<AppBarProps> = ({ title, searchComponent }) => {
     <Box className={classes.root}>
       <MuiAppBar position="static">
         <Toolbar>
-          <GoHomeButton className={classes.goHomeButton} edge="start" />
+          <GoHomeButton className={classes.iconButton} edge="start" />
           <Typography className={classes.title} variant="h6" noWrap>
             {title}
           </Typography>
           <Box className={classes.search}>{searchComponent}</Box>
-          <ToggleThemeButton />
-          {isAuthorized ? <UserAccount /> : <SignIn />}
+          <ToggleThemeButton className={classes.iconButton} />
+          {isAuthorized ? <UserAccount /> : <SignInButton />}
           <SignUp />
         </Toolbar>
       </MuiAppBar>
