@@ -14,8 +14,8 @@ import { Avatar } from 'components/Avatar';
 import { Address } from 'components/Address';
 import { UserBalance } from 'features/UserBalance';
 import { $filteredUsers } from 'stores/pages/users';
-import { TransferTokensButton } from 'dev/TransferTokens/TransferTokensButton';
-import { TransferTokensModal } from 'dev/TransferTokens/TransferTokensModal';
+import { TransferTokensButton } from 'features/TransferTokens/TransferTokensButton';
+import { TransferTokensModal } from 'features/TransferTokens/TransferTokensModal';
 
 export const UsersTable: FC = () => {
   return (

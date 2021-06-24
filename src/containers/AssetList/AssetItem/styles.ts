@@ -1,23 +1,21 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-export const useStyles = makeStyles<Theme, { disabled: boolean }>((theme) => ({
+export const useStyles = makeStyles((theme: Theme) => ({
   card: {
     display: 'flex',
     width: 300,
     height: 100,
     margin: theme.spacing(1),
-    cursor: ({ disabled }) => (disabled ? 'default' : 'pointer'),
+    cursor: 'pointer',
     '& $moveLeft, $moveRight': {
-      transition: ({ disabled }) => (disabled ? 'none' : '0.3s'),
+      transition: '0.3s',
     },
     '&:hover': {
       '& $moveLeft': {
-        transform: ({ disabled }) =>
-          disabled ? 'none' : `translateX(-${theme.spacing(1)}px)`,
+        transform: `translateX(-${theme.spacing(1)}px)`,
       },
       '& $moveRight': {
-        transform: ({ disabled }) =>
-          disabled ? 'none' : `translateX(${theme.spacing(1)}px)`,
+        transform: `translateX(${theme.spacing(1)}px)`,
       },
     },
   },

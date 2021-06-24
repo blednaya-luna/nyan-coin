@@ -8,7 +8,6 @@ import { useStyles } from './styles';
 
 type AssetItemProps = AssetItem & {
   onClick?: () => void;
-  disabled?: boolean;
 };
 
 export const Asset: FC<AssetItemProps> = ({
@@ -16,9 +15,8 @@ export const Asset: FC<AssetItemProps> = ({
   description,
   price,
   onClick,
-  disabled = false,
 }) => {
-  const classes = useStyles({ disabled });
+  const classes = useStyles();
 
   return (
     <Box className={classes.card} onClick={onClick}>

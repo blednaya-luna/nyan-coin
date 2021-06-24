@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { useList } from 'effector-react';
 import { Grid } from '@material-ui/core';
 
-import { $filteredAssets, selectAssetToExchange } from 'stores/pages/assets';
+import { $filteredAssets } from 'stores/pages/assets';
+import { ExchangeAssetModal } from 'features/ExchangeAsset/ExchangeAssetModal';
+import { selectAssetToExchange } from 'features/ExchangeAsset/model';
 
 import { Asset } from './AssetItem';
-import { ExchangeAssetModal } from './ExchangeAssetModal';
 
 export const AssetList: FC = () => {
   return (
