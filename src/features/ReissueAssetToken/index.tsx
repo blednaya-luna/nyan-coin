@@ -18,7 +18,7 @@ export const ReissueAssetToken: FC = () => {
           <Typography>Reissue asset token</Typography>
         </Grid>
         <Grid item>
-          <ReissueAssetTokenButton>Reissue</ReissueAssetTokenButton>
+          <ReissueAssetTokenButton label="Reissue" />
         </Grid>
       </Grid>
       <Divider className={classes.divider} />

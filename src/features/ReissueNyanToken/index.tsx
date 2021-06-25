@@ -14,7 +14,7 @@ export const ReissueNyanToken: FC = () => {
           <Typography>Reissue NYAN Token</Typography>
         </Grid>
         <Grid item>
-          <ReissueNyanTokenButton>Reissue</ReissueNyanTokenButton>
+          <ReissueNyanTokenButton label="Reissue" />
         </Grid>
       </Grid>
       <Divider className={classes.divider} />

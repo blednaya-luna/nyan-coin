@@ -20,7 +20,7 @@ export const IssueAssetToken: FC = () => {
           <Typography>Issue asset token</Typography>
         </Grid>
         <Grid item>
-          <IssueAssetTokenButton>Issue</IssueAssetTokenButton>
+          <IssueAssetTokenButton label="Issue" />
         </Grid>
       </Grid>
       <Divider className={classes.divider} />

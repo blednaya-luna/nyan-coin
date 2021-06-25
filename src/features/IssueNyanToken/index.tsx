@@ -14,7 +14,7 @@ export const IssueNyanToken: FC = () => {
           <Typography>Issue NYAN Token</Typography>
         </Grid>
         <Grid item>
-          <IssueNyanTokenButton>Issue</IssueNyanTokenButton>
+          <IssueNyanTokenButton label="Issue" />
         </Grid>
       </Grid>
       <Divider className={classes.divider} />

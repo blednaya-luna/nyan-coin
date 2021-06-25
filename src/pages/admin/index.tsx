@@ -6,7 +6,6 @@ import { IssueAssetToken } from 'features/IssueAssetToken';
 import { IssueNyanToken } from 'features/IssueNyanToken';
 import { ReissueAssetToken } from 'features/ReissueAssetToken';
 import { ReissueNyanToken } from 'features/ReissueNyanToken';
-import { TransferNyanToken } from 'features/TransferNyanToken';
 
 import { useStyles } from '../styles';
 
@@ -23,9 +22,6 @@ const Admin: FC = () => {
           </Grid>
           <Grid item>
             <ReissueNyanToken />
-          </Grid>
-          <Grid item>
-            <TransferNyanToken />
           </Grid>
           <Grid item>
             <IssueAssetToken />
