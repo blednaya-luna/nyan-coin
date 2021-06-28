@@ -35,7 +35,6 @@ export const CancelTransferTokensButton = reflect({
   view: Button,
   bind: {
     onClick: () => resetAssetToExchange(),
-    disabled: $amount.map((amount) => amount <= 0),
   },
 });
 
