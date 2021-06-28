@@ -1,8 +1,8 @@
 import { attach, createEvent, forward, guard, restore } from 'effector';
 
 import { argType, dAppScript } from 'api/constants';
+import { User } from 'pages/admin/tabs/users/types';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { User } from 'stores/pages/users/types';
 
 export const setRecipient = createEvent<User>();
 export const resetRecipient = createEvent();

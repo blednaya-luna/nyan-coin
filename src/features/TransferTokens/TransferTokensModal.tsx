@@ -1,41 +1,40 @@
-import { Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 
-import { Button } from 'components/Button';
-import { Dialog } from 'components/Dialog';
-
-import { AmountTextField, TransferTokensButton } from './components';
-import { $transferModalIsOpen, $recipient, resetRecipient } from './model';
-import { useStyles } from './styles';
+import {
+  AmountTextField,
+  TransferTokensButton,
+  TransferTokensDialog,
+  CancelTransferTokensButton,
+} from './components';
+import { $recipient } from './model';
 
 export const TransferTokensModal: FC = () => {
-  const transferModalIsOpen = useStore($transferModalIsOpen);
   const recipient = useStore($recipient);
-  const classes = useStyles();
 
   return (
-    <Dialog
-      open={transferModalIsOpen}
-      onClose={() => resetRecipient()}
+    <TransferTokensDialog
       title={`Transfer NYAN Tokens to ${recipient?.email}`}
       content={
-        <Box className={classes.content}>
-          <AmountTextField
-            label="amount"
-            helperText="Enter how many tokens need to be transferred"
-            required
-            fullWidth={false}
-            autoFocus
-          />
-        </Box>
+        <Grid container justify="center" spacing={2}>
+          <Grid item>
+            <AmountTextField
+              label="amount"
+              helperText="Enter how many tokens need to be transferred"
+              required
+              autoFocus
+            />
+          </Grid>
+        </Grid>
       }
-      actions={
-        <>
-          <Button label="Cancel" onClick={() => resetRecipient()} />
-          <TransferTokensButton label="Transfer" />
-        </>
-      }
+      actions={[
+        <CancelTransferTokensButton
+          key="cancel-transfer-tokens"
+          label="Cancel"
+        />,
+        <TransferTokensButton key="transfer-tokens" label="Transfer" />,
+      ]}
     />
   );
 };

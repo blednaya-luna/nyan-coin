@@ -2,7 +2,7 @@ import { Send } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
-import { User } from 'stores/pages/users/types';
+import { User } from 'pages/admin/tabs/users/types';
 
 import { setRecipient } from './model';
 
