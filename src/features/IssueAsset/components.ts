@@ -65,13 +65,13 @@ export const AssetExchangePriceTextField = reflect({
 export const IssueAssetButton = reflect({
   view: Button,
   bind: {
-    onClick: issueAsset,
+    onClick: () => issueAsset(),
   },
 });
 
 export const CancelIssueAssetButton = reflect({
   view: Button,
   bind: {
-    onClick: closeIssueAssetModal,
+    onClick: () => closeIssueAssetModal(),
   },
 });

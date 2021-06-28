@@ -14,7 +14,7 @@ import {
 export const IssueAssetModal: FC = () => {
   return (
     <IssueAssetDialog
-      title="Issue new asset"
+      title="Issue asset"
       content={
         <Grid container direction="column" spacing={1}>
           <Grid item>
@@ -49,7 +49,7 @@ export const IssueAssetModal: FC = () => {
       }
       actions={[
         <CancelIssueAssetButton key="cancel-issue-asset" label="Cancel" />,
-        <IssueAssetButton key="issue-asset" label="Issue new asset" />,
+        <IssueAssetButton key="issue-asset" label="Issue asset" />,
       ]}
     />
   );

@@ -13,7 +13,7 @@ export const IssueAssetButton: FC = () => {
       <Fab
         className={classes.fab}
         color="primary"
-        onClick={openIssueAssetModal}
+        onClick={() => openIssueAssetModal()}
       >
         <Add />
       </Fab>
