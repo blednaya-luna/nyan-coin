@@ -26,8 +26,8 @@ export const signUpFx = sample({
   clock: signUp,
   target: attach({
     effect: callCallableFunctionWithFeeFx,
-    source: [$email],
-    mapParams: (_, [email]) => ({
+    source: $email,
+    mapParams: (_, email) => ({
       func: dAppScript.signUp,
       args: [
         {
