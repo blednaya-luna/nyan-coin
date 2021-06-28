@@ -5,7 +5,6 @@ import { APP_LOCATION } from './constants';
 
 const RootRedirect = lazy(() => import('components/RootRedirect'));
 const Home = lazy(() => import('pages/home'));
-const Users = lazy(() => import('pages/users'));
 const Assets = lazy(() => import('pages/assets'));
 const Admin = lazy(() => import('pages/admin'));
 
@@ -18,10 +17,6 @@ export const routes: RouteConfig[] = [
   {
     path: APP_LOCATION.home,
     component: Home,
-  },
-  {
-    path: APP_LOCATION.users,
-    component: Users,
   },
   {
     path: APP_LOCATION.assets,
