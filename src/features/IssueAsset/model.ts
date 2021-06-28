@@ -15,7 +15,7 @@ export const openIssueAssetModal = createEvent();
 export const closeIssueAssetModal = createEvent();
 export const $issueAssetModalIsOpen = createStore(false)
   .on(openIssueAssetModal, () => true)
-  .on(closeIssueAssetModal, () => false);
+  .reset(closeIssueAssetModal);
 
 export const setAssetName = createEvent<string>();
 export const $assetName = restore(setAssetName, '').reset(closeIssueAssetModal); // max length is 16

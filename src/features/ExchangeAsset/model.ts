@@ -16,7 +16,6 @@ export const setAmount = createEvent<number>();
 export const $amount = restore(setAmount, 1).reset(resetAssetToExchange);
 
 export const exchangeAsset = createEvent();
-
 export const exchangeAssetFx = guard({
   clock: exchangeAsset,
   source: [$assetToExchange, $amount],
