@@ -3,13 +3,12 @@ import React, { FC } from 'react';
 
 import { Balance, BalanceProps } from 'components/Balance';
 
-import {
-  UserBalanceGate,
-  loadUserBalance as refreshUserBalance,
-  $userBalances,
-} from './model';
-import './init.model';
-import { UserBalanceProps } from './types';
+import { UserBalanceGate, refreshUserBalance, $userBalances } from './model';
+
+export type UserBalanceProps = {
+  address: string;
+  fetchOnMount?: boolean;
+};
 
 export const UserBalance: FC<
   UserBalanceProps & Pick<BalanceProps, 'disableTypography'>
