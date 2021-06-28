@@ -1,41 +1,39 @@
-import { Typography } from '@material-ui/core';
-import { useStore } from 'effector-react';
+import { Typography, Grid } from '@material-ui/core';
 import React, { FC } from 'react';
 
-import { Button } from 'components/Button';
-import { Dialog } from 'components/Dialog';
-
-import { EmailTextField, SignUpButton } from './components';
-import { $signUpModalIsOpen, toggleOpenSignUpModal } from './model';
-import { useStyles } from './styles';
+import {
+  EmailTextField,
+  SignUpButton,
+  SignUpDialog,
+  CancelSignUpButton,
+} from './components';
 
 export const SignUp: FC = () => {
-  const classes = useStyles();
-  const signUpModalIsOpen = useStore($signUpModalIsOpen);
-
   return (
-    <Dialog
-      open={signUpModalIsOpen}
-      onClose={toggleOpenSignUpModal}
+    <SignUpDialog
       title="Sign Up"
       content={
-        <>
-          <Typography className={classes.info}>
-            To use the app we need to register you at the Waves blockchain level
-          </Typography>
-          <EmailTextField
-            required
-            label="Email"
-            helperText="Enter your email"
-          />
-        </>
+        <Grid container direction="column" spacing={1}>
+          <Grid item>
+            <Typography>
+              To use the app we need to register you at the Waves blockchain
+              level
+            </Typography>
+          </Grid>
+          <Grid item>
+            <EmailTextField
+              label="Email"
+              helperText="Enter your email"
+              required
+              autoFocus
+            />
+          </Grid>
+        </Grid>
       }
-      actions={
-        <>
-          <Button label="Cancel" onClick={() => toggleOpenSignUpModal()} />
-          <SignUpButton label="Sign Up" />
-        </>
-      }
+      actions={[
+        <CancelSignUpButton key="cancel-signup" label="Cancel" />,
+        <SignUpButton key="signup" label="Sign Up" />,
+      ]}
     />
   );
 };
