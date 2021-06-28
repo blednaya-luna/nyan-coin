@@ -47,7 +47,7 @@ export const issueAssetFx = sample({
       $assetExchangePrice,
     ],
     mapParams: (
-      params,
+      _,
       [assetName, assetDescription, assetQuantity, assetExchangePrice],
     ) => ({
       func: dAppScript.issueAssetToken,
