@@ -1,11 +1,18 @@
-import { attach, combine, createEvent, restore } from 'effector';
+import { attach, createEvent, forward, restore, createStore } from 'effector';
+import { MouseEvent } from 'react';
 
 import { argType, dAppScript } from 'api/constants';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 import { calcFee } from 'utils/calcFee';
 
+export const openIssueAssetModal = createEvent<MouseEvent>();
+export const closeIssueAssetModal = createEvent<MouseEvent>();
+export const $issueAssetModalIsOpen = createStore(false)
+  .on(openIssueAssetModal, () => true)
+  .on(closeIssueAssetModal, () => false);
+
 export const setAssetName = createEvent<string>();
-export const $assetName = restore(setAssetName, '');
+export const $assetName = restore(setAssetName, ''); // max length is 16
 
 export const setAssetDescription = createEvent<string>();
 export const $assetDescription = restore(setAssetDescription, '');
@@ -16,30 +23,13 @@ export const $assetQuantity = restore(setAssetQuantity, 0);
 export const setAssetExchangePrice = createEvent<number>();
 export const $assetExchangePrice = restore(setAssetExchangePrice, 0);
 
-export const $assetData = combine({
-  name: $assetName,
-  description: $assetDescription,
-  price: $assetExchangePrice,
-});
-
-export const issueAssetTokenFx = attach({
+export const issueNewAsset = createEvent<MouseEvent>();
+export const issueNewAssetFx = attach({
   effect: callCallableFunctionWithFeeFx,
-  source: {
-    assetName: $assetName,
-    assetDescription: $assetDescription,
-    assetQuantity: $assetQuantity,
-    assetExchangePrice: $assetExchangePrice,
-    assetData: $assetData.map((assetData) => JSON.stringify(assetData)),
-  },
+  source: [$assetName, $assetDescription, $assetQuantity, $assetExchangePrice],
   mapParams: (
-    _: void,
-    {
-      assetName,
-      assetDescription,
-      assetQuantity,
-      assetExchangePrice,
-      assetData,
-    },
+    params,
+    [assetName, assetDescription, assetQuantity, assetExchangePrice],
   ) => ({
     func: dAppScript.issueAssetToken,
     args: [
@@ -61,9 +51,18 @@ export const issueAssetTokenFx = attach({
       },
       {
         type: argType.string,
-        value: assetData,
+        value: JSON.stringify({
+          name: assetName,
+          description: assetDescription,
+          price: assetExchangePrice,
+        }),
       },
     ],
     additionalFee: calcFee({ issue: true }),
   }),
+});
+
+forward({
+  from: issueNewAsset,
+  to: issueNewAssetFx,
 });

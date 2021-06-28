@@ -2,7 +2,6 @@ import { Container, Grid } from '@material-ui/core';
 import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
-import { IssueAssetToken } from 'features/IssueAssetToken';
 import { IssueNyanToken } from 'features/IssueNyanToken';
 import { ReissueAssetToken } from 'features/ReissueAssetToken';
 import { ReissueNyanToken } from 'features/ReissueNyanToken';
@@ -22,9 +21,6 @@ const Admin: FC = () => {
           </Grid>
           <Grid item>
             <ReissueNyanToken />
-          </Grid>
-          <Grid item>
-            <IssueAssetToken />
           </Grid>
           <Grid item>
             <ReissueAssetToken />
