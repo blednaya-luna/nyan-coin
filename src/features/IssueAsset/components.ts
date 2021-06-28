@@ -17,7 +17,7 @@ import {
   setAssetQuantity,
   $assetExchangePrice,
   setAssetExchangePrice,
-  issueNewAsset,
+  issueAsset,
   $issueAssetModalIsOpen,
   closeIssueAssetModal,
 } from './model';
@@ -65,7 +65,7 @@ export const AssetExchangePriceTextField = reflect({
 export const IssueAssetButton = reflect({
   view: Button,
   bind: {
-    onClick: issueNewAsset,
+    onClick: issueAsset,
   },
 });
 

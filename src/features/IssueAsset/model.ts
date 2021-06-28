@@ -23,8 +23,8 @@ export const $assetQuantity = restore(setAssetQuantity, 0);
 export const setAssetExchangePrice = createEvent<number>();
 export const $assetExchangePrice = restore(setAssetExchangePrice, 0);
 
-export const issueNewAsset = createEvent<MouseEvent>();
-export const issueNewAssetFx = attach({
+export const issueAsset = createEvent<MouseEvent>();
+export const issueAssetFx = attach({
   effect: callCallableFunctionWithFeeFx,
   source: [$assetName, $assetDescription, $assetQuantity, $assetExchangePrice],
   mapParams: (
@@ -63,6 +63,6 @@ export const issueNewAssetFx = attach({
 });
 
 forward({
-  from: issueNewAsset,
-  to: issueNewAssetFx,
+  from: issueAsset,
+  to: issueAssetFx,
 });
