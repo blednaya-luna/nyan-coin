@@ -31,14 +31,14 @@ export const AmountTextField = reflect({
   },
 });
 
-export const CancelTransferTokensButton = reflect({
+export const CancelExchangeAssetButton = reflect({
   view: Button,
   bind: {
     onClick: () => resetAssetToExchange(),
   },
 });
 
-export const TransferTokensButton = reflect({
+export const ExchangeAssetButton = reflect({
   view: Button,
   bind: {
     onClick: () => exchangeAsset(),

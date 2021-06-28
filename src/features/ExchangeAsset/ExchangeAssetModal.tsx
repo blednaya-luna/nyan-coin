@@ -6,9 +6,9 @@ import { Asset } from 'components/Asset';
 
 import {
   AmountTextField,
-  TransferTokensButton,
+  ExchangeAssetButton,
   ExchangeAssetDialog,
-  CancelTransferTokensButton,
+  CancelExchangeAssetButton,
 } from './components';
 import { $assetToExchange } from './model';
 import { useStyles } from './styles';
@@ -38,11 +38,11 @@ export const ExchangeAssetModal: FC = () => {
         </Grid>
       }
       actions={[
-        <CancelTransferTokensButton
+        <CancelExchangeAssetButton
           key="cancel-exchange-asset"
           label="Cancel"
         />,
-        <TransferTokensButton key="exchange-asset" label="Exchange" />,
+        <ExchangeAssetButton key="exchange-asset" label="Exchange" />,
       ]}
     />
   );
