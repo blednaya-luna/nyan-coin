@@ -1,4 +1,5 @@
-import { Tab } from '@material-ui/core';
+import { Tab, AppBar as MuiAppBar } from '@material-ui/core';
+import { Person, Redeem } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
@@ -11,10 +12,12 @@ const Admin: FC = () => {
   return (
     <>
       <AppBar title="Admin panel" />
-      <AdminTabs>
-        <Tab label="Users" />
-        <Tab label="Assets" />
-      </AdminTabs>
+      <MuiAppBar position="static" color="inherit">
+        <AdminTabs>
+          <Tab label="Users" icon={<Person />} wrapped />
+          <Tab label="Assets" icon={<Redeem />} wrapped />
+        </AdminTabs>
+      </MuiAppBar>
       <AdminTabPanel index={0}>
         <Users />
       </AdminTabPanel>
