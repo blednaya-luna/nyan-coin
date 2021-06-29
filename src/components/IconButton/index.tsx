@@ -26,7 +26,7 @@ export const IconButton: FC<IconButtonProps> = ({
     </MuiIconButton>
   );
 
-  return title ? (
+  return title && !props.disabled ? (
     <Tooltip title={title}>{renderIconButton()}</Tooltip>
   ) : (
     renderIconButton()
