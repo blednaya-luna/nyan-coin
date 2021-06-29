@@ -1,4 +1,4 @@
-import { createEffect, forward, restore } from 'effector';
+import { createEffect, restore, guard } from 'effector';
 import { createGate } from 'effector-react';
 import { combineEvents } from 'patronum';
 
@@ -28,7 +28,9 @@ export const assetsLoaded = combineEvents({
 
 export const $assets = restore<Asset[]>(assetsLoaded, []);
 
-forward({
-  from: AssetsGate.open,
-  to: [fetchAssetsDataFx, fetchDAppAssetsBalanceFx],
+guard({
+  source: $assets,
+  clock: AssetsGate.open,
+  filter: (asset) => asset.length === 0,
+  target: [fetchAssetsDataFx, fetchDAppAssetsBalanceFx],
 });

@@ -13,12 +13,15 @@ import React, { FC } from 'react';
 
 import { Address } from 'components/Address';
 import { Avatar } from 'components/Avatar';
+import { Balance } from 'components/Balance';
 import { IconButton } from 'components/IconButton';
 import { TransferTokensButton } from 'features/TransferTokens/TransferTokensButton';
 import { TransferTokensModal } from 'features/TransferTokens/TransferTokensModal';
-import { UserBalance } from 'features/UserBalance';
-
-import { UsersGate, $users } from './model';
+import {
+  UsersGate,
+  $users,
+  refreshUserBalance,
+} from 'stores/pages/admin/users';
 
 export const Users: FC = () => {
   useGate(UsersGate);
@@ -29,11 +32,11 @@ export const Users: FC = () => {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell />
+              <TableCell>Avatar</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Address</TableCell>
               <TableCell>Balance</TableCell>
-              <TableCell />
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -52,9 +55,9 @@ export const Users: FC = () => {
                   />
                 </TableCell>
                 <TableCell>
-                  <UserBalance
-                    address={user.address}
-                    fetchOnMount
+                  <Balance
+                    balance={user.balance}
+                    refreshBalance={() => refreshUserBalance(user)}
                     disableTypography
                   />
                 </TableCell>

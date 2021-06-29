@@ -1,8 +1,9 @@
 import { Box, Typography, Link } from '@material-ui/core';
-import { FileCopy, Visibility } from '@material-ui/icons';
+import { Visibility } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
+import { ContentCopy } from 'components/icons/ContentCopy';
 import { copyAddressToClipboardFx } from 'stores/account';
 import { centerEllipsis } from 'utils/centerEllipsis';
 import { Scope, getExplorerLink, AddressScope } from 'utils/getExplorerLink';
@@ -37,7 +38,7 @@ export const Address: FC<AddressProps> = ({
       <IconButton
         className={classes.iconButton}
         title="Copy address to clipboard"
-        Icon={FileCopy}
+        Icon={ContentCopy}
         onClick={() => copyAddressToClipboardFx(address)}
       />
       {scope && (

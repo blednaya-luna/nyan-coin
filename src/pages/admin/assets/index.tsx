@@ -13,8 +13,7 @@ import React, { FC } from 'react';
 import { Address } from 'components/Address';
 import { ReissueAssetButton } from 'features/ReissueAsset/ReissueAssetButton';
 import { ReissueAssetModal } from 'features/ReissueAsset/ReissueAssetModal';
-
-import { AssetsGate, $assets } from './model';
+import { $assets, AssetsGate } from 'stores/pages/admin/assets';
 
 export const Assets: FC = () => {
   useGate(AssetsGate);
@@ -30,7 +29,7 @@ export const Assets: FC = () => {
               <TableCell>Price</TableCell>
               <TableCell>Balance</TableCell>
               <TableCell>AssetId</TableCell>
-              <TableCell />
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -38,7 +37,10 @@ export const Assets: FC = () => {
               <TableRow>
                 <TableCell>{asset.name}</TableCell>
                 <TableCell>{asset.description}</TableCell>
-                <TableCell>{`${asset.price} NT`}</TableCell>
+                <TableCell>
+                  {`${asset.price} NT`}
+                  {/* TODO add refresh icon button */}
+                </TableCell>
                 <TableCell>{asset.balance}</TableCell>
                 <TableCell>
                   <Address
@@ -55,6 +57,7 @@ export const Assets: FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      {/* TODO add issue asset fab button */}
       <ReissueAssetModal />
     </>
   );

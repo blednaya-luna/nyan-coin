@@ -3,9 +3,9 @@ import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
 
+import { Assets } from './assets';
 import { AdminTabs, AdminTabPanel } from './components';
-import { Assets } from './tabs/assets';
-import { Users } from './tabs/users';
+import { Users } from './users';
 
 const Admin: FC = () => {
   return (
