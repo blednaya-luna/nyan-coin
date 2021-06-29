@@ -1,7 +1,6 @@
 import { createEvent, restore, createEffect, createStore } from 'effector';
 
 import { dAppDataByPatter } from 'api/dApp';
-import { RawDAppDataItem } from 'api/dApp/types';
 import { buildPattern } from 'api/utils';
 import { DAPP_DATA } from 'config';
 
@@ -21,7 +20,7 @@ export const $fee = $isScripted.map(($isScripted) =>
 
 export const copyAddressToClipboardFx = createEffect(copyAddressToClipboard);
 
-export const getUserDataFx = createEffect<string, RawDAppDataItem[]>(
+export const getUserDataFx = createEffect<string, WavesKeeper.TStringData[]>(
   (address) =>
     dAppDataByPatter(
       buildPattern({

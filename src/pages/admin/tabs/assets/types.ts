@@ -1,4 +1,4 @@
-export type AssetItem = {
+export type Asset = {
   assetId: string;
   name: string;
   description: string;

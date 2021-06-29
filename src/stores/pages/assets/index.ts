@@ -10,7 +10,7 @@ import { createGate } from 'effector-react';
 import { debounce, combineEvents } from 'patronum';
 
 import { dAppAssetsBalance, dAppDataByPatter } from 'api/dApp';
-import { RawDAppDataItem, RawDAppAssetsBalance } from 'api/dApp/types';
+import { RawDAppAssetsBalance } from 'api/dApp/types';
 import { buildPattern } from 'api/utils';
 import { NYAN_TOKEN, DAPP_SCRIPT, DAPP_DATA } from 'config';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
@@ -25,8 +25,8 @@ import {
 
 export const AssetsPageGate = createGate();
 
-export const fetchAssetsDataFx = createEffect<void, RawDAppDataItem[]>(() =>
-  dAppDataByPatter(buildPattern(DAPP_DATA.asset.data)),
+export const fetchAssetsDataFx = createEffect<void, WavesKeeper.TStringData[]>(
+  () => dAppDataByPatter(buildPattern(DAPP_DATA.asset.data)),
 );
 
 export const fetchDAppAssetsBalanceFx =

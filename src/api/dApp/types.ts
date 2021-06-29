@@ -6,13 +6,6 @@ import {
 } from 'api/account/types';
 import { DAPP } from 'config';
 
-// TODO RawDAppDataItem is WavesKeeper.TTypedData
-export type RawDAppDataItem = {
-  key: string;
-  type: 'integer' | 'boolean' | 'binary' | 'string';
-  value: string;
-};
-
 export type RawDAppTokenBalanceItem = RawAccountTokenBalanceItem & {
   address: typeof DAPP;
 };

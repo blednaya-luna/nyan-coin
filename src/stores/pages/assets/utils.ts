@@ -1,9 +1,9 @@
-import { RawDAppAssetsBalance, RawDAppDataItem } from 'api/dApp/types';
+import { RawDAppAssetsBalance } from 'api/dApp/types';
 import { extractValueFromKey } from 'api/utils';
 
 import { AssetBalanceItem, AssetDataItem, AssetItem } from './types';
 
-export const parseAssetsData = (assetsData: RawDAppDataItem[]) =>
+export const parseAssetsData = (assetsData: WavesKeeper.TStringData[]) =>
   assetsData.map<AssetDataItem>((assetDataItem) => {
     const data = JSON.parse(assetDataItem.value);
     return {
