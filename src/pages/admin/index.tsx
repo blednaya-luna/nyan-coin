@@ -13,7 +13,7 @@ const Admin: FC = () => {
     <>
       <AppBar title="Admin panel" />
       <MuiAppBar position="static" color="inherit">
-        <AdminTabs>
+        <AdminTabs centered>
           <Tab label="Users" icon={<Person />} wrapped />
           <Tab label="Assets" icon={<Redeem />} wrapped />
         </AdminTabs>
