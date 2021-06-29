@@ -16,14 +16,17 @@ export const routes: RouteConfig[] = [
   },
   {
     path: APP_LOCATION.home,
+    exact: true,
     component: Home,
   },
   {
     path: APP_LOCATION.assets,
+    exact: true,
     component: Assets,
   },
   {
     path: APP_LOCATION.admin,
+    exact: true,
     component: Admin,
   },
 ];
