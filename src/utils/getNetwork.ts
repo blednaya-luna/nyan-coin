@@ -1,4 +1,6 @@
-export const getNetwork = (networkCode: string) => {
+export const getNetwork = (
+  networkCode: WavesKeeper.TPublicStateNetwork['code'],
+) => {
   switch (networkCode) {
     case 'T':
       return 'Testnet';

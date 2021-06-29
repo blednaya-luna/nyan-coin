@@ -8,7 +8,7 @@ import { Avatar } from 'components/Avatar';
 import { IconButton } from 'components/IconButton';
 import { Network } from 'components/Network';
 import { UserBalance } from 'features/UserBalance';
-import { $address, $email, $network } from 'stores/account';
+import { $address, $email } from 'stores/account';
 import 'stores/account/init';
 
 import { useStyles } from './styles';
@@ -16,15 +16,14 @@ import { useStyles } from './styles';
 export const UserAccount: FC = () => {
   const address = useStore($address);
   const email = useStore($email);
-  const network = useStore($network);
   const classes = useStyles();
 
   return (
     <>
-      {(address || network) && (
+      {address && (
         <Box className={classes.leftBlock}>
           {address && <UserBalance address={address} fetchOnMount />}
-          {network && <Network network={network} />}
+          <Network />
         </Box>
       )}
       {address && <Avatar address={address} />}

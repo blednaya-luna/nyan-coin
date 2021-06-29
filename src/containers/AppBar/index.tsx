@@ -8,7 +8,6 @@ import { useStore } from 'effector-react';
 import React, { FC, ReactNode } from 'react';
 
 import { GoHomeButton } from 'containers/GoHomeButton';
-import { SignInButton } from 'containers/SignInButton';
 import { ToggleThemeButton } from 'containers/ToggleThemeButton';
 import { UserAccount } from 'containers/UserAccount';
 import { SignUp } from 'features/SignUp';
@@ -36,7 +35,7 @@ export const AppBar: FC<AppBarProps> = ({ title, searchComponent }) => {
           </Typography>
           <Box className={classes.search}>{searchComponent}</Box>
           <ToggleThemeButton className={classes.iconButton} />
-          {isAuthorized ? <UserAccount /> : <SignInButton />}
+          {isAuthorized && <UserAccount />}
           <SignUp />
         </Toolbar>
       </MuiAppBar>

@@ -9,8 +9,6 @@ import { updateWavesKeeper } from './utils';
 
 export const WavesKeeperGate = createGate();
 
-export const signInWithKeeper = createEvent();
-
 export const setIsWavesKeeperInstalled = createEvent<boolean>();
 export const $isWavesKeeperInstalled = restore(
   setIsWavesKeeperInstalled,
@@ -39,8 +37,9 @@ export const setupSynchronizationWithWavesKeeperFx = createEffect(async () => {
   const wavesKeeperAPI = await wavesKeeperInitialPromise;
   const wavesKeeperPublicState = await wavesKeeperAPI.publicState();
   await updateWavesKeeper(wavesKeeperPublicState);
-  window.WavesKeeper.on('update', updateWavesKeeper);
   setIsAuthorized(true);
+
+  window.WavesKeeper.on('update', updateWavesKeeper);
 });
 
 export const sendTx = createEffect(
@@ -49,15 +48,10 @@ export const sendTx = createEffect(
       const rawTx = await WavesKeeper.signAndPublishTransaction(tx);
       const parsedTx = JSON.parse(rawTx);
 
-      const wavesKeeperPublicState = await WavesKeeper.publicState();
       notify.info({
         title: 'Transaction sent',
         link: {
-          url: getExplorerLink(
-            wavesKeeperPublicState.network.code,
-            parsedTx.id,
-            'tx',
-          ),
+          url: getExplorerLink('tx', parsedTx.id),
           text: 'View transaction',
         },
       });

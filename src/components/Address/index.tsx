@@ -11,17 +11,23 @@ import { useStyles } from './styles';
 type AddressProps = {
   address: string;
   disableTypography?: boolean;
+  shortAddress?: boolean;
 };
 
-export const Address: FC<AddressProps> = ({ address, disableTypography }) => {
+export const Address: FC<AddressProps> = ({
+  address,
+  disableTypography,
+  shortAddress = true,
+}) => {
   const classes = useStyles();
+  const adaptedAddress = shortAddress ? centerEllipsis(address) : address;
 
   return (
     <Box className={classes.root}>
       {disableTypography ? (
-        address
+        adaptedAddress
       ) : (
-        <Typography variant="caption">{centerEllipsis(address)}</Typography>
+        <Typography variant="caption">{adaptedAddress}</Typography>
       )}
       <IconButton
         className={classes.iconButton}

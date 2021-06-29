@@ -1,6 +1,6 @@
 import { attach, createEvent, forward, guard, restore } from 'effector';
 
-import { argType, dAppScript, nyanCoin } from 'api/constants';
+import { DAPP_SCRIPT, NYAN_TOKEN } from 'config';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 import { AssetItem } from 'stores/pages/assets/types';
 
@@ -26,20 +26,20 @@ export const exchangeAssetFx = guard({
   target: attach<[AssetItem, number], typeof callCallableFunctionWithFeeFx>({
     effect: callCallableFunctionWithFeeFx,
     mapParams: ([assetToExchange, amount]) => ({
-      func: dAppScript.exchangeAssetToken,
+      func: DAPP_SCRIPT.EXCHANGE_ASSET,
       args: [
         {
-          type: argType.string,
+          type: 'string',
           value: assetToExchange.assetId,
         },
         {
-          type: argType.integer,
+          type: 'integer',
           value: amount,
         },
       ],
       payment: [
         {
-          assetId: nyanCoin,
+          assetId: NYAN_TOKEN,
           amount: assetToExchange.price,
         },
       ],

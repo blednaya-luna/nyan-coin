@@ -8,7 +8,7 @@ import {
   sample,
 } from 'effector';
 
-import { argType, dAppScript } from 'api/constants';
+import { DAPP_SCRIPT } from 'config';
 import { getUserDataFx } from 'stores/account';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 
@@ -24,14 +24,14 @@ export const $email = restore(setEmail, '').reset(closeSignUpModal);
 export const signUp = createEvent();
 export const signUpFx = sample({
   clock: signUp,
-  target: attach({
+  target: attach<void, typeof $email, typeof callCallableFunctionWithFeeFx>({
     effect: callCallableFunctionWithFeeFx,
     source: $email,
     mapParams: (_, email) => ({
-      func: dAppScript.signUp,
+      func: DAPP_SCRIPT.SIGN_UP,
       args: [
         {
-          type: argType.string,
+          type: 'string',
           value: email,
         },
       ],

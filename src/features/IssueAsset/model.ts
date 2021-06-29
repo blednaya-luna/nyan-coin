@@ -7,7 +7,7 @@ import {
   sample,
 } from 'effector';
 
-import { argType, dAppScript } from 'api/constants';
+import { DAPP_SCRIPT } from 'config';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 import { calcFee } from 'utils/calcFee';
 
@@ -38,7 +38,16 @@ export const $assetExchangePrice = restore(setAssetExchangePrice, 0).reset(
 export const issueAsset = createEvent();
 export const issueAssetFx = sample({
   clock: issueAsset,
-  target: attach({
+  target: attach<
+    void,
+    [
+      typeof $assetName,
+      typeof $assetDescription,
+      typeof $assetQuantity,
+      typeof $assetExchangePrice,
+    ],
+    typeof callCallableFunctionWithFeeFx
+  >({
     effect: callCallableFunctionWithFeeFx,
     source: [
       $assetName,
@@ -50,26 +59,26 @@ export const issueAssetFx = sample({
       _,
       [assetName, assetDescription, assetQuantity, assetExchangePrice],
     ) => ({
-      func: dAppScript.issueAssetToken,
+      func: DAPP_SCRIPT.ISSUE_ASSET,
       args: [
         {
-          type: argType.string,
+          type: 'string',
           value: assetName,
         },
         {
-          type: argType.string,
+          type: 'string',
           value: assetDescription,
         },
         {
-          type: argType.integer,
+          type: 'integer',
           value: assetQuantity,
         },
         {
-          type: argType.integer,
+          type: 'integer',
           value: assetExchangePrice,
         },
         {
-          type: argType.string,
+          type: 'string',
           value: JSON.stringify({
             name: assetName,
             description: assetDescription,

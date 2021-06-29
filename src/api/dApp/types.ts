@@ -4,24 +4,24 @@ import {
   RawAccountAssetsBalance,
   RawAccountAssetBalanceItem,
 } from 'api/account/types';
+import { DAPP } from 'config';
 
-import { argType, dApp } from '../constants';
-
+// TODO RawDAppDataItem is WavesKeeper.TTypedData
 export type RawDAppDataItem = {
   key: string;
-  type: keyof typeof argType;
+  type: 'integer' | 'boolean' | 'binary' | 'string';
   value: string;
 };
 
 export type RawDAppTokenBalanceItem = RawAccountTokenBalanceItem & {
-  address: typeof dApp;
+  address: typeof DAPP;
 };
 
 export type RawDAppAssetsBalanceItem = RawAccountAssetsBalanceItem;
 export type RawDAppAssetsBalance = RawAccountAssetsBalance & {
-  address: typeof dApp;
+  address: typeof DAPP;
 };
 
 export type RawDAppAssetBalanceItem = RawAccountAssetBalanceItem & {
-  address: typeof dApp;
+  address: typeof DAPP;
 };

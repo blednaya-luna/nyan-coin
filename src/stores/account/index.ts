@@ -1,17 +1,14 @@
 import { createEvent, restore, createEffect, createStore } from 'effector';
 
-import { dAppScopeKeys } from 'api/constants';
 import { dAppDataByPatter } from 'api/dApp';
 import { RawDAppDataItem } from 'api/dApp/types';
 import { buildPattern } from 'api/utils';
+import { DAPP_DATA } from 'config';
 
 import { copyAddressToClipboard } from './utils';
 
 export const setAddress = createEvent<string>();
 export const $address = restore(setAddress, null);
-
-export const setNetwork = createEvent<WavesKeeper.TPublicStateNetwork>();
-export const $network = restore(setNetwork, null);
 
 export const setIsScripted = createEvent<boolean>();
 export const $isScripted = restore(setIsScripted, false);
@@ -28,7 +25,7 @@ export const getUserDataFx = createEffect<string, RawDAppDataItem[]>(
   (address) =>
     dAppDataByPatter(
       buildPattern({
-        ...dAppScopeKeys.user.email,
+        ...DAPP_DATA.user.email,
         value: address,
       }),
     ),

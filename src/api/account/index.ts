@@ -1,16 +1,12 @@
-import { baseURL, nyanCoin } from '../constants';
-import { fetcher } from '../utils';
-import { RawAccountTokenBalanceItem } from './types';
+import { BASE_URL, NYAN_TOKEN } from 'config';
 
-export const accountTokenBalance = ({
-  address,
-}: {
-  address: string;
-}): Promise<RawAccountTokenBalanceItem> =>
-  fetcher(`${baseURL}/assets/balance/${address}/${nyanCoin}`);
+import { fetcher } from '../utils';
+
+export const accountTokenBalance = ({ address }: { address: string }) =>
+  fetcher(`${BASE_URL}/assets/balance/${address}/${NYAN_TOKEN}`);
 
 export const accountAssetsBalance = ({ address }: { address: string }) =>
-  fetcher(`${baseURL}/assets/balance/${address}`);
+  fetcher(`${BASE_URL}/assets/balance/${address}`);
 
 export const accountAssetBalance = ({
   address,
@@ -18,4 +14,4 @@ export const accountAssetBalance = ({
 }: {
   address: string;
   assetId: string;
-}) => fetcher(`${baseURL}/assets/balance/${address}/${assetId}`);
+}) => fetcher(`${BASE_URL}/assets/balance/${address}/${assetId}`);

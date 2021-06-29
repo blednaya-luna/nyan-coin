@@ -1,8 +1,8 @@
-import { nyanCoin } from '../constants';
+import { NYAN_TOKEN } from 'config';
 
 export type RawAccountTokenBalanceItem = {
   address: string;
-  assetId: typeof nyanCoin;
+  assetId: typeof NYAN_TOKEN;
   balance: number;
 };
 

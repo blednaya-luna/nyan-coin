@@ -59,6 +59,7 @@
     "@waves/waveskeeper-types": "^0.0.6",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
+    "effector-logger": "^0.10.0",
     "eslint-import-resolver-typescript": "^2.4.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
@@ -68,7 +69,11 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

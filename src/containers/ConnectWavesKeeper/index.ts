@@ -1,11 +1,11 @@
 import { useGate } from 'effector-react';
-import React, { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
 import { WavesKeeperGate } from 'stores/keeper';
 import 'stores/keeper/init';
 
 type ConnectWavesKeeperProps = {
-  children: ReactNode;
+  children: JSX.Element;
 };
 
 export const ConnectWavesKeeper: FC<ConnectWavesKeeperProps> = ({
@@ -13,5 +13,5 @@ export const ConnectWavesKeeper: FC<ConnectWavesKeeperProps> = ({
 }) => {
   useGate(WavesKeeperGate);
 
-  return <>{children}</>;
+  return children;
 };

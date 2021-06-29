@@ -1,259 +1,189 @@
 {-# STDLIB_VERSION 4 #-}
-{-# CONTENT_TYPE DAPP #-}
 {-# SCRIPT_TYPE ACCOUNT #-}
+{-# CONTENT_TYPE DAPP #-}
 
-func getNumberByKey(key: String) = {
-  let number = match getInteger(this, key) {
-    case a:Int => a
-    case _ => 0
-  }
-  number
-}
+func getNumberByKey (key) = {
+    let number =     match getInteger(this, key) {
+        case a: Int =>
+            a
+        case _ =>
+            0
+    }
+    number
+    }
+
 
 let NONE = "none"
-func getStringByKey(key: String) = {
-  let string = match getString(this, key) {
-    case a:String => a
-    case _ => NONE
-  }
-  string
-}
 
-func addressToString(address: Address) = {
-  toBase58String(address.bytes)
-}
-func stringToAddress(string: String) = {
-  Address(fromBase58String(string))
-}
+func getStringByKey (key) = {
+    let string =     match getString(this, key) {
+        case a: String =>
+            a
+        case _ =>
+            NONE
+    }
+    string
+    }
 
-func byteVectorToString(byteVector: ByteVector) = {
-  toBase58String(byteVector)
-}
-func stringToByteVector(string: String) = {
-  fromBase58String(string)
-}
 
-func isAdmin(caller: Address) = {
-  this == caller
-}
+func addressToString (address) = toBase58String(address.bytes)
 
-func getUserEmailKey(userEmail: String) = {
-  "user_" + userEmail + "_email"
-}
-func getUserEmailValue(userEmail: String) = {
-  getStringByKey(getUserEmailKey(userEmail))
-}
 
-func getNyanTokenKey(dAppAddress: Address) = {
-  "dApp_" + addressToString(dAppAddress) +"_tokenId"
-}
-func getNyanTokenValue(dAppAddress: Address) = {
-  getStringByKey(getNyanTokenKey(dAppAddress))
-}
+func stringToAddress (string) = Address(fromBase58String(string))
 
-func getAssetPriceKey(assetId: String) = {
-  "asset_" + assetId + "_price"
-}
-func getAssetPriceValue(assetId: String) = {
-  getNumberByKey(getAssetPriceKey(assetId))
-}
 
-func getAssetDataKey(assetId: String) = {
-  "asset_" + assetId + "_data"
-}
-func getAssetDataValue(assetId: String) = {
-  getStringByKey(getAssetPriceKey(assetId))
-}
+func byteVectorToString (byteVector) = toBase58String(byteVector)
+
+
+func stringToByteVector (string) = fromBase58String(string)
+
+
+func isAdmin (caller) = (this == caller)
+
+
+func getUserEmailKey (userEmail) = (("user_" + userEmail) + "_email")
+
+
+func getUserEmailValue (userEmail) = getStringByKey(getUserEmailKey(userEmail))
+
+
+func getNyanTokenKey (dAppAddress) = (("dApp_" + addressToString(dAppAddress)) + "_tokenId")
+
+
+func getNyanTokenValue (dAppAddress) = getStringByKey(getNyanTokenKey(dAppAddress))
+
+
+func getAssetPriceKey (assetId) = (("asset_" + assetId) + "_price")
+
+
+func getAssetPriceValue (assetId) = getNumberByKey(getAssetPriceKey(assetId))
+
+
+func getAssetDataKey (assetId) = (("asset_" + assetId) + "_data")
+
+
+func getAssetDataValue (assetId) = getStringByKey(getAssetPriceKey(assetId))
+
 
 @Callable(i)
-func signUp(email: String) = {
-  let userAddress = addressToString(i.caller)
-  let userEmail = getUserEmailValue(userAddress)
+func signUp (email) = {
+    let userAddress = addressToString(i.caller)
+    let userEmail = getUserEmailValue(userAddress)
+    if ((userEmail != NONE))
+        then throw((("User " + userEmail) + " is already registered"))
+        else [StringEntry(getUserEmailKey(userAddress), email)]
+    }
 
-  if (userEmail != NONE)
-  then {
-    throw("User " + userEmail + " is already registered")
-  }
-  else {
-    [
-      StringEntry(getUserEmailKey(userAddress), email)
-    ]
-  }
-}
+
 
 @Callable(i)
-func issueNyanToken(quantity: Int) = {
-  let nyanToken = getNyanTokenValue(this)
+func issueNyanToken (quantity) = {
+    let nyanToken = getNyanTokenValue(this)
+    if (!(isAdmin(i.caller)))
+        then throw("Function invoke not allowed, requested from non-admin address")
+        else if ((nyanToken != NONE))
+            then throw("NYAN Token is already issued")
+            else {
+                let nyanTokenIssue = Issue("NYAN Token", "NYAN Token is a cryptocurrency token that operates on the Waves platform", quantity, 0, true)
+                let nyanTokenAssetId = calculateAssetId(nyanTokenIssue)
+[nyanTokenIssue, StringEntry(getNyanTokenKey(this), byteVectorToString(nyanTokenAssetId))]
+                }
+    }
 
-  if (!isAdmin(i.caller))
-  then {
-    throw("Function invoke not allowed, requested from non-admin address")
-  }
-  else if (nyanToken != NONE)
-  then {
-    throw("NYAN Token is already issued")
-  }
-  else {
-    let nyanTokenIssue = Issue("NYAN Token", "NYAN Token is a cryptocurrency token that operates on the Waves platform", quantity, 0, true)
-    let nyanTokenAssetId = nyanTokenIssue.calculateAssetId()
-    [
-      nyanTokenIssue,
-      StringEntry(getNyanTokenKey(this), byteVectorToString(nyanTokenAssetId))
-    ]
-  }
 
-}
 
 @Callable(i)
-func reissueNyanToken(quantity: Int) = {
-  let nyanToken = getNyanTokenValue(this)
+func reissueNyanToken (quantity) = {
+    let nyanToken = getNyanTokenValue(this)
+    if (!(isAdmin(i.caller)))
+        then throw("Function invoke not allowed, requested from non-admin address")
+        else if ((nyanToken == NONE))
+            then throw("NYAN Token was not issued")
+            else [Reissue(stringToByteVector(nyanToken), quantity, true)]
+    }
 
-  if (!isAdmin(i.caller))
-  then {
-    throw("Function invoke not allowed, requested from non-admin address")
-  }
-  else if (nyanToken == NONE)
-  then {
-    throw("NYAN Token was not issued")
-  }
-  else {
-    [
-      Reissue(stringToByteVector(nyanToken), quantity, true)
-    ]
-  }
-}
+
 
 @Callable(i)
-func transferNyanToken(recipient: String, amount: Int) = {
-  let userEmail = getUserEmailValue(recipient)
-  let nyanTokenAssetId = stringToByteVector(getNyanTokenValue(this))
-  let currentDAppBalance = assetBalance(this, nyanTokenAssetId)
-  let newDAppBalance = currentDAppBalance - amount
-
-  if (!isAdmin(i.caller))
-  then {
-    throw("Function invoke not allowed, requested from non-admin address")
-  }
-  else if (userEmail == NONE)
-  then {
-    throw("You cannot transfer NYAN Tokens to an unregistered user")
-  }
-  else if (amount < 0)
-  then {
-    throw("You cannot transfer a negative amount")
-  }
-  else if (newDAppBalance < 0)
-  then {
-    throw("Not enough NYAN Tokens to transfer")
-  }
-  else {
-    [
-      ScriptTransfer(stringToAddress(recipient), amount, nyanTokenAssetId)
-    ]
-  }
-}
-
-@Callable(i)
-func issueAssetToken(name: String, description: String, quantity: Int, price: Int, data: String) = {
-  let assetTokenIssue = Issue(name, description, quantity, 0, true)
-  let assetTokenAssetId = assetTokenIssue.calculateAssetId()
-  let assetToken = byteVectorToString(assetTokenAssetId)
-
-  if (!isAdmin(i.caller))
-  then {
-    throw("Function invoke not allowed, requested from non-admin address")
-  }
-  else if (quantity == 0)
-  then {
-    [
-      assetTokenIssue,
-      IntegerEntry(getAssetPriceKey(assetToken), price),
-      StringEntry(getAssetDataKey(assetToken), data)
-    ]
-  }
-  else {
+func transferNyanToken (recipient,amount) = {
+    let userEmail = getUserEmailValue(recipient)
     let nyanTokenAssetId = stringToByteVector(getNyanTokenValue(this))
     let currentDAppBalance = assetBalance(this, nyanTokenAssetId)
-    let amount = quantity * price
-    let newDAppBalance = currentDAppBalance - amount
+    let newDAppBalance = (currentDAppBalance - amount)
+    if (!(isAdmin(i.caller)))
+        then throw("Function invoke not allowed, requested from non-admin address")
+        else if ((userEmail == NONE))
+            then throw("You cannot transfer NYAN Tokens to an unregistered user")
+            else if ((0 > amount))
+                then throw("You cannot transfer a negative amount")
+                else if ((0 > newDAppBalance))
+                    then throw("Not enough NYAN Tokens to transfer")
+                    else [ScriptTransfer(stringToAddress(recipient), amount, nyanTokenAssetId)]
+    }
 
-    if (newDAppBalance < 0)
-    then {
-      throw("Not enough NYAN Tokens to issue an asset")
-    }
-    else {
-      [
-        assetTokenIssue,
-        Burn(nyanTokenAssetId, amount),
-        IntegerEntry(getAssetPriceKey(assetToken), price),
-        StringEntry(getAssetDataKey(assetToken), data)
-      ]
-    }
-  }
-}
+
 
 @Callable(i)
-func reissueAssetToken(assetId: String, quantity: Int) = {
-  let nyanTokenAssetId = stringToByteVector(getNyanTokenValue(this))
-  let currentDAppBalance = assetBalance(this, nyanTokenAssetId)
-  let price = getAssetPriceValue(assetId)
-  let amount = quantity * price
-  let newDAppBalance = currentDAppBalance - amount
+func issueAssetToken (name,description,quantity,price,data) = {
+    let assetTokenIssue = Issue(name, description, quantity, 0, true)
+    let assetTokenAssetId = calculateAssetId(assetTokenIssue)
+    let assetToken = byteVectorToString(assetTokenAssetId)
+    if (!(isAdmin(i.caller)))
+        then throw("Function invoke not allowed, requested from non-admin address")
+        else if ((quantity == 0))
+            then [assetTokenIssue, IntegerEntry(getAssetPriceKey(assetToken), price), StringEntry(getAssetDataKey(assetToken), data)]
+            else {
+                let nyanTokenAssetId = stringToByteVector(getNyanTokenValue(this))
+                let currentDAppBalance = assetBalance(this, nyanTokenAssetId)
+                let amount = (quantity * price)
+                let newDAppBalance = (currentDAppBalance - amount)
+                if ((0 > newDAppBalance))
+                    then throw("Not enough NYAN Tokens to issue an asset")
+                    else [assetTokenIssue, Burn(nyanTokenAssetId, amount), IntegerEntry(getAssetPriceKey(assetToken), price), StringEntry(getAssetDataKey(assetToken), data)]
+                }
+    }
 
-  if (!isAdmin(i.caller))
-  then {
-    throw("Function invoke not allowed, requested from non-admin address")
-  }
-  else if (newDAppBalance < 0)
-  then {
-    throw("Not enough NYAN Tokens to reissue an asset")
-  }
-  else {
-    [
-      Reissue(stringToByteVector(assetId), quantity, true),
-      Burn(nyanTokenAssetId, amount)
-    ]
-  }
-}
+
 
 @Callable(i)
-func exchangeAssetToken(assetId: String, amount: Int) = {
-  let payments = i.payments
-
-  if (size(payments) == 0)
-  then {
-    throw("You need to attach the payment")
-  }
-  else {
-    let paymentAmount = payments[0].amount
-    let paymentAssetId = value(payments[0].assetId)
-    let assetPrice = getAssetPriceValue(assetId)
-    let assetAmount = amount * assetPrice
-    let userAddress = i.caller
-    let assetTokenAssetId = stringToByteVector(assetId)
+func reissueAssetToken (assetId,quantity) = {
+    let nyanTokenAssetId = stringToByteVector(getNyanTokenValue(this))
+    let currentDAppBalance = assetBalance(this, nyanTokenAssetId)
+    let price = getAssetPriceValue(assetId)
+    let amount = (quantity * price)
+    let newDAppBalance = (currentDAppBalance - amount)
+    if (!(isAdmin(i.caller)))
+        then throw("Function invoke not allowed, requested from non-admin address")
+        else if ((0 > newDAppBalance))
+            then throw("Not enough NYAN Tokens to reissue an asset")
+            else [Reissue(stringToByteVector(assetId), quantity, true), Burn(nyanTokenAssetId, amount)]
+    }
 
 
-    if (paymentAmount < assetAmount)
-    then {
-      throw("Not enough NYAN Tokens to exchange an asset")
+
+@Callable(i)
+func exchangeAssetToken (assetId,amount) = {
+    let payments = i.payments
+    if ((size(payments) == 0))
+        then throw("You need to attach the payment")
+        else {
+            let paymentAmount = payments[0].amount
+            let paymentAssetId = value(payments[0].assetId)
+            let assetPrice = getAssetPriceValue(assetId)
+            let assetAmount = (amount * assetPrice)
+            let userAddress = i.caller
+            let assetTokenAssetId = stringToByteVector(assetId)
+            if ((assetAmount > paymentAmount))
+                then throw("Not enough NYAN Tokens to exchange an asset")
+                else if ((paymentAmount == assetAmount))
+                    then [ScriptTransfer(userAddress, amount, assetTokenAssetId), Burn(paymentAssetId, paymentAmount)]
+                    else {
+                        let paymentAmountChange = (paymentAmount - assetAmount)
+[ScriptTransfer(userAddress, amount, assetTokenAssetId), ScriptTransfer(userAddress, paymentAmountChange, paymentAssetId), Burn(paymentAssetId, assetAmount)]
+                        }
+            }
     }
-    else if (paymentAmount == assetAmount)
-    then {
-      [
-        ScriptTransfer(userAddress, amount, assetTokenAssetId),
-        Burn(paymentAssetId, paymentAmount)
-      ]
-    }
-    else {
-      let paymentAmountChange = paymentAmount - assetAmount
-      [
-        ScriptTransfer(userAddress, amount, assetTokenAssetId),
-        ScriptTransfer(userAddress, paymentAmountChange, paymentAssetId),
-        Burn(paymentAssetId, assetAmount)
-      ]
-    }
-  }
-}
+
 
 @Verifier(tx)
-func verify() = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
+func verify () = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)

@@ -1,6 +1,6 @@
 import { createEffect, attach } from 'effector';
 
-import { dApp } from 'api/constants';
+import { DAPP } from 'config';
 
 import { $fee } from '../account';
 import { sendTx } from '../keeper';
@@ -16,7 +16,7 @@ export const callCallableFunctionFx = createEffect<
   sendTx({
     type: 16,
     data: {
-      dApp,
+      dApp: DAPP,
       call: {
         function: func,
         args,

@@ -20,6 +20,7 @@ export const TransferTokensModal: FC = () => {
         <Grid container justify="center" spacing={2}>
           <Grid item>
             <AmountTextField
+              type="number"
               label="amount"
               helperText="Enter how many tokens need to be transferred"
               required

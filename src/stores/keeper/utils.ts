@@ -1,12 +1,10 @@
 import { nodeInteraction } from '@waves/waves-transactions';
 
-import { setAddress, setIsScripted, setNetwork } from '../account';
+import { setAddress, setIsScripted } from '../account';
 
 export const updateWavesKeeper = async (
   publicState: WavesKeeper.IPublicStateResponse,
 ) => {
-  setNetwork(publicState.network);
-
   if (publicState.account) {
     setAddress(publicState.account.address);
 

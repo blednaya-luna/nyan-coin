@@ -1,4 +1,4 @@
-import { Send } from '@material-ui/icons';
+import { AttachMoney } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
@@ -16,7 +16,7 @@ export const TransferTokensButton: FC<TransferTokensButtonProps> = ({
   return (
     <IconButton
       title="Transfer NT Tokens to user"
-      Icon={Send}
+      Icon={AttachMoney}
       onClick={() => setRecipient(recipient)}
     />
   );

@@ -1,6 +1,6 @@
 import { attach, createEvent, forward, guard, restore } from 'effector';
 
-import { argType, dAppScript } from 'api/constants';
+import { DAPP_SCRIPT } from 'config';
 import { User } from 'pages/admin/tabs/users/types';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 
@@ -25,14 +25,14 @@ export const transferTokensFx = guard({
   target: attach<[User, number], typeof callCallableFunctionWithFeeFx>({
     effect: callCallableFunctionWithFeeFx,
     mapParams: ([recipient, amount]) => ({
-      func: dAppScript.transferToken,
+      func: DAPP_SCRIPT.TRANSFER_TOKEN,
       args: [
         {
-          type: argType.string,
+          type: 'string',
           value: recipient.address,
         },
         {
-          type: argType.integer,
+          type: 'integer',
           value: amount,
         },
       ],

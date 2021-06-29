@@ -1,13 +1,12 @@
 import { attach, createEvent, restore } from 'effector';
 
-import { argType, dAppScript } from 'api/constants';
+import { DAPP_SCRIPT } from 'config';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { calcFee } from 'utils/calcFee';
 
 export const setQuantity = createEvent<number>();
 export const $quantity = restore(setQuantity, 0);
 
-export const issueNyanTokenFx = attach<
+export const reissueNyanTokenFx = attach<
   void,
   typeof $quantity,
   typeof callCallableFunctionWithFeeFx
@@ -15,13 +14,12 @@ export const issueNyanTokenFx = attach<
   effect: callCallableFunctionWithFeeFx,
   source: $quantity,
   mapParams: (_, quantity) => ({
-    func: dAppScript.issueToken,
+    func: DAPP_SCRIPT.REISSUE_TOKEN,
     args: [
       {
-        type: argType.integer,
+        type: 'integer',
         value: quantity,
       },
     ],
-    additionalFee: calcFee({ issue: true }),
   }),
 });

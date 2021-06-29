@@ -7,17 +7,22 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import { useList } from 'effector-react';
+import { Edit, DeleteForever } from '@material-ui/icons';
+import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
 import { Address } from 'components/Address';
 import { Avatar } from 'components/Avatar';
+import { IconButton } from 'components/IconButton';
 import { TransferTokensButton } from 'features/TransferTokens/TransferTokensButton';
 import { TransferTokensModal } from 'features/TransferTokens/TransferTokensModal';
 import { UserBalance } from 'features/UserBalance';
-import { $filteredUsers } from 'stores/pages/users';
 
-export const UsersTable: FC = () => {
+import { UsersGate, $users } from './model';
+
+export const Users: FC = () => {
+  useGate(UsersGate);
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -32,7 +37,7 @@ export const UsersTable: FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {useList($filteredUsers, (user) => (
+            {useList($users, (user) => (
               <TableRow>
                 <TableCell>
                   <Avatar address={user.address} />
@@ -50,6 +55,12 @@ export const UsersTable: FC = () => {
                 </TableCell>
                 <TableCell>
                   <TransferTokensButton recipient={user} />
+                  <IconButton title="Edit user" Icon={Edit} disabled />
+                  <IconButton
+                    title="Revoke user"
+                    Icon={DeleteForever}
+                    disabled
+                  />
                 </TableCell>
               </TableRow>
             ))}

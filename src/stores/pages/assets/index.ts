@@ -9,10 +9,10 @@ import {
 import { createGate } from 'effector-react';
 import { debounce, combineEvents } from 'patronum';
 
-import { dAppScopeKeys, dAppScript, nyanCoin } from 'api/constants';
 import { dAppAssetsBalance, dAppDataByPatter } from 'api/dApp';
 import { RawDAppDataItem, RawDAppAssetsBalance } from 'api/dApp/types';
 import { buildPattern } from 'api/utils';
+import { NYAN_TOKEN, DAPP_SCRIPT, DAPP_DATA } from 'config';
 import { callCallableFunctionWithFeeFx } from 'stores/dApp';
 
 import { AssetItem } from './types';
@@ -26,7 +26,7 @@ import {
 export const AssetsPageGate = createGate();
 
 export const fetchAssetsDataFx = createEffect<void, RawDAppDataItem[]>(() =>
-  dAppDataByPatter(buildPattern(dAppScopeKeys.asset.data)),
+  dAppDataByPatter(buildPattern(DAPP_DATA.asset.data)),
 );
 
 export const fetchDAppAssetsBalanceFx =
@@ -71,7 +71,7 @@ forward({
   to: attach<AssetItem, typeof callCallableFunctionWithFeeFx>({
     effect: callCallableFunctionWithFeeFx,
     mapParams: (asset) => ({
-      func: dAppScript.exchangeAssetToken,
+      func: DAPP_SCRIPT.EXCHANGE_ASSET,
       args: [
         {
           type: 'string',
@@ -84,7 +84,7 @@ forward({
       ],
       payment: [
         {
-          assetId: nyanCoin,
+          assetId: NYAN_TOKEN,
           amount: asset.price,
         },
       ],

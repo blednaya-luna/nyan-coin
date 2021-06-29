@@ -5,7 +5,6 @@ import {
   $isWavesKeeperInstalled,
   setupSynchronizationWithWavesKeeperFx,
   setupWavesKeeperFx,
-  signInWithKeeper,
   WavesKeeperGate,
 } from '.';
 
@@ -16,7 +15,7 @@ delay({
 });
 
 guard({
-  source: signInWithKeeper,
+  source: setupWavesKeeperFx.done,
   filter: $isWavesKeeperInstalled,
   target: setupSynchronizationWithWavesKeeperFx,
 });

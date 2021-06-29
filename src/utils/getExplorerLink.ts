@@ -1,16 +1,6 @@
-export const getExplorerLink = (
-  networkCode: string,
-  address: string,
-  type: 'tx',
-) => {
-  switch (networkCode) {
-    case 'T':
-      return `https://wavesexplorer.com/testnet/${type}/${address}`;
-    case 'W':
-      return `https://wavesexplorer.com/${type}/${address}`;
-    case 'S':
-      return `https://wavesexplorer.com/stagenet/${type}/${address}`;
-    default:
-      return `https://wavesexplorer.com/custom/${type}/${address}`;
-  }
-};
+import { EXPLORER_URL } from 'config';
+
+export type Scope = 'tx' | 'assets';
+
+export const getExplorerLink = (type: Scope, address: string) =>
+  `${EXPLORER_URL}/${type}/${address}`;
