@@ -41,7 +41,11 @@ export const Assets: FC = () => {
                 <TableCell>{`${asset.price} NT`}</TableCell>
                 <TableCell>{asset.balance}</TableCell>
                 <TableCell>
-                  <Address address={asset.assetId} disableTypography />
+                  <Address
+                    address={asset.assetId}
+                    scope="assets"
+                    disableTypography
+                  />
                 </TableCell>
                 <TableCell>
                   <ReissueAssetButton asset={asset} />

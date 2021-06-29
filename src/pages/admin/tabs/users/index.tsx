@@ -44,7 +44,12 @@ export const Users: FC = () => {
                 </TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>
-                  <Address address={user.address} disableTypography />
+                  <Address
+                    address={user.address}
+                    scope="address"
+                    type="assets"
+                    disableTypography
+                  />
                 </TableCell>
                 <TableCell>
                   <UserBalance

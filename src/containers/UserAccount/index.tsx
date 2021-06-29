@@ -27,7 +27,9 @@ export const UserAccount: FC = () => {
       {address && <Avatar address={address} />}
       {(address || email) && (
         <Box className={classes.rightBlock}>
-          {address && <Address address={address} />}
+          {address && (
+            <Address address={address} scope="address" type="assets" />
+          )}
           {email && <Typography variant="caption">{email}</Typography>}
         </Box>
       )}
