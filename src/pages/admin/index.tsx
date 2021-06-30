@@ -1,5 +1,11 @@
 import { Tab, AppBar as MuiAppBar } from '@material-ui/core';
-import { Person, Redeem } from '@material-ui/icons';
+import {
+  Person,
+  Redeem,
+  AccountBalanceWallet,
+  FormatListBulleted,
+  EmojiEvents,
+} from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
@@ -16,6 +22,14 @@ const Admin: FC = () => {
         <AdminTabs centered>
           <Tab label="Users" icon={<Person />} wrapped />
           <Tab label="Assets" icon={<Redeem />} wrapped />
+          <Tab
+            label="Balance"
+            icon={<AccountBalanceWallet />}
+            wrapped
+            disabled
+          />
+          <Tab label="Orders" icon={<FormatListBulleted />} wrapped disabled />
+          <Tab label="Achievements" icon={<EmojiEvents />} wrapped disabled />
         </AdminTabs>
       </MuiAppBar>
       <AdminTabPanel index={0}>
