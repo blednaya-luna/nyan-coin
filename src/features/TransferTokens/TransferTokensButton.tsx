@@ -2,7 +2,7 @@ import { AccountBalanceWallet } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
-import { User } from 'stores/pages/admin/users/types';
+import { User } from 'stores/users/types';
 
 import { setRecipient } from './model';
 

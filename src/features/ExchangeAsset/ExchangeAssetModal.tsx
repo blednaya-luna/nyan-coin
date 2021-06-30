@@ -2,7 +2,7 @@ import { Box, Grid } from '@material-ui/core';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 
-import { Asset } from 'components/Asset';
+import { AssetTicket } from 'components/AssetTicket';
 
 import {
   AmountTextField,
@@ -24,7 +24,7 @@ export const ExchangeAssetModal: FC = () => {
         <Grid container justify="center" spacing={2}>
           <Grid item>
             <Box className={classes.assetContainer}>
-              {assetToExchange && <Asset {...assetToExchange} />}
+              {assetToExchange && <AssetTicket asset={assetToExchange} />}
             </Box>
           </Grid>
           <Grid item>

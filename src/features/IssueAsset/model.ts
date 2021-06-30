@@ -8,7 +8,7 @@ import {
 } from 'effector';
 
 import { DAPP_SCRIPT } from 'config';
-import { callCallableFunctionWithFeeFx } from 'stores/dApp';
+import { invokeScriptWithFeeFx } from 'stores/keeper';
 import { calcFee } from 'utils/calcFee';
 
 export const openIssueAssetModal = createEvent();
@@ -46,9 +46,9 @@ export const issueAssetFx = sample({
       typeof $assetQuantity,
       typeof $assetExchangePrice,
     ],
-    typeof callCallableFunctionWithFeeFx
+    typeof invokeScriptWithFeeFx
   >({
-    effect: callCallableFunctionWithFeeFx,
+    effect: invokeScriptWithFeeFx,
     source: [
       $assetName,
       $assetDescription,

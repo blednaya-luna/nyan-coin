@@ -2,7 +2,8 @@ import { reflect } from '@effector/reflect';
 import { Tabs } from '@material-ui/core';
 
 import { TabPanel } from 'components/TabPanel';
-import { $tab, setTab } from 'stores/pages/admin';
+
+import { $tab, setTab } from './model';
 
 export const AdminTabs = reflect({
   view: Tabs,

@@ -7,12 +7,11 @@ import {
 import { useStore } from 'effector-react';
 import React, { FC, ReactNode } from 'react';
 
-import { GoHomeButton } from 'containers/GoHomeButton';
-import { ToggleThemeButton } from 'containers/ToggleThemeButton';
-import { UserAccount } from 'containers/UserAccount';
+import { UserAccount } from 'components/Account';
+import { GoHomeButton } from 'components/GoHomeButton';
 import { SignUp } from 'features/SignUp';
-import { $isAuthorized } from 'stores/account';
-import 'stores/account/init';
+import { ToggleThemeButton } from 'features/ThemeProvider';
+import { $user } from 'stores/account';
 
 import { useStyles } from './styles';
 
@@ -22,7 +21,7 @@ type AppBarProps = {
 };
 
 export const AppBar: FC<AppBarProps> = ({ title, searchComponent }) => {
-  const isAuthorized = useStore($isAuthorized);
+  const user = useStore($user);
   const classes = useStyles();
 
   return (
@@ -35,7 +34,7 @@ export const AppBar: FC<AppBarProps> = ({ title, searchComponent }) => {
           </Typography>
           <Box className={classes.search}>{searchComponent}</Box>
           <ToggleThemeButton className={classes.iconButton} />
-          {isAuthorized && <UserAccount />}
+          {user && <UserAccount user={user} />}
           <SignUp />
         </Toolbar>
       </MuiAppBar>

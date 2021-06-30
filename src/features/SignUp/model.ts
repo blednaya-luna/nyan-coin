@@ -3,14 +3,13 @@ import {
   createEvent,
   createStore,
   forward,
-  guard,
   restore,
-  sample,
+  guard,
 } from 'effector';
 
 import { DAPP_SCRIPT } from 'config';
-import { getUserDataFx } from 'stores/account';
-import { callCallableFunctionWithFeeFx } from 'stores/dApp';
+import { userLoaded } from 'stores/account';
+import { invokeScriptWithFeeFx } from 'stores/keeper';
 
 export const openSignUpModal = createEvent();
 export const closeSignUpModal = createEvent();
@@ -22,27 +21,33 @@ export const setEmail = createEvent<string>();
 export const $email = restore(setEmail, '').reset(closeSignUpModal);
 
 export const signUp = createEvent();
-export const signUpFx = sample({
-  clock: signUp,
-  target: attach<void, typeof $email, typeof callCallableFunctionWithFeeFx>({
-    effect: callCallableFunctionWithFeeFx,
-    source: $email,
-    mapParams: (_, email) => ({
-      func: DAPP_SCRIPT.SIGN_UP,
-      args: [
-        {
-          type: 'string',
-          value: email,
-        },
-      ],
-    }),
+export const signUpFx = attach<
+  void,
+  typeof $email,
+  typeof invokeScriptWithFeeFx
+>({
+  effect: invokeScriptWithFeeFx,
+  source: $email,
+  mapParams: (_, email) => ({
+    func: DAPP_SCRIPT.SIGN_UP,
+    args: [
+      {
+        type: 'string',
+        value: email,
+      },
+    ],
   }),
 });
 
 guard({
-  source: getUserDataFx.doneData,
-  filter: (userData) => userData.length === 0,
+  clock: userLoaded,
+  filter: (user) => user === null,
   target: openSignUpModal,
+});
+
+forward({
+  from: signUp,
+  to: signUpFx,
 });
 
 forward({

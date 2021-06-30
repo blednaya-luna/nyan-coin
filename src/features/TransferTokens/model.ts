@@ -1,8 +1,8 @@
 import { attach, createEvent, forward, guard, restore } from 'effector';
 
 import { DAPP_SCRIPT } from 'config';
-import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { User } from 'stores/pages/admin/users/types';
+import { invokeScriptWithFeeFx } from 'stores/keeper';
+import { User } from 'stores/users/types';
 
 export const setRecipient = createEvent<User>();
 export const resetRecipient = createEvent();
@@ -22,8 +22,8 @@ export const transferTokensFx = guard({
     const [recipient, amount] = source;
     return recipient !== null && amount > 0;
   },
-  target: attach<[User, number], typeof callCallableFunctionWithFeeFx>({
-    effect: callCallableFunctionWithFeeFx,
+  target: attach<[User, number], typeof invokeScriptWithFeeFx>({
+    effect: invokeScriptWithFeeFx,
     mapParams: ([recipient, amount]) => ({
       func: DAPP_SCRIPT.TRANSFER_TOKEN,
       args: [

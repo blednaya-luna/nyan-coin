@@ -1,12 +1,12 @@
 import {
-  RawAccountTokenBalanceItem,
+  RawAccountTokenBalance,
   RawAccountAssetsBalanceItem,
   RawAccountAssetsBalance,
-  RawAccountAssetBalanceItem,
+  RawAccountAssetBalance,
 } from 'api/account/types';
 import { DAPP } from 'config';
 
-export type RawDAppTokenBalanceItem = RawAccountTokenBalanceItem & {
+export type RawDAppTokenBalance = RawAccountTokenBalance & {
   address: typeof DAPP;
 };
 
@@ -15,6 +15,6 @@ export type RawDAppAssetsBalance = RawAccountAssetsBalance & {
   address: typeof DAPP;
 };
 
-export type RawDAppAssetBalanceItem = RawAccountAssetBalanceItem & {
+export type RawDAppAssetBalance = RawAccountAssetBalance & {
   address: typeof DAPP;
 };

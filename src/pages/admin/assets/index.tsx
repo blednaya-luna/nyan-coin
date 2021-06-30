@@ -11,9 +11,9 @@ import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
 import { Address } from 'components/Address';
-import { ReissueAssetButton } from 'features/ReissueAsset/ReissueAssetButton';
-import { ReissueAssetModal } from 'features/ReissueAsset/ReissueAssetModal';
-import { $assets, AssetsGate } from 'stores/pages/admin/assets';
+import { IssueAssetButton, IssueAssetModal } from 'features/IssueAsset';
+import { ReissueAssetButton, ReissueAssetModal } from 'features/ReissueAsset';
+import { $assets, AssetsGate } from 'stores/assets';
 
 export const Assets: FC = () => {
   useGate(AssetsGate);
@@ -57,7 +57,8 @@ export const Assets: FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* TODO add issue asset fab button */}
+      <IssueAssetButton />
+      <IssueAssetModal />
       <ReissueAssetModal />
     </>
   );

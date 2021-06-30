@@ -15,13 +15,11 @@ import { Address } from 'components/Address';
 import { Avatar } from 'components/Avatar';
 import { Balance } from 'components/Balance';
 import { IconButton } from 'components/IconButton';
-import { TransferTokensButton } from 'features/TransferTokens/TransferTokensButton';
-import { TransferTokensModal } from 'features/TransferTokens/TransferTokensModal';
 import {
-  UsersGate,
-  $users,
-  refreshUserBalance,
-} from 'stores/pages/admin/users';
+  TransferTokensButton,
+  TransferTokensModal,
+} from 'features/TransferTokens';
+import { UsersGate, $users, refreshUserBalance } from 'stores/users';
 
 export const Users: FC = () => {
   useGate(UsersGate);

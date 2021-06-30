@@ -1,10 +1,10 @@
 import { attach, createEvent, forward, guard, restore } from 'effector';
 
 import { DAPP_SCRIPT, NYAN_TOKEN } from 'config';
-import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { AssetItem } from 'stores/pages/assets/types';
+import { Asset } from 'stores/assets/types';
+import { invokeScriptWithFeeFx } from 'stores/keeper';
 
-export const selectAssetToExchange = createEvent<AssetItem>();
+export const selectAssetToExchange = createEvent<Asset>();
 export const resetAssetToExchange = createEvent();
 export const $assetToExchange = restore(selectAssetToExchange, null).reset(
   resetAssetToExchange,
@@ -19,12 +19,12 @@ export const exchangeAsset = createEvent();
 export const exchangeAssetFx = guard({
   clock: exchangeAsset,
   source: [$assetToExchange, $amount],
-  filter: (source): source is [AssetItem, number] => {
+  filter: (source): source is [Asset, number] => {
     const [assetToExchange, amount] = source;
     return assetToExchange !== null && amount > 0;
   },
-  target: attach<[AssetItem, number], typeof callCallableFunctionWithFeeFx>({
-    effect: callCallableFunctionWithFeeFx,
+  target: attach<[Asset, number], typeof invokeScriptWithFeeFx>({
+    effect: invokeScriptWithFeeFx,
     mapParams: ([assetToExchange, amount]) => ({
       func: DAPP_SCRIPT.EXCHANGE_ASSET,
       args: [

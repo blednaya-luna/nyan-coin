@@ -2,12 +2,12 @@ import { Add } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
-import { AssetItem } from 'stores/pages/assets/types';
+import { Asset } from 'stores/assets/types';
 
 import { selectAssetToReissue } from './model';
 
 type ReissueAssetButtonProps = {
-  asset: AssetItem;
+  asset: Asset;
 };
 
 export const ReissueAssetButton: FC<ReissueAssetButtonProps> = ({ asset }) => {

@@ -1,16 +1,24 @@
-import copyToClipboard from 'copy-to-clipboard';
+import { RawAccountTokenBalance } from 'api/account/types';
+import { extractValueFromKey } from 'api/utils';
+import { User } from 'stores/users/types';
+import { Nullable } from 'utils/types';
 
-import { notify } from 'utils/notify';
+export const parseUser = ({
+  userData,
+  userBalance,
+}: {
+  userData: WavesKeeper.TStringData[];
+  userBalance: RawAccountTokenBalance;
+}): Nullable<User> => {
+  if (userData.length === 1) {
+    const userDataItem = userData[0];
 
-export const copyAddressToClipboard = (address: string) => {
-  const copied = copyToClipboard(address);
-  if (copied) {
-    notify.info({
-      title: 'Address copied',
-    });
-  } else {
-    notify.error({
-      title: 'Failed to copy address',
-    });
+    return {
+      address: extractValueFromKey(userDataItem.key),
+      email: userDataItem.value,
+      balance: userBalance.balance,
+    };
   }
+
+  return null;
 };

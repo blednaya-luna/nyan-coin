@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { CircularProgress } from 'components/CircularProgress';
 import { ConnectWavesKeeper } from 'containers/ConnectWavesKeeper';
-import { ThemeProvider } from 'containers/ThemeProvider';
-import { routes } from 'routes/routes';
+import { ThemeProvider } from 'features/ThemeProvider';
+import { routes } from 'routes';
 
 export const App: FC = () => {
   return (

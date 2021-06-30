@@ -4,29 +4,29 @@ import React, { FC } from 'react';
 
 import { IconButton } from 'components/IconButton';
 import { ContentCopy } from 'components/icons/ContentCopy';
-import { copyAddressToClipboardFx } from 'stores/account';
 import { centerEllipsis } from 'utils/centerEllipsis';
+import { copyAddressToClipboard } from 'utils/copyAddressToClipboard';
 import { Scope, getExplorerLink, AddressScope } from 'utils/getExplorerLink';
 
 import { useStyles } from './styles';
 
 type AddressProps = {
   address: string;
-  shortAddress?: boolean;
   scope?: Scope;
   type?: AddressScope;
+  shortAddress?: boolean;
   disableTypography?: boolean;
 };
 
 export const Address: FC<AddressProps> = ({
   address,
-  shortAddress = true,
   scope,
   type,
+  shortAddress,
   disableTypography,
 }) => {
   const classes = useStyles();
-  const adaptedAddress = shortAddress ? centerEllipsis(address) : address;
+  const adaptedAddress = shortAddress ? address : centerEllipsis(address);
 
   return (
     <Box className={classes.root}>
@@ -39,7 +39,7 @@ export const Address: FC<AddressProps> = ({
         className={classes.iconButton}
         title="Copy address to clipboard"
         Icon={ContentCopy}
-        onClick={() => copyAddressToClipboardFx(address)}
+        onClick={() => copyAddressToClipboard(address)}
       />
       {scope && (
         <Link
@@ -52,7 +52,7 @@ export const Address: FC<AddressProps> = ({
             className={classes.iconButton}
             title="See at Waves Explorer"
             Icon={Visibility}
-            onClick={() => copyAddressToClipboardFx(address)}
+            onClick={() => copyAddressToClipboard(address)}
           />
         </Link>
       )}

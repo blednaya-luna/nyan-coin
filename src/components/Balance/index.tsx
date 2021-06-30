@@ -27,12 +27,14 @@ export const Balance: FC<BalanceProps> = ({
       ) : (
         <Typography variant="caption">{userBalance}</Typography>
       )}
-      <IconButton
-        className={classes.iconButton}
-        title="Refresh balance"
-        Icon={Refresh}
-        onClick={refreshBalance}
-      />
+      {refreshBalance && (
+        <IconButton
+          className={classes.iconButton}
+          title="Refresh balance"
+          Icon={Refresh}
+          onClick={refreshBalance}
+        />
+      )}
     </Box>
   );
 };

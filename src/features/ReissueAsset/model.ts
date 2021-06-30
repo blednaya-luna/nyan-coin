@@ -1,12 +1,12 @@
 import { createEvent, restore, guard, attach, forward } from 'effector';
 
 import { DAPP_SCRIPT } from 'config';
-import { callCallableFunctionWithFeeFx } from 'stores/dApp';
-import { AssetItem } from 'stores/pages/assets/types';
+import { Asset } from 'stores/assets/types';
+import { invokeScriptWithFeeFx } from 'stores/keeper';
 
 import { resetAssetToExchange } from '../ExchangeAsset/model';
 
-export const selectAssetToReissue = createEvent<AssetItem>();
+export const selectAssetToReissue = createEvent<Asset>();
 export const resetAssetToReissue = createEvent();
 export const $assetToReissue = restore(selectAssetToReissue, null).reset(
   resetAssetToReissue,
@@ -21,12 +21,12 @@ export const reissueAsset = createEvent();
 export const reissueAssetFx = guard({
   clock: reissueAsset,
   source: [$assetToReissue, $quantity],
-  filter: (source): source is [AssetItem, number] => {
+  filter: (source): source is [Asset, number] => {
     const [assetToReissue, quantity] = source;
     return assetToReissue !== null && quantity > 0;
   },
-  target: attach<[AssetItem, number], typeof callCallableFunctionWithFeeFx>({
-    effect: callCallableFunctionWithFeeFx,
+  target: attach<[Asset, number], typeof invokeScriptWithFeeFx>({
+    effect: invokeScriptWithFeeFx,
     mapParams: ([assetToReissue, quantity]) => ({
       func: DAPP_SCRIPT.REISSUE_ASSET,
       args: [

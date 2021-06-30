@@ -1,6 +1,6 @@
 import { NYAN_TOKEN } from 'config';
 
-export type RawAccountTokenBalanceItem = {
+export type RawAccountTokenBalance = {
   address: string;
   assetId: typeof NYAN_TOKEN;
   balance: number;
@@ -20,7 +20,7 @@ export type RawAccountAssetsBalance = {
   balances: RawAccountAssetsBalanceItem[];
 };
 
-export type RawAccountAssetBalanceItem = {
+export type RawAccountAssetBalance = {
   address: string;
   assetId: string;
   balance: number;

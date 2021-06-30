@@ -1,26 +1,26 @@
-import { createEvent, restore, createEffect, createStore } from 'effector';
+import { createEvent, restore, createEffect, forward } from 'effector';
+import { combineEvents } from 'patronum';
 
+import { accountTokenBalance } from 'api/account';
+import { RawAccountTokenBalance } from 'api/account/types';
 import { dAppDataByPatter } from 'api/dApp';
 import { buildPattern } from 'api/utils';
 import { DAPP_DATA } from 'config';
+import { User } from 'stores/users/types';
+import { Nullable } from 'utils/types';
 
-import { copyAddressToClipboard } from './utils';
+import { parseUser } from './utils';
 
 export const setAddress = createEvent<string>();
-export const $address = restore(setAddress, null);
 
 export const setIsScripted = createEvent<boolean>();
 export const $isScripted = restore(setIsScripted, false);
 
-export const setIsAuthorized = createEvent<boolean>();
-export const $isAuthorized = restore(setIsAuthorized, false);
 export const $fee = $isScripted.map(($isScripted) =>
   $isScripted ? 0.009 : 0.005,
 );
 
-export const copyAddressToClipboardFx = createEffect(copyAddressToClipboard);
-
-export const getUserDataFx = createEffect<string, WavesKeeper.TStringData[]>(
+export const fetchUserDataFx = createEffect<string, WavesKeeper.TStringData[]>(
   (address) =>
     dAppDataByPatter(
       buildPattern({
@@ -30,13 +30,20 @@ export const getUserDataFx = createEffect<string, WavesKeeper.TStringData[]>(
     ),
 );
 
-export const $email = createStore<string | null>(null).on(
-  getUserDataFx.doneData,
-  (_, userData) => {
-    if (userData.length === 1) {
-      return userData[0].value;
-    }
-    return null;
-  },
+const fetchUserBalanceFx = createEffect<string, RawAccountTokenBalance>(
+  (address) => accountTokenBalance({ address }),
 );
-export const $isRegistered = $email.map((email) => email !== null);
+
+export const userLoaded = combineEvents({
+  events: {
+    userData: fetchUserDataFx.doneData,
+    userBalance: fetchUserBalanceFx.doneData,
+  },
+}).map(parseUser);
+
+export const $user = restore<Nullable<User>>(userLoaded, null);
+
+forward({
+  from: setAddress,
+  to: [fetchUserDataFx, fetchUserBalanceFx],
+});

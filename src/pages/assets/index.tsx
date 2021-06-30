@@ -1,21 +1,34 @@
-import { useGate } from 'effector-react';
+import { Grid } from '@material-ui/core';
+import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
+import { AssetTicket } from 'components/AssetTicket';
 import { AppBar } from 'containers/AppBar';
-import { AssetList } from 'containers/AssetList';
-import { AssetsSearchField } from 'containers/AssetsSearchField';
-import { IssueAsset } from 'features/IssueAsset';
-import { AssetsPageGate } from 'stores/pages/assets';
-import 'stores/pages/assets/init';
+import {
+  ExchangeAssetModal,
+  selectAssetToExchange,
+} from 'features/ExchangeAsset';
+import { AssetsGate, $filteredAssets } from 'stores/assets';
+
+import { AssetsSearchField } from './components';
 
 const Assets: FC = () => {
-  useGate(AssetsPageGate);
+  useGate(AssetsGate);
 
   return (
     <>
       <AppBar title="Assets" searchComponent={<AssetsSearchField />} />
-      <AssetList />
-      <IssueAsset />
+      <Grid container justify="center">
+        {useList($filteredAssets, (asset) => (
+          <Grid item>
+            <AssetTicket
+              asset={asset}
+              onClick={() => selectAssetToExchange(asset)}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <ExchangeAssetModal />
     </>
   );
 };
