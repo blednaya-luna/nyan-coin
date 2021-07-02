@@ -15,7 +15,7 @@ import { IssueAssetButton, IssueAssetModal } from 'features/IssueAsset';
 import { ReissueAssetButton, ReissueAssetModal } from 'features/ReissueAsset';
 import { $assets, AssetsGate } from 'stores/assets';
 
-export const Assets: FC = () => {
+export const AssetsTab: FC = () => {
   useGate(AssetsGate);
 
   return (

@@ -4,7 +4,6 @@ import { combineEvents } from 'patronum';
 import { accountTokenBalance } from 'api/account';
 import { RawAccountTokenBalance } from 'api/account/types';
 import { dAppDataByPatter } from 'api/dApp';
-import { buildPattern } from 'api/utils';
 import { DAPP_DATA } from 'config';
 import { User } from 'stores/users/types';
 import { Nullable } from 'utils/types';
@@ -22,12 +21,10 @@ export const $fee = $isScripted.map(($isScripted) =>
 
 export const fetchUserDataFx = createEffect<string, WavesKeeper.TStringData[]>(
   (address) =>
-    dAppDataByPatter(
-      buildPattern({
-        ...DAPP_DATA.user.email,
-        value: address,
-      }),
-    ),
+    dAppDataByPatter({
+      ...DAPP_DATA.user.email,
+      value: address,
+    }),
 );
 
 const fetchUserBalanceFx = createEffect<string, RawAccountTokenBalance>(

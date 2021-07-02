@@ -19,7 +19,7 @@ export const DAPP_DATA = {
     price: { scope: 'asset', key: 'price' },
   },
   dApp: {
-    tokenId: { scope: 'dApp', key: 'tokenId' },
+    tokenId: { scope: 'dApp', key: 'tokenId', value: DAPP },
   },
   user: {
     email: { scope: 'user', key: 'email' },

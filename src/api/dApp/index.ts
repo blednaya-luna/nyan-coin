@@ -1,9 +1,14 @@
 import { DAPP, NYAN_TOKEN, BASE_URL } from 'config';
 
-import { fetcher } from '../utils';
+import { fetcher, buildKey, Match, buildMatches } from '../utils';
 
-export const dAppDataByPatter = ({ pattern }: { pattern: string }) =>
-  fetcher(`${BASE_URL}/addresses/data/${DAPP}?matches=${pattern}`);
+export const dAppDataByPatter = (matches: Match | Match[]) =>
+  fetcher(
+    `${BASE_URL}/addresses/data/${DAPP}?matches=${buildMatches(matches)}`,
+  );
+
+export const dAppDataByKey = (match: Required<Match>) =>
+  fetcher(`${BASE_URL}/addresses/data/${DAPP}/${buildKey(match)}`);
 
 export const dAppTokenBalance = () =>
   fetcher(`${BASE_URL}/assets/balance/${DAPP}/${NYAN_TOKEN}`);

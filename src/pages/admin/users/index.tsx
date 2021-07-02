@@ -21,7 +21,7 @@ import {
 } from 'features/TransferTokens';
 import { UsersGate, $users, refreshUserBalance } from 'stores/users';
 
-export const Users: FC = () => {
+export const UsersTab: FC = () => {
   useGate(UsersGate);
 
   return (

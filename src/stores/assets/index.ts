@@ -4,7 +4,6 @@ import { combineEvents, debounce } from 'patronum';
 
 import { dAppAssetsBalance, dAppDataByPatter } from 'api/dApp';
 import { RawDAppAssetsBalance } from 'api/dApp/types';
-import { buildPattern } from 'api/utils';
 import { DAPP_DATA } from 'config';
 
 import { Asset } from './types';
@@ -13,7 +12,7 @@ import { parseAssets, filterAssetsByText } from './utils';
 export const AssetsGate = createGate();
 
 export const fetchAssetsDataFx = createEffect<void, WavesKeeper.TStringData[]>(
-  () => dAppDataByPatter(buildPattern(DAPP_DATA.asset.data)),
+  () => dAppDataByPatter(DAPP_DATA.asset.data),
 );
 
 export const fetchDAppAssetsBalanceFx =

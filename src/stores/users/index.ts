@@ -5,7 +5,7 @@ import { combineEvents } from 'patronum';
 import { accountTokenBalance } from 'api/account';
 import { RawAccountTokenBalance } from 'api/account/types';
 import { dAppDataByPatter } from 'api/dApp';
-import { buildPattern, extractValueFromKey } from 'api/utils';
+import { extractValueFromKey } from 'api/utils';
 import { DAPP_DATA } from 'config';
 
 import { User } from './types';
@@ -14,7 +14,7 @@ import { parseUsers, updateUserBalance } from './utils';
 export const UsersGate = createGate();
 
 const fetchUsersDataFx = createEffect<void, WavesKeeper.TStringData[]>(() =>
-  dAppDataByPatter(buildPattern(DAPP_DATA.user.email)),
+  dAppDataByPatter(DAPP_DATA.user.email),
 );
 
 const fetchUsersBalanceFx = createEffect<

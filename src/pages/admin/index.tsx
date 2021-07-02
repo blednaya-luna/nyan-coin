@@ -10,9 +10,10 @@ import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
 
-import { Assets } from './assets';
+import { AssetsTab } from './assets';
+import { BalanceTab } from './balance';
 import { AdminTabs, AdminTabPanel } from './components';
-import { Users } from './users';
+import { UsersTab } from './users';
 
 const Admin: FC = () => {
   return (
@@ -22,21 +23,19 @@ const Admin: FC = () => {
         <AdminTabs centered>
           <Tab label="Users" icon={<Person />} wrapped />
           <Tab label="Assets" icon={<Redeem />} wrapped />
-          <Tab
-            label="Balance"
-            icon={<AccountBalanceWallet />}
-            wrapped
-            disabled
-          />
+          <Tab label="Balance" icon={<AccountBalanceWallet />} wrapped />
           <Tab label="Orders" icon={<FormatListBulleted />} wrapped disabled />
           <Tab label="Achievements" icon={<EmojiEvents />} wrapped disabled />
         </AdminTabs>
       </MuiAppBar>
       <AdminTabPanel index={0}>
-        <Users />
+        <UsersTab />
       </AdminTabPanel>
       <AdminTabPanel index={1}>
-        <Assets />
+        <AssetsTab />
+      </AdminTabPanel>
+      <AdminTabPanel index={2}>
+        <BalanceTab />
       </AdminTabPanel>
     </>
   );
