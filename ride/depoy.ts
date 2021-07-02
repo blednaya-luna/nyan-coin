@@ -66,7 +66,7 @@ const issueToken = (dApp: string, seed: string) =>
     .catch((error) => ({ error: error.message }));
 
 const getDAppTokenId = (dApp: string) =>
-  fetch(`${nodeUrl}/addresses/data/${dApp}/dApp_${dApp}_tokenId`)
+  fetch(`${nodeUrl}/addresses/data/${dApp}/dApp_<${dApp}>_tokenId`)
     .then((res) => res.json())
     .then((json) => {
       if ('error' in json) {
@@ -100,7 +100,16 @@ fs.readFile('dApp.ride', 'utf8', async (_, script) => {
 
   await waitForTx(deployResult.tx, { apiBase: nodeUrl });
 
-  await issueToken(deployResult.dApp, getSeedResult.seed);
+  const issueTokenResult = await issueToken(
+    deployResult.dApp,
+    getSeedResult.seed,
+  );
+  if ('error' in issueTokenResult) {
+    console.error(issueTokenResult.error);
+    return;
+  }
+
+  await waitForTx(issueTokenResult.tx, { apiBase: nodeUrl });
 
   const getDAppTokenIdResult = await getDAppTokenId(deployResult.dApp);
   if ('error' in getDAppTokenIdResult) {
