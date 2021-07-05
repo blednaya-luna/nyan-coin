@@ -40,8 +40,8 @@ export const IssueAssetModal: FC = () => {
           </Grid>
           <Grid item>
             <AssetExchangePriceTextField
-              label="Exchange price (NYAN Tokens)"
-              helperText="Enter exchange price of asset in NYAN Tokens"
+              label="Exchange price (NYAN Token)"
+              helperText="Enter exchange price of asset in NYAN Token"
               required
             />
           </Grid>

@@ -19,7 +19,7 @@ export const ExchangeAssetModal: FC = () => {
 
   return (
     <ExchangeAssetDialog
-      title={`Exchange NYAN Tokens to asset "${assetToExchange?.name}"`}
+      title={`Exchange NYAN Token to asset "${assetToExchange?.name}"`}
       content={
         <Grid container justify="center" spacing={2}>
           <Grid item>
@@ -30,7 +30,7 @@ export const ExchangeAssetModal: FC = () => {
           <Grid item>
             <AmountTextField
               label="amount"
-              helperText="Enter how many tokens you want to exchange for NYAN Tokens"
+              helperText="Enter how many tokens you want to exchange for NYAN Token"
               required
               autoFocus
             />

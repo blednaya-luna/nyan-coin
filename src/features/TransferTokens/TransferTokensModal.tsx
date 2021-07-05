@@ -15,7 +15,7 @@ export const TransferTokensModal: FC = () => {
 
   return (
     <TransferTokensDialog
-      title={`Transfer NYAN Tokens to ${recipient?.email}`}
+      title={`Transfer NYAN Token to ${recipient?.email}`}
       content={
         <Grid container justify="center" spacing={2}>
           <Grid item>
