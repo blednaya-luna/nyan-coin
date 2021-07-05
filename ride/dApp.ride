@@ -136,7 +136,7 @@ func transferNyanToken(recipient: String, amount: Int) = {
   }
   else if (userEmail == NONE)
   then {
-    throw("You cannot transfer NYAN Tokens to an unregistered user")
+    throw("You cannot transfer NYAN Token to an unregistered user")
   }
   else if (amount < 0)
   then {
@@ -144,7 +144,7 @@ func transferNyanToken(recipient: String, amount: Int) = {
   }
   else if (newDAppBalance < 0)
   then {
-    throw("Not enough NYAN Tokens to transfer")
+    throw("Not enough NYAN Token to transfer")
   }
   else {
     [
@@ -179,7 +179,7 @@ func issueAssetToken(name: String, description: String, quantity: Int, price: In
 
     if (newDAppBalance < 0)
     then {
-      throw("Not enough NYAN Tokens to issue an asset")
+      throw("Not enough NYAN Token to issue an asset")
     }
     else {
       [
@@ -206,7 +206,7 @@ func reissueAssetToken(assetId: String, quantity: Int) = {
   }
   else if (newDAppBalance < 0)
   then {
-    throw("Not enough NYAN Tokens to reissue an asset")
+    throw("Not enough NYAN Token to reissue an asset")
   }
   else {
     [
@@ -235,7 +235,7 @@ func exchangeAssetToken(assetId: String, amount: Int) = {
 
     if (paymentAmount < assetAmount)
     then {
-      throw("Not enough NYAN Tokens to exchange an asset")
+      throw("Not enough NYAN Token to exchange an asset")
     }
     else if (paymentAmount == assetAmount)
     then {
