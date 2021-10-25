@@ -79,13 +79,13 @@ const getDAppTokenId = (dApp: string) =>
 fs.readFile('dApp.ride', 'utf8', async (_, script) => {
   const compileResult = await compileResultScript(script);
   if ('error' in compileResult) {
-    console.error(compileResult.error);
+    console.error('compileResultScript error:', compileResult.error);
     return;
   }
 
   const getSeedResult = getSeed();
   if ('error' in getSeedResult) {
-    console.error(getSeedResult.error);
+    console.error('getSeed error:', getSeedResult.error);
     return;
   }
 
@@ -94,7 +94,7 @@ fs.readFile('dApp.ride', 'utf8', async (_, script) => {
     getSeedResult.seed,
   );
   if ('error' in deployResult) {
-    console.error(deployResult.error);
+    console.error('deployScript error:', deployResult.error);
     return;
   }
 
@@ -105,7 +105,7 @@ fs.readFile('dApp.ride', 'utf8', async (_, script) => {
     getSeedResult.seed,
   );
   if ('error' in issueTokenResult) {
-    console.error(issueTokenResult.error);
+    console.error('issueToken error:', issueTokenResult.error);
     return;
   }
 
@@ -113,7 +113,7 @@ fs.readFile('dApp.ride', 'utf8', async (_, script) => {
 
   const getDAppTokenIdResult = await getDAppTokenId(deployResult.dApp);
   if ('error' in getDAppTokenIdResult) {
-    console.error(getDAppTokenIdResult.error);
+    console.error('getDAppTokenId error:', getDAppTokenIdResult.error);
     return;
   }
 
