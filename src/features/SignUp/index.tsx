@@ -1,32 +1,39 @@
+import { Typography, Grid } from '@material-ui/core';
 import React, { FC } from 'react';
-import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 
-import { SignUpButton, EmailTextField } from './components';
-import { useStyles } from './styles';
+import {
+  EmailTextField,
+  SignUpButton,
+  SignUpDialog,
+  CancelSignUpButton,
+} from './components';
 
 export const SignUp: FC = () => {
-  const classes = useStyles();
-
   return (
-    <Paper className={classes.root}>
-      <Grid container alignItems="center" justify="space-between">
-        <Grid item>
-          <Typography>Sign up</Typography>
+    <SignUpDialog
+      title="Sign Up"
+      content={
+        <Grid container direction="column" spacing={1}>
+          <Grid item>
+            <Typography>
+              To use the app we need to register you at the Waves blockchain
+              level
+            </Typography>
+          </Grid>
+          <Grid item>
+            <EmailTextField
+              label="Email"
+              helperText="Enter your email"
+              required
+              autoFocus
+            />
+          </Grid>
         </Grid>
-        <Grid item>
-          <SignUpButton>Sign up</SignUpButton>
-        </Grid>
-      </Grid>
-      <Divider className={classes.divider} />
-      <Grid container direction="column" spacing={1}>
-        <Grid item>
-          <EmailTextField
-            required
-            label="Email"
-            helperText="Enter your email"
-          />
-        </Grid>
-      </Grid>
-    </Paper>
+      }
+      actions={[
+        <CancelSignUpButton key="cancel-signup" label="Cancel" />,
+        <SignUpButton key="signup" label="Sign Up" />,
+      ]}
+    />
   );
 };

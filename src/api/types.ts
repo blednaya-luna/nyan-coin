@@ -1,5 +1,4 @@
-export type RawDAppDataItem = {
-  key: string;
-  type: string;
-  value: string;
+export type ApiError = {
+  error: number;
+  message: string;
 };

@@ -1,37 +1,41 @@
+import { Box, Grid, Link } from '@material-ui/core';
 import React, { FC } from 'react';
-import { Container } from '@material-ui/core';
+import { useHistory } from 'react-router';
 
-import { Account } from 'features/Account';
-import { SignUp } from 'features/SignUp';
-import { IssueNyanToken } from 'features/IssueNyanToken';
-import { ReissueNyanToken } from 'features/ReissueNyanToken';
-import { TransferNyanToken } from 'features/TransferNyanToken';
-import { IssueAssetToken } from 'features/IssueAssetToken';
-import { ReissueAssetToken } from 'features/ReissueAssetToken';
-import { UserList } from 'features/UserList';
-import { AssetList } from 'dev/AssetList';
-
-import { useStyles } from './styles';
+import { AppBar } from 'containers/AppBar';
+import { APP_LOCATION } from 'routes/constants';
 
 const Home: FC = () => {
-  const classes = useStyles();
+  const { push } = useHistory();
 
   return (
-    <main>
-      <section>
-        <Account />
-        <AssetList />
-        <UserList />
-        <Container className={classes.root} maxWidth="sm">
-          <SignUp />
-          <IssueNyanToken />
-          <ReissueNyanToken />
-          <TransferNyanToken />
-          <IssueAssetToken />
-          <ReissueAssetToken />
-        </Container>
-      </section>
-    </main>
+    <>
+      <AppBar title="Home" />
+      <Box p={2}>
+        <Grid container direction="column" alignItems="flex-start" spacing={1}>
+          <Grid item>
+            <Link
+              component="button"
+              variant="body2"
+              color="inherit"
+              onClick={() => push(APP_LOCATION.assets)}
+            >
+              Assets
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link
+              component="button"
+              variant="body2"
+              color="inherit"
+              onClick={() => push(APP_LOCATION.admin)}
+            >
+              Admin
+            </Link>
+          </Grid>
+        </Grid>
+      </Box>
+    </>
   );
 };
 

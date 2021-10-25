@@ -1,0 +1,41 @@
+{
+  "branches": ["develop"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "Features" },
+            { "type": "fix", "section": "Bug Fixes" },
+            { "type": "build", "section": "Test changes" },
+            { "type": "docs", "section": "Documentation" },
+            { "type": "style", "section": "Style changes" },
+            { "type": "refactor", "section": "Refactor" },
+            { "type": "perf", "section": "Performance optimization" },
+            { "type": "ci", "section": "CI/CD" },
+            { "type": "test", "section": "Test changes" },
+            { "type": "chore", "hidden": true }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["package.json", "CHANGELOG.md"],
+        "message": "chore(release): ${nextRelease.version} \n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

@@ -1,21 +1,33 @@
-export const fetcher = (url: string) => fetch(url);
+export const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  const json = await response.json();
+  if (json.error) {
+    return Promise.reject(json);
+  }
+  return Promise.resolve(json);
+};
 
-type Match = {
+export type Match = {
   scope: string;
   key: string;
+  value?: string;
 };
 
-export const buildPattern = ({ scope, key }: Match) => {
-  return `^${scope}_.*_${key}$`;
-};
+export const buildKey = ({ scope, key, value }: Required<Match>) =>
+  `${scope}_<${value}>_${key}`;
 
-export const buildPatterns = (matches: Match[]) => {
-  return matches
-    .reduce<string[]>((acc, match) => [...acc, buildPattern(match)], [])
+const buildRegexp = ({ scope, key, value = '.*' }: Match) =>
+  `^${scope}_<${value}>_${key}$`;
+
+const buildRegexps = (matches: Match[]) =>
+  matches
+    .reduce<string[]>((acc, match) => [...acc, buildRegexp(match)], [])
     .join('|');
-};
+
+export const buildMatches = (matches: Match | Match[]) =>
+  Array.isArray(matches) ? buildRegexps(matches) : buildRegexp(matches);
 
 export const extractValueFromKey = (key: string) => {
-  const extractedValue = key.match('_(.*?)_');
+  const extractedValue = key.match('_<(.*?)>_');
   return extractedValue ? extractedValue[1] : '';
 };

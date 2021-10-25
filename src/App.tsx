@@ -1,24 +1,25 @@
 import React, { FC, StrictMode, Suspense } from 'react';
-import { Router } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import { createBrowserHistory } from 'history';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CircularProgress } from '@material-ui/core';
 
-import { routes } from './routes';
-
-const history = createBrowserHistory();
+import { CircularProgress } from 'components/CircularProgress';
+import { ConnectWavesKeeper } from 'containers/ConnectWavesKeeper';
+import { ThemeProvider } from 'features/ThemeProvider';
+import { routes } from 'routes';
 
 export const App: FC = () => {
   return (
     <StrictMode>
-      <ToastContainer />
-      <Router history={history}>
-        <Suspense fallback={<CircularProgress />}>
-          {renderRoutes(routes)}
-        </Suspense>
-      </Router>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Suspense fallback={<CircularProgress />}>
+            <ConnectWavesKeeper>{renderRoutes(routes)}</ConnectWavesKeeper>
+          </Suspense>
+        </BrowserRouter>
+        <ToastContainer />
+      </ThemeProvider>
     </StrictMode>
   );
 };

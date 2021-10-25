@@ -1,8 +1,17 @@
+import {
+  Button as MuiButton,
+  ButtonProps as MuiButtonProps,
+} from '@material-ui/core';
 import React, { FC } from 'react';
-import { Button as MuiButton, ButtonProps } from '@material-ui/core';
 
-export const Button: FC<ButtonProps> = (props) => {
+type ButtonProps = MuiButtonProps & {
+  label: string;
+};
+
+export const Button: FC<ButtonProps> = ({ label, ...props }) => {
   return (
-    <MuiButton variant="outlined" color="primary" size="small" {...props} />
+    <MuiButton color="inherit" variant="outlined" size="small" {...props}>
+      {label}
+    </MuiButton>
   );
 };

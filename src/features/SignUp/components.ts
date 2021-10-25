@@ -1,20 +1,22 @@
-import { combine } from 'effector';
 import { reflect } from '@effector/reflect';
 
-import { TextField, textFieldOnChangePrepend } from 'components/TextField';
 import { Button } from 'components/Button';
-import { $isAuthorized } from 'stores/account';
+import { Dialog } from 'components/Dialog';
+import { TextField, textFieldOnChangePrepend } from 'components/TextField';
 
-import { $email, setEmail, signUpFx } from './model';
+import {
+  $email,
+  setEmail,
+  $signUpModalIsOpen,
+  closeSignUpModal,
+  signUp,
+} from './model';
 
-export const SignUpButton = reflect({
-  view: Button,
+export const SignUpDialog = reflect({
+  view: Dialog,
   bind: {
-    onClick: () => signUpFx(),
-    disabled: combine(
-      [$isAuthorized, $email],
-      ([isAuthorized, email]) => !isAuthorized || email.length === 0,
-    ),
+    open: $signUpModalIsOpen,
+    onClose: closeSignUpModal,
   },
 });
 
@@ -23,6 +25,20 @@ export const EmailTextField = reflect({
   bind: {
     value: $email,
     onChange: setEmail.prepend(textFieldOnChangePrepend),
-    disabled: $isAuthorized.map((isAuthorized) => !isAuthorized),
+  },
+});
+
+export const CancelSignUpButton = reflect({
+  view: Button,
+  bind: {
+    onClick: () => closeSignUpModal(),
+  },
+});
+
+export const SignUpButton = reflect({
+  view: Button,
+  bind: {
+    onClick: () => signUp(),
+    disabled: $email.map((email) => email.length <= 0),
   },
 });
