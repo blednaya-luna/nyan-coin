@@ -3,17 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "commit": "git-cz",
     "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "yarn lint --fix",
+    "prepare": "husky install",
     "prettier": "yarn prettier:code && yarn prettier:json",
     "prettier:code": "prettier --write '*/**/*.{js,ts,jsx,tsx}'",
     "prettier:json": "prettier --write --parser json {*.json,.eslintrc,.huskyrc,.lintstagedrc}",
-    "lint": "eslint .",
-    "lint:fix": "yarn lint --fix",
-    "commit": "git-cz"
+    "semantic-release": "semantic-release",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "dependencies": {
     "@effector/reflect": "^0.6.0",
@@ -48,6 +69,10 @@
     "@eslint-kit/eslint-config-patch": "^1.0.0",
     "@eslint-kit/eslint-config-prettier": "^3.0.0",
     "@eslint-kit/eslint-config-typescript": "^5.0.1",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/github": "^8.0.1",
+    "@semantic-release/npm": "^8.0.2",
     "@types/history": "^4.7.8",
     "@types/jest": "^26.0.9",
     "@types/react": "^16.9.46",
@@ -63,26 +88,8 @@
     "eslint-import-resolver-typescript": "^2.4.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "prettier": "2.3.0"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+    "prettier": "2.3.0",
+    "semantic-release": "^18.0.0",
+    "ts-node": "^10.4.0"
   }
 }
