@@ -11,12 +11,13 @@ import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
 import { Address } from 'components/Address';
+import { DAPP } from 'config';
 import { IssueAssetButton, IssueAssetModal } from 'features/IssueAsset';
 import { ReissueAssetButton, ReissueAssetModal } from 'features/ReissueAsset';
 import { $assets, AssetsGate } from 'stores/assets';
 
 export const AssetsTab: FC = () => {
-  useGate(AssetsGate);
+  useGate(AssetsGate, { address: DAPP, withAssetsWithEmptyBalance: true });
 
   return (
     <>

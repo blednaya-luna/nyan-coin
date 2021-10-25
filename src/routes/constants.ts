@@ -3,4 +3,7 @@ export const APP_LOCATION = {
   home: '/home',
   assets: '/assets',
   admin: '/admin',
+  user: {
+    assets: '/user/:address/assets',
+  },
 } as const;

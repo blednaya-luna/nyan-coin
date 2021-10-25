@@ -7,6 +7,7 @@ const RootRedirect = lazy(() => import('components/RootRedirect'));
 const Home = lazy(() => import('pages/home'));
 const Assets = lazy(() => import('pages/assets'));
 const Admin = lazy(() => import('pages/admin'));
+const MyAssets = lazy(() => import('pages/MyAssets'));
 
 export const routes: RouteConfig[] = [
   {
@@ -23,6 +24,11 @@ export const routes: RouteConfig[] = [
     path: APP_LOCATION.assets,
     exact: true,
     component: Assets,
+  },
+  {
+    path: APP_LOCATION.user.assets,
+    exact: true,
+    component: MyAssets,
   },
   {
     path: APP_LOCATION.admin,

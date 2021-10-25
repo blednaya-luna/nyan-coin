@@ -3,17 +3,17 @@ import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
 import { AssetTicket } from 'components/AssetTicket';
+import { DAPP } from 'config';
 import { AppBar } from 'containers/AppBar';
 import {
   ExchangeAssetModal,
   selectAssetToExchange,
 } from 'features/ExchangeAsset';
+import { AssetsSearchField } from 'shared/AssetsSearchField';
 import { AssetsGate, $filteredAssets } from 'stores/assets';
 
-import { AssetsSearchField } from './components';
-
 const Assets: FC = () => {
-  useGate(AssetsGate);
+  useGate(AssetsGate, { address: DAPP, withAssetsWithEmptyBalance: false });
 
   return (
     <>
