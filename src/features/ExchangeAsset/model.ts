@@ -40,7 +40,7 @@ export const exchangeAssetFx = guard({
       payment: [
         {
           assetId: NYAN_TOKEN,
-          amount: assetToExchange.price,
+          amount: assetToExchange.price * amount,
         },
       ],
     }),
