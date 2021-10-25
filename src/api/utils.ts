@@ -16,10 +16,10 @@ export type Match = {
 export const buildKey = ({ scope, key, value }: Required<Match>) =>
   `${scope}_<${value}>_${key}`;
 
-const buildRegexp = ({ scope, key, value = '.*' }: Match) =>
-  `^${scope}_<${value}>_${key}$`;
+export const buildRegexp = ({ scope, key, value = '.*' }: Match) =>
+  encodeURIComponent(`^${scope}_<${value}>_${key}$`);
 
-const buildRegexps = (matches: Match[]) =>
+export const buildRegexps = (matches: Match[]) =>
   matches
     .reduce<string[]>((acc, match) => [...acc, buildRegexp(match)], [])
     .join('|');

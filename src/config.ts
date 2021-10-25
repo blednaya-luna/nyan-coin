@@ -1,7 +1,7 @@
 export const BASE_URL = 'https://nodes-testnet.wavesnodes.com';
 export const EXPLORER_URL = 'https://testnet.wavesexplorer.com';
-export const DAPP = '3NC4WKpsUSi7YSdFzgokXtkoeiSJLzCeHGx';
-export const NYAN_TOKEN = '25q3k2Q3Bh1sAqtg4STsfyX1omS4ffURs9yjHhsFav2e';
+export const DAPP = '3ND7koq1CpoHCrLv833dEWPcC8ygda22q3n';
+export const NYAN_TOKEN = 'AVfmaHcu4FD3poeJjGDMwnuhbzf5K7Q3pU9yhV2Y7Lpp';
 
 export const DAPP_SCRIPT = {
   SIGN_UP: 'signUp',
