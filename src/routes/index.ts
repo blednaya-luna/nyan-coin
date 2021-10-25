@@ -8,6 +8,7 @@ const Home = lazy(() => import('pages/home'));
 const Assets = lazy(() => import('pages/assets'));
 const Admin = lazy(() => import('pages/admin'));
 const MyAssets = lazy(() => import('pages/MyAssets'));
+const User = lazy(() => import('pages/User'));
 
 export const routes: RouteConfig[] = [
   {
@@ -24,6 +25,11 @@ export const routes: RouteConfig[] = [
     path: APP_LOCATION.assets,
     exact: true,
     component: Assets,
+  },
+  {
+    path: APP_LOCATION.user.root,
+    exact: true,
+    component: User,
   },
   {
     path: APP_LOCATION.user.assets,

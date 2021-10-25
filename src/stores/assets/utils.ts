@@ -61,7 +61,6 @@ export const filterAssets = ({
   searchQuery: string;
   assetsGateProps: AssetsGateProps;
 }) => {
-  console.log(assets, searchQuery, withAssetsWithEmptyBalance);
   return assets
     .filter(byEmptyBalance(withAssetsWithEmptyBalance))
     .filter(bySearchQuery(searchQuery));
