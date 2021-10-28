@@ -21,6 +21,7 @@ export const DAPP_DATA = {
   },
   dApp: {
     tokenId: { scope: 'dApp', key: 'tokenId', value: DAPP },
+    responsible: { scope: 'dApp', key: 'responsible' },
   },
   user: {
     email: { scope: 'user', key: 'email' },
