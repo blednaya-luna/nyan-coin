@@ -27,18 +27,39 @@ const compileResultScript = (script: string) =>
     })
     .catch((error) => ({ error: error.message }));
 
-const getSeed = () => {
-  const [myArg] = process.argv.slice(2);
-  if (!myArg) {
+const getCLIArgs = () => {
+  const seedArg = process.argv.find((arg) => arg.includes('-seed'));
+  if (!seedArg) {
     return { error: 'seed not provided, call with -seed="your seed"' };
   }
-  const [_, seed] = myArg.split('=');
-  return { seed };
+  const [_, seed] = seedArg.split('=');
+
+  const isDAppUpdateArg = process.argv.find((arg) => arg.includes('-update'));
+  const isDAppUpdate = Boolean(isDAppUpdateArg);
+
+  return { seed, isDAppUpdate };
 };
 
-const deployScript = (compiledScript: string, seed: string) =>
-  broadcast(setScript({ script: compiledScript, chainId }, seed), nodeUrl)
-    .then((res) => ({ tx: res.id, dApp: res.sender }))
+const deployScript = (
+  compiledScript: string,
+  seed: string,
+  isDAppUpdate = false,
+) =>
+  broadcast(
+    setScript(
+      {
+        script: compiledScript,
+        chainId,
+        fee: isDAppUpdate ? 1400000 : 1000000,
+      },
+      seed,
+    ),
+    nodeUrl,
+  )
+    .then((res) => ({
+      tx: res.id,
+      dApp: res.sender,
+    }))
     .catch((error) => ({ error: error.message }));
 
 const issueToken = (dApp: string, seed: string) =>
@@ -83,15 +104,16 @@ fs.readFile('dApp.ride', 'utf8', async (_, script) => {
     return;
   }
 
-  const getSeedResult = getSeed();
-  if ('error' in getSeedResult) {
-    console.error('getSeed error:', getSeedResult.error);
+  const getCLIArgsResult = getCLIArgs();
+  if ('error' in getCLIArgsResult) {
+    console.error('getSeed error:', getCLIArgsResult.error);
     return;
   }
 
   const deployResult = await deployScript(
     compileResult.compiledScript,
-    getSeedResult.seed,
+    getCLIArgsResult.seed,
+    getCLIArgsResult.isDAppUpdate,
   );
   if ('error' in deployResult) {
     console.error('deployScript error:', deployResult.error);
@@ -100,25 +122,29 @@ fs.readFile('dApp.ride', 'utf8', async (_, script) => {
 
   await waitForTx(deployResult.tx, { apiBase: nodeUrl });
 
-  const issueTokenResult = await issueToken(
-    deployResult.dApp,
-    getSeedResult.seed,
-  );
-  if ('error' in issueTokenResult) {
-    console.error('issueToken error:', issueTokenResult.error);
-    return;
+  if (getCLIArgsResult.isDAppUpdate) {
+    console.info('dApp successfully updated');
+  } else {
+    const issueTokenResult = await issueToken(
+      deployResult.dApp,
+      getCLIArgsResult.seed,
+    );
+    if ('error' in issueTokenResult) {
+      console.error('issueToken error:', issueTokenResult.error);
+      return;
+    }
+
+    await waitForTx(issueTokenResult.tx, { apiBase: nodeUrl });
+
+    const getDAppTokenIdResult = await getDAppTokenId(deployResult.dApp);
+    if ('error' in getDAppTokenIdResult) {
+      console.error('getDAppTokenId error:', getDAppTokenIdResult.error);
+      return;
+    }
+
+    console.table({
+      dApp: deployResult.dApp,
+      tokenId: getDAppTokenIdResult.tokenId,
+    });
   }
-
-  await waitForTx(issueTokenResult.tx, { apiBase: nodeUrl });
-
-  const getDAppTokenIdResult = await getDAppTokenId(deployResult.dApp);
-  if ('error' in getDAppTokenIdResult) {
-    console.error('getDAppTokenId error:', getDAppTokenIdResult.error);
-    return;
-  }
-
-  console.table({
-    dApp: deployResult.dApp,
-    tokenId: getDAppTokenIdResult.tokenId,
-  });
 });
