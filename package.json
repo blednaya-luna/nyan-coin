@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "prettier": "yarn prettier:code && yarn prettier:json",
     "prettier:code": "prettier --write '*/**/*.{js,ts,jsx,tsx}'",
-    "prettier:json": "prettier --write --parser json {*.json,.eslintrc,.huskyrc,.lintstagedrc}",
+    "prettier:json": "prettier --write --parser json {*.json,.eslintrc,.huskyrc,.lintstagedrc,.releaserc}",
     "semantic-release": "semantic-release",
     "start": "react-scripts start",
     "test": "react-scripts test"
