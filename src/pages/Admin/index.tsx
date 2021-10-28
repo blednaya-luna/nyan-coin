@@ -10,10 +10,10 @@ import React, { FC } from 'react';
 
 import { AppBar } from 'containers/AppBar';
 
-import { AssetsTab } from './assets';
-import { BalanceTab } from './balance';
+import { AssetsTab } from './Assets';
+import { BalanceTab } from './Balance';
 import { AdminTabs, AdminTabPanel } from './components';
-import { UsersTab } from './users';
+import { UsersTab } from './Users';
 
 const Admin: FC = () => {
   return (

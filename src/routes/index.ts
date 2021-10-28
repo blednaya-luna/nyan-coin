@@ -4,10 +4,9 @@ import { RouteConfig } from 'react-router-config';
 import { APP_LOCATION } from './constants';
 
 const RootRedirect = lazy(() => import('components/RootRedirect'));
-const Home = lazy(() => import('pages/home'));
-const Assets = lazy(() => import('pages/assets'));
-const Admin = lazy(() => import('pages/admin'));
-const MyAssets = lazy(() => import('pages/MyAssets'));
+const Home = lazy(() => import('pages/Home'));
+const Assets = lazy(() => import('pages/Assets'));
+const Admin = lazy(() => import('pages/Admin'));
 const User = lazy(() => import('pages/User'));
 
 export const routes: RouteConfig[] = [
@@ -30,11 +29,6 @@ export const routes: RouteConfig[] = [
     path: APP_LOCATION.user.root,
     exact: true,
     component: User,
-  },
-  {
-    path: APP_LOCATION.user.assets,
-    exact: true,
-    component: MyAssets,
   },
   {
     path: APP_LOCATION.admin,
