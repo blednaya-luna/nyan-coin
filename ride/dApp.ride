@@ -274,7 +274,10 @@ func exchangeAssetToken(assetId: String, amount: Int) = {
 func setResponsibleStatus(userAddress: String) = {
   let isResponsible = getResponsibleValue(userAddress)
 
-  if (isResponsible)
+if (!isAdmin(i.caller))
+  then {
+    throw("Function invoke not allowed, requested from non-admin address")
+  } else if (isResponsible)
   then {
     throw("User already have responsible status")
   } else {
@@ -288,7 +291,10 @@ func setResponsibleStatus(userAddress: String) = {
 func revokeResponsibleStatus(userAddress: String) = {
   let isResponsible = getResponsibleValue(userAddress)
 
-  if (!isResponsible)
+if (!isAdmin(i.caller))
+  then {
+    throw("Function invoke not allowed, requested from non-admin address")
+  } else if (!isResponsible)
   then {
     throw("User already don't have responsible status")
   } else {
