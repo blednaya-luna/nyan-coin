@@ -19,6 +19,10 @@ import { Avatar } from 'components/Avatar';
 import { Balance } from 'components/Balance';
 import { Button } from 'components/Button';
 import { AppBar } from 'containers/AppBar';
+import {
+  selectAssetToRequestReward,
+  RequestRewardModal,
+} from 'features/RequestReward';
 import { $user } from 'stores/account';
 import { $filteredAssets, AssetsGate } from 'stores/assets';
 
@@ -93,7 +97,11 @@ export const User = () => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Button label="Order" startIcon={<Assignment />} />
+                      <Button
+                        label="Order"
+                        startIcon={<Assignment />}
+                        onClick={() => selectAssetToRequestReward(asset)}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -102,7 +110,7 @@ export const User = () => {
           </TableContainer>
           <Box p={2} />
           <Typography variant="overline" gutterBottom>
-            My orders
+            My orders [MOCKED]
           </Typography>
           <TableContainer component={Paper}>
             <Table size="small">
@@ -130,6 +138,7 @@ export const User = () => {
           </TableContainer>
         </Box>
       </Box>
+      <RequestRewardModal />
     </>
   );
 };

@@ -11,6 +11,7 @@ export const DAPP_SCRIPT = {
   ISSUE_ASSET: 'issueAssetToken',
   REISSUE_ASSET: 'reissueAssetToken',
   EXCHANGE_ASSET: 'exchangeAssetToken',
+  REQUEST_REWARD: 'requestReward',
 } as const;
 
 export const DAPP_DATA = {
