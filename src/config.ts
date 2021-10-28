@@ -26,4 +26,7 @@ export const DAPP_DATA = {
   user: {
     email: { scope: 'user', key: 'email' },
   },
+  order: {
+    data: { scope: 'order', key: 'data' },
+  },
 } as const;

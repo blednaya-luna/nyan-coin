@@ -25,11 +25,13 @@ import {
 } from 'features/RequestReward';
 import { $user } from 'stores/account';
 import { $filteredAssets, AssetsGate } from 'stores/assets';
+import { OrdersGate } from 'stores/orders';
 
 export const User = () => {
   const user = useStore($user);
   const { address } = useParams<{ address: string }>();
   useGate(AssetsGate, { address, withAssetsWithEmptyBalance: false });
+  useGate(OrdersGate, { address });
 
   return (
     <>
