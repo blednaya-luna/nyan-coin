@@ -19,6 +19,14 @@ func getStringByKey(key: String) = {
   string
 }
 
+func getBooleanByKey(key: String) = {
+  let boolean = match getBoolean(this, key) {
+      case a:Boolean => a
+      case _ => false
+    }
+    boolean
+}
+
 func addressToString(address: Address) = {
   toBase58String(address.bytes)
 }
@@ -37,11 +45,18 @@ func isAdmin(caller: Address) = {
   this == caller
 }
 
-func getUserEmailKey(userEmail: String) = {
-  "user_<" + userEmail + ">_email"
+func getUserEmailKey(userAddress: String) = {
+  "user_<" + userAddress + ">_email"
 }
-func getUserEmailValue(userEmail: String) = {
-  getStringByKey(getUserEmailKey(userEmail))
+func getUserEmailValue(userAddress: String) = {
+  getStringByKey(getUserEmailKey(userAddress))
+}
+
+func getResponsibleKey(userAddress: String) = {
+  "user_<" + userAddress + ">_responsible"
+}
+func getResponsibleValue(userAddress: String) = {
+  getBooleanByKey(getResponsibleKey(userAddress))
 }
 
 func getNyanTokenKey(dAppAddress: Address) = {
@@ -252,6 +267,34 @@ func exchangeAssetToken(assetId: String, amount: Int) = {
         Burn(paymentAssetId, assetAmount)
       ]
     }
+  }
+}
+
+@Callable(i)
+func setResponsibleStatus(userAddress: String) = {
+  let isResponsible = getResponsibleValue(userAddress)
+
+  if (isResponsible)
+  then {
+    throw("User already have responsible status")
+  } else {
+    [
+      BooleanEntry(getResponsibleKey(userAddress), true)
+    ]
+  }
+}
+
+@Callable(i)
+func revokeResponsibleStatus(userAddress: String) = {
+  let isResponsible = getResponsibleValue(userAddress)
+
+  if (!isResponsible)
+  then {
+    throw("User already don't have responsible status")
+  } else {
+    [
+      BooleanEntry(getResponsibleKey(userAddress), false)
+    ]
   }
 }
 
