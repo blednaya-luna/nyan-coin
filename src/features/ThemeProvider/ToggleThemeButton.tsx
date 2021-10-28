@@ -15,7 +15,6 @@ export const ToggleThemeButton: FC<IconButtonProps> = ({ ...props }) => {
       title={theme === 'dark' ? 'Toggle light theme' : 'Toggle dark theme'}
       size="medium"
       Icon={theme === 'dark' ? Brightness7 : Brightness4}
-      iconFontSize="default"
       onClick={() => toggleTheme()}
       {...props}
     />

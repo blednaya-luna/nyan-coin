@@ -15,7 +15,6 @@ export const GoHomeButton: FC<IconButtonProps> = ({ ...props }) => {
       title="Go to home page"
       size="medium"
       Icon={Home}
-      iconFontSize="default"
       onClick={() => push(APP_LOCATION.home)}
     />
   );

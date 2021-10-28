@@ -38,7 +38,6 @@ export const Dialog: FC<DialogProps> = ({
           <IconButton
             className={classes.closeButton}
             Icon={Close}
-            iconFontSize="default"
             onClick={onClose}
           />
         </Grid>

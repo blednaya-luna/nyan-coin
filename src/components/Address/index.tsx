@@ -1,4 +1,4 @@
-import { Box, Typography, Link } from '@material-ui/core';
+import { Box, Typography, Link, TypographyVariant } from '@material-ui/core';
 import { Visibility } from '@material-ui/icons';
 import React, { FC } from 'react';
 
@@ -15,6 +15,7 @@ type AddressProps = {
   scope?: Scope;
   type?: AddressScope;
   shortAddress?: boolean;
+  variant?: TypographyVariant;
   disableTypography?: boolean;
 };
 
@@ -22,18 +23,19 @@ export const Address: FC<AddressProps> = ({
   address,
   scope,
   type,
-  shortAddress,
+  shortAddress = true,
+  variant = 'caption',
   disableTypography,
 }) => {
   const classes = useStyles();
-  const adaptedAddress = shortAddress ? address : centerEllipsis(address);
+  const adaptedAddress = shortAddress ? centerEllipsis(address) : address;
 
   return (
     <Box className={classes.root}>
       {disableTypography ? (
         adaptedAddress
       ) : (
-        <Typography variant="caption">{adaptedAddress}</Typography>
+        <Typography variant={variant}>{adaptedAddress}</Typography>
       )}
       <IconButton
         className={classes.iconButton}
@@ -52,7 +54,6 @@ export const Address: FC<AddressProps> = ({
             className={classes.iconButton}
             title="See at Waves Explorer"
             Icon={Visibility}
-            onClick={() => copyAddressToClipboard(address)}
           />
         </Link>
       )}

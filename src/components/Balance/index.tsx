@@ -1,4 +1,4 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, TypographyVariant } from '@material-ui/core';
 import { Refresh } from '@material-ui/icons';
 import React, { FC } from 'react';
 
@@ -9,12 +9,14 @@ import { useStyles } from './styles';
 export type BalanceProps = {
   balance: number | null;
   refreshBalance?: () => void;
+  variant?: TypographyVariant;
   disableTypography?: boolean;
 };
 
 export const Balance: FC<BalanceProps> = ({
   balance,
   refreshBalance,
+  variant = 'caption',
   disableTypography,
 }) => {
   const classes = useStyles();
@@ -25,7 +27,7 @@ export const Balance: FC<BalanceProps> = ({
       {disableTypography ? (
         userBalance
       ) : (
-        <Typography variant="caption">{userBalance}</Typography>
+        <Typography variant={variant}>{userBalance}</Typography>
       )}
       {refreshBalance && (
         <IconButton
