@@ -2,6 +2,10 @@
 {-# CONTENT_TYPE DAPP #-}
 {-# SCRIPT_TYPE ACCOUNT #-}
 
+let orderStatusNew = "NEW"
+let orderStatusWIP = "WIP"
+let orderStatusDone = "DONE"
+
 func getNumberByKey(key: String) = {
   let number = match getInteger(this, key) {
     case a:Int => a
@@ -41,6 +45,10 @@ func stringToByteVector(string: String) = {
   fromBase58String(string)
 }
 
+func intToString(integer: Int) = {
+  toString(integer)
+}
+
 func isAdmin(caller: Address) = {
   this == caller
 }
@@ -78,6 +86,14 @@ func getAssetDataKey(assetId: String) = {
 }
 func getAssetDataValue(assetId: String) = {
   getStringByKey(getAssetPriceKey(assetId))
+}
+
+func getOrderDataKey(assetId: String, userAddress: String, transactionId: String) = {
+  # TODO change key?
+  "order_<" + assetId + "_" + userAddress + "_" + transactionId + ">_data" 
+}
+func getOrderDataValue(assetId: String, userAddress: String, transactionId: String) = {
+  getStringByKey(getOrderDataKey(assetId, userAddress, transactionId))
 }
 
 @Callable(i)
@@ -274,13 +290,15 @@ func exchangeAssetToken(assetId: String, amount: Int) = {
 func setResponsibleStatus(userAddress: String) = {
   let isResponsible = getResponsibleValue(userAddress)
 
-if (!isAdmin(i.caller))
+  if (!isAdmin(i.caller))
   then {
     throw("Function invoke not allowed, requested from non-admin address")
-  } else if (isResponsible)
+  }
+  else if (isResponsible)
   then {
     throw("User already have responsible status")
   } else {
+    # TODO replace to list of responsible?
     [
       BooleanEntry(getResponsibleKey(userAddress), true)
     ]
@@ -291,15 +309,50 @@ if (!isAdmin(i.caller))
 func revokeResponsibleStatus(userAddress: String) = {
   let isResponsible = getResponsibleValue(userAddress)
 
-if (!isAdmin(i.caller))
+  if (!isAdmin(i.caller))
   then {
     throw("Function invoke not allowed, requested from non-admin address")
-  } else if (!isResponsible)
+  }
+  else if (!isResponsible)
   then {
     throw("User already don't have responsible status")
-  } else {
+  }
+  else {
+    # replace to DeleteEntry
     [
       BooleanEntry(getResponsibleKey(userAddress), false)
+    ]
+  }
+}
+
+@Callable(i)
+func requestReward() ={
+  let payments = i.payments
+
+  if (size(payments) == 0)
+  then {
+    throw("You need to attach the payment")
+  }
+  else {
+    # TODO check that it's our token
+    let paymentAssetId = value(payments[0].assetId)
+    let paymentAmount = payments[0].amount
+    let assetId = byteVectorToString(paymentAssetId)
+    let userAddress = addressToString(i.caller)
+    let amount = intToString(paymentAmount)
+    let transactionId = byteVectorToString(i.transactionId)
+    let orderData =
+    "{" +
+      "\"assetId\":\""+ assetId + "\"," +
+      "\"amount\":\""+ amount + "\"," +
+      "\"userAddress\":\""+ userAddress + "\"," +
+      "\"transactionId\":\""+ transactionId + "\"," +
+      "\"status\":\""+ orderStatusNew + "\"" +
+    "}"
+
+    [
+      StringEntry(getOrderDataKey(assetId, userAddress, transactionId), orderData),
+      Burn(paymentAssetId, paymentAmount)
     ]
   }
 }
