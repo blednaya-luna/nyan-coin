@@ -7,14 +7,12 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import { Edit, DeleteForever } from '@material-ui/icons';
 import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
 import { Address } from 'components/Address';
 import { Avatar } from 'components/Avatar';
 import { Balance } from 'components/Balance';
-import { IconButton } from 'components/IconButton';
 import {
   TransferTokensButton,
   TransferTokensModal,
@@ -61,12 +59,6 @@ export const UsersTab: FC = () => {
                 </TableCell>
                 <TableCell>
                   <TransferTokensButton recipient={user} />
-                  <IconButton title="Edit user" Icon={Edit} disabled />
-                  <IconButton
-                    title="Revoke user"
-                    Icon={DeleteForever}
-                    disabled
-                  />
                 </TableCell>
               </TableRow>
             ))}

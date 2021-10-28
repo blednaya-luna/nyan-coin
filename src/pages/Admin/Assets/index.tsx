@@ -16,6 +16,8 @@ import { IssueAssetButton, IssueAssetModal } from 'features/IssueAsset';
 import { ReissueAssetButton, ReissueAssetModal } from 'features/ReissueAsset';
 import { $assets, AssetsGate } from 'stores/assets';
 
+import { Balance } from '../../../components/Balance';
+
 export const AssetsTab: FC = () => {
   useGate(AssetsGate, { address: DAPP, withAssetsWithEmptyBalance: true });
 
@@ -38,11 +40,15 @@ export const AssetsTab: FC = () => {
               <TableRow>
                 <TableCell>{asset.name}</TableCell>
                 <TableCell>{asset.description}</TableCell>
+                <TableCell>{`${asset.price} NT`}</TableCell>
                 <TableCell>
-                  {`${asset.price} NT`}
-                  {/* TODO add refresh icon button */}
+                  <Balance
+                    balance={asset.balance}
+                    // TODO add refresh balance
+                    refreshBalance={() => {}}
+                    disableTypography
+                  />
                 </TableCell>
-                <TableCell>{asset.balance}</TableCell>
                 <TableCell>
                   <Address
                     address={asset.assetId}
