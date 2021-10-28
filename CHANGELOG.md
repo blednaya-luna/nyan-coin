@@ -1,3 +1,32 @@
+## [1.1.0](https://github.com/blednaya-luna/nyan-coin/compare/v1.0.0...v1.1.0) (2021-10-28)
+
+
+### Features
+
+* **dApp:** prototype of requestReward function added ([a77fa57](https://github.com/blednaya-luna/nyan-coin/commit/a77fa57f7fededb9043ab426a5dc5fa1e688ddfb))
+* **dApp:** reject to set and revoke responsible status to non-admin ([396cdeb](https://github.com/blednaya-luna/nyan-coin/commit/396cdeb4f5d3e3ad60cfc794df3198960e451e2a))
+* **dApp:** smart contract can set and revoke responsible status to user ([b26de18](https://github.com/blednaya-luna/nyan-coin/commit/b26de1838097ddeb014a04a964206afca0e58a79))
+* **deploy:** script can update dApp now ([e73e6ad](https://github.com/blednaya-luna/nyan-coin/commit/e73e6ad09075968bc6e2b5ac749819f6baf90633))
+* **global:** update packages, fix test, update dapp config ([6d1d2ef](https://github.com/blednaya-luna/nyan-coin/commit/6d1d2ef68be563ff41e55c7e14f17f380063c15b))
+* **my-assets:** added page with displaying user assets by address ([946fb00](https://github.com/blednaya-luna/nyan-coin/commit/946fb0070aab34d1847f31c4e5c0acd771fcbd60))
+* **orders:** added alfa-prototype of displaying orders from dApp ([7fae5d5](https://github.com/blednaya-luna/nyan-coin/commit/7fae5d5e72c622c2039f26bed389a467d875adca))
+* **request reward:** added request reward functionality ([93169a1](https://github.com/blednaya-luna/nyan-coin/commit/93169a1bf71e784fb2afd0ff4343b1b81442f4d1))
+* **user:** added user page and provide to avatar push to user page ([807f3df](https://github.com/blednaya-luna/nyan-coin/commit/807f3df1edcc0f472d761ccc02b674100c7c2164))
+* **user:** user page, connect info and assets table, some refactor ([7df5594](https://github.com/blednaya-luna/nyan-coin/commit/7df5594bc9f4d61051052255abcbcd58124b06c3))
+
+
+### Bug Fixes
+
+* **configs:** added KV to responsible dApp data ([33e7de8](https://github.com/blednaya-luna/nyan-coin/commit/33e7de8d11c44d9afae4418c550b88b457e718ff))
+* **prettier:** added semantic-release config to prettier ([c9ab0fa](https://github.com/blednaya-luna/nyan-coin/commit/c9ab0fa1b7045a666807fc6016b78ab0f588b9c9))
+* **semantic-release:** change semantic-release config extension ([c1fd974](https://github.com/blednaya-luna/nyan-coin/commit/c1fd97479f964f386cd598e6e2d6843d9247b077))
+* **semantic-release:** fix semantic-release config ([2370d81](https://github.com/blednaya-luna/nyan-coin/commit/2370d81f46c68c61843a27981c971e442aa17b38))
+
+
+### CI/CD
+
+* **husky:** disable husky in CI ([e64b32b](https://github.com/blednaya-luna/nyan-coin/commit/e64b32bc98f64ef79042af438f899a75eb06dc84))
+
 ## 1.0.0 (2021-10-25)
 
 
