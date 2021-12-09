@@ -24,8 +24,11 @@ func getBooleanByKey(key: String) = {
   }
 }
 
-func isAdmin(caller: Address) = {
-  this == caller
+func getNyanTokenKey() = {
+  "dApp_<" + toBase58String(this.bytes) +">_tokenId"
+}
+func getNyanTokenValue() = {
+  getStringByKey(getNyanTokenKey())
 }
 
 func getUserEmailKey(userAddress: String) = {
@@ -35,18 +38,11 @@ func getUserEmailValue(userAddress: String) = {
   getStringByKey(getUserEmailKey(userAddress))
 }
 
-func getResponsibleKey(userAddress: String) = {
+func getUserResponsibleKey(userAddress: String) = {
   "user_<" + userAddress + ">_responsible"
 }
-func getResponsibleValue(userAddress: String) = {
-  getBooleanByKey(getResponsibleKey(userAddress))
-}
-
-func getNyanTokenKey() = {
-  "dApp_<" + toBase58String(this.bytes) +">_tokenId"
-}
-func getNyanTokenValue() = {
-  getStringByKey(getNyanTokenKey())
+func getUserResponsibleValue(userAddress: String) = {
+  getBooleanByKey(getUserResponsibleKey(userAddress))
 }
 
 func getAssetPriceKey(assetId: String) = {
@@ -56,19 +52,39 @@ func getAssetPriceValue(assetId: String) = {
   getNumberByKey(getAssetPriceKey(assetId))
 }
 
-func getAssetDataKey(assetId: String) = {
-  "asset_<" + assetId + ">_data"
+func getOrderAssetIdKey(orderId: String) = {
+  "order_<" + orderId + ">_asset" 
 }
-func getAssetDataValue(assetId: String) = {
-  getStringByKey(getAssetPriceKey(assetId))
+func getOrderAssetIdValue(orderId: String) = {
+  getStringByKey(getOrderAssetIdKey(orderId))
 }
 
-func getOrderDataKey(assetId: String, userAddress: String, transactionId: String) = {
-  # TODO change key?
-  "order_<" + assetId + "_" + userAddress + "_" + transactionId + ">_data" 
+func getOrderAmountKey(orderId: String) = {
+  "order_<" + orderId + ">_amount" 
 }
-func getOrderDataValue(assetId: String, userAddress: String, transactionId: String) = {
-  getStringByKey(getOrderDataKey(assetId, userAddress, transactionId))
+func getOrderAmountValue(orderId: String) = {
+  getNumberByKey(getOrderAmountKey(orderId))
+}
+
+func getOrderUserAddressKey(orderId: String) = {
+  "order_<" + orderId + ">_user" 
+}
+func getOrderUserAddressValue(orderId: String) = {
+  getStringByKey(getOrderUserAddressKey(orderId))
+}
+
+func getOrderStatusKey(orderId: String) = {
+  "order_<" + orderId + ">_status" 
+}
+func getOrderStatusValue(orderId: String) = {
+  getStringByKey(getOrderStatusKey(orderId))
+}
+
+func isAdmin(caller: Address) = {
+  this == caller
+}
+func isResponsible(caller: Address) = {
+  getUserResponsibleValue(toBase58String(caller.bytes))
 }
 
 @Callable(i)
@@ -80,7 +96,8 @@ func signUp(email: String) = {
     throw("User " + userEmail + " is already registered")
   } else {
     [
-      StringEntry(getUserEmailKey(userAddress), email)
+      StringEntry(getUserEmailKey(userAddress), email),
+      BooleanEntry(getUserResponsibleKey(userAddress), false)
     ]
   }
 }
@@ -151,8 +168,7 @@ func issueAssetToken(name: String, description: String, quantity: Int, price: In
   } else if (quantity == 0) then {
     [
       assetTokenIssue,
-      IntegerEntry(getAssetPriceKey(assetToken), price),
-      StringEntry(getAssetDataKey(assetToken), data)
+      IntegerEntry(getAssetPriceKey(assetToken), price)
     ]
   } else {
     let nyanTokenAssetId = fromBase58String(getNyanTokenValue())
@@ -166,8 +182,7 @@ func issueAssetToken(name: String, description: String, quantity: Int, price: In
       [
         assetTokenIssue,
         Burn(nyanTokenAssetId, amount),
-        IntegerEntry(getAssetPriceKey(assetToken), price),
-        StringEntry(getAssetDataKey(assetToken), data)
+        IntegerEntry(getAssetPriceKey(assetToken), price)
       ]
     }
   }
@@ -227,30 +242,26 @@ func exchangeAssetToken(assetId: String, amount: Int) = {
 
 @Callable(i)
 func setResponsibleStatus(userAddress: String) = {
-  let isResponsible = getResponsibleValue(userAddress)
-
   if (!isAdmin(i.caller)) then {
     throw("Function invoke not allowed, requested from non-admin address")
-  } else if (isResponsible) then {
+  } else if (isResponsible(i.caller)) then {
     throw("User already have responsible status")
   } else {
     [
-      BooleanEntry(getResponsibleKey(userAddress), true)
+      BooleanEntry(getUserResponsibleKey(userAddress), true)
     ]
   }
 }
 
 @Callable(i)
 func revokeResponsibleStatus(userAddress: String) = {
-  let isResponsible = getResponsibleValue(userAddress)
-
   if (!isAdmin(i.caller)) then {
     throw("Function invoke not allowed, requested from non-admin address")
-  } else if (!isResponsible) then {
+  } else if (!isResponsible(i.caller)) then {
     throw("User already don't have responsible status")
   } else {
     [
-      BooleanEntry(getResponsibleKey(userAddress), false)
+      BooleanEntry(getUserResponsibleKey(userAddress), false)
     ]
   }
 }
@@ -264,24 +275,53 @@ func requestReward() = {
     throw("You need to attach the payment")
   } else {
     # TODO check that it is our token
+    let orderId = toBase58String(i.transactionId)
     let paymentAssetId = value(payments[0].assetId)
-    let paymentAmount = payments[0].amount
     let assetId = toBase58String(paymentAssetId)
+    let amount = payments[0].amount
     let userAddress = toBase58String(i.caller.bytes)
-    let amount = toString(paymentAmount)
-    let transactionId = toBase58String(i.transactionId)
-    let orderData =
-    "{" +
-      "\"assetId\":\"" + assetId + "\"," +
-      "\"amount\":\"" + amount + "\"," +
-      "\"userAddress\":\"" + userAddress + "\"," +
-      "\"transactionId\":\"" + transactionId + "\"," +
-      "\"status\":\"" + "NEW" + "\"" +
-    "}"
-
     [
-      StringEntry(getOrderDataKey(assetId, userAddress, transactionId), orderData),
-      Burn(paymentAssetId, paymentAmount)
+      StringEntry(getOrderAssetIdKey(orderId), assetId),
+      IntegerEntry(getOrderAmountKey(orderId), amount),
+      StringEntry(getOrderUserAddressKey(orderId), userAddress),
+      StringEntry(getOrderStatusKey(orderId), "NEW"),
+      Burn(paymentAssetId, amount)
+    ]
+  }
+}
+
+# WIP
+@Callable(i)
+func getRequestToWork(orderId: String) = {
+  let orderStatus = getOrderStatusValue(orderId)
+
+  if (!isResponsible(i.caller)) then {
+    throw("rejected")
+  } else if (orderStatus == "WIP") then {
+    throw("rejected")
+  } else if (orderStatus == "DONE") then {
+    throw("rejected")
+  } else {
+    [
+      StringEntry(getOrderStatusKey(orderId), "WIP")
+    ]
+  }
+}
+
+# WIP
+@Callable(i)
+func closeOrder(orderId: String) = {
+  let orderStatus = getOrderStatusValue(orderId)
+
+  if (!isResponsible(i.caller)) then {
+    throw("rejected")
+  } else if (orderStatus == "NEW") then {
+    throw("rejected")
+  } else if (orderStatus == "DONE") then {
+    throw("rejected")
+  } else {
+    [
+      StringEntry(getOrderStatusKey(orderId), "DONE")
     ]
   }
 }
