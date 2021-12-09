@@ -286,9 +286,6 @@ func requestReward() = {
   }
 }
 
-# @Verifier(tx)
-# func verify() = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
-
 @Verifier(tx)
 func verify() = {
   match tx {
