@@ -46,6 +46,8 @@ export const AssetsTab: FC = () => {
                     balance={asset.balance}
                     // TODO add refresh balance
                     refreshBalance={() => {}}
+                    type="token"
+                    disabled
                     disableTypography
                   />
                 </TableCell>

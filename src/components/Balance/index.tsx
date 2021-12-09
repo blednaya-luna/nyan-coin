@@ -9,6 +9,8 @@ import { useStyles } from './styles';
 export type BalanceProps = {
   balance: number | null;
   refreshBalance?: () => void;
+  type?: 'NT' | 'token';
+  disabled?: boolean;
   variant?: TypographyVariant;
   disableTypography?: boolean;
 };
@@ -16,11 +18,15 @@ export type BalanceProps = {
 export const Balance: FC<BalanceProps> = ({
   balance,
   refreshBalance,
+  type = 'NT',
+  disabled,
   variant = 'caption',
   disableTypography,
 }) => {
   const classes = useStyles();
-  const userBalance = balance ? `${balance} NT` : '0 NT';
+  const tokenBalance = balance ?? 0;
+  const tokenType = type === 'NT' ? 'NT' : 'pcs.';
+  const userBalance = `${tokenBalance} ${tokenType}`;
 
   return (
     <Box className={classes.root}>
@@ -35,6 +41,7 @@ export const Balance: FC<BalanceProps> = ({
           title="Refresh balance"
           Icon={Refresh}
           onClick={refreshBalance}
+          disabled={disabled}
         />
       )}
     </Box>
