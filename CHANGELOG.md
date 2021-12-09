@@ -1,3 +1,18 @@
+## [1.2.0](https://github.com/blednaya-luna/nyan-coin/compare/v1.1.0...v1.2.0) (2021-12-09)
+
+
+### Features
+
+* **admin:** user assets balance ([f20025c](https://github.com/blednaya-luna/nyan-coin/commit/f20025c66d1c55505abc865f8a54484daf121689))
+* **dApp:** added new features in dApp [unstable] ([ed918f8](https://github.com/blednaya-luna/nyan-coin/commit/ed918f8e6614b5188efae3a29741f3416cfdbd0d))
+* **pages:** remove home page ([e5d7135](https://github.com/blednaya-luna/nyan-coin/commit/e5d7135f856c5d6b2f91972b3d9e586969f82d6c))
+
+
+### Refactor
+
+* **dApp:** refactor dApp script ([5f0d099](https://github.com/blednaya-luna/nyan-coin/commit/5f0d099e5d494a747b9c448c21770ad788b2dfa8))
+* **dApp:** refactor dApp script, bump stdlib version to 5 ([809d830](https://github.com/blednaya-luna/nyan-coin/commit/809d8308b8e2b5ceb1e505fea3f5a6f5929325ee))
+
 ## [1.1.0](https://github.com/blednaya-luna/nyan-coin/compare/v1.0.0...v1.1.0) (2021-10-28)
 
 
