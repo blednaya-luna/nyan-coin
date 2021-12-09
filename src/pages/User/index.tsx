@@ -59,6 +59,7 @@ export const User = () => {
                 balance={user.balance}
                 // TODO add refresh balance
                 refreshBalance={() => {}}
+                disabled
                 variant="subtitle2"
               />
             </>
@@ -90,7 +91,16 @@ export const User = () => {
                   <TableRow>
                     <TableCell>{asset.name}</TableCell>
                     <TableCell>{asset.description}</TableCell>
-                    <TableCell>{asset.balance}</TableCell>
+                    <TableCell>
+                      <Balance
+                        balance={asset.balance}
+                        // TODO add refresh balance
+                        refreshBalance={() => {}}
+                        type="token"
+                        disabled
+                        disableTypography
+                      />
+                    </TableCell>
                     <TableCell>
                       <Address
                         address={asset.assetId}
