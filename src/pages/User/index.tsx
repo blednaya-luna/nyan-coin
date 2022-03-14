@@ -23,15 +23,16 @@ import {
   selectAssetToRequestReward,
   RequestRewardModal,
 } from 'features/RequestReward';
-import { $user } from 'stores/account';
 import { $filteredAssets, AssetsGate } from 'stores/assets';
 import { OrdersGate } from 'stores/orders';
+import { UserGate, $user } from 'stores/user';
 
 export const User = () => {
-  const user = useStore($user);
   const { address } = useParams<{ address: string }>();
+  useGate(UserGate, { address });
   useGate(AssetsGate, { address, withAssetsWithEmptyBalance: false });
   useGate(OrdersGate, { address });
+  const user = useStore($user);
 
   return (
     <>
@@ -55,13 +56,7 @@ export const User = () => {
                 variant="subtitle2"
               />
               <Typography variant="subtitle2">{user.email}</Typography>
-              <Balance
-                balance={user.balance}
-                // TODO add refresh balance
-                refreshBalance={() => {}}
-                disabled
-                variant="subtitle2"
-              />
+              <Balance balance={user.balance} variant="subtitle2" />
             </>
           )}
         </Box>
@@ -94,10 +89,7 @@ export const User = () => {
                     <TableCell>
                       <Balance
                         balance={asset.balance}
-                        // TODO add refresh balance
-                        refreshBalance={() => {}}
                         type="token"
-                        disabled
                         disableTypography
                       />
                     </TableCell>
