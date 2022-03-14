@@ -5,6 +5,7 @@ import {
   createEffect,
   forward,
   attach,
+  guard,
 } from 'effector';
 import { createGate } from 'effector-react';
 
@@ -55,9 +56,11 @@ export const reissueTokenFx = attach<
   }),
 });
 
-forward({
-  from: BalanceGate.open,
-  to: fetchDAppBalance,
+guard({
+  source: $dAppBalance,
+  clock: BalanceGate.open,
+  filter: (balance) => balance === 0,
+  target: fetchDAppBalance,
 });
 
 forward({
@@ -69,5 +72,3 @@ forward({
   from: reissueTokenFx.done,
   to: closeReissueTokenModal,
 });
-
-// TODO not reftech is exist balance
