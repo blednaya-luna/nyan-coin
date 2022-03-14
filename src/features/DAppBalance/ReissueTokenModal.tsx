@@ -8,7 +8,7 @@ import {
   ReissueTokenButton,
 } from './components';
 
-export const IssueTokenModal: FC = () => {
+export const ReissueTokenModal: FC = () => {
   return (
     <ReissueTokenDialog
       title="Reissue token"

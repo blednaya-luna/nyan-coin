@@ -6,8 +6,8 @@ import {
   DAppBalanceComponent,
   OpenReissueTokenModalButton,
 } from './components';
-import { IssueTokenModal } from './IssueTokenModal';
 import { BalanceGate } from './model';
+import { ReissueTokenModal } from './ReissueTokenModal';
 import { useStyles } from './styles';
 
 export const DAppBalance = () => {
@@ -20,7 +20,7 @@ export const DAppBalance = () => {
       <Typography variant="overline">dApp balance: </Typography>
       <DAppBalanceComponent />
       <OpenReissueTokenModalButton label="Reissue token" />
-      <IssueTokenModal />
+      <ReissueTokenModal />
     </Paper>
   );
 };
