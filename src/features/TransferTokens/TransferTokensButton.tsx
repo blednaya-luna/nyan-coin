@@ -1,3 +1,4 @@
+import { Send } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { Button } from 'components/Button';
@@ -13,6 +14,10 @@ export const TransferTokensButton: FC<TransferTokensButtonProps> = ({
   recipient,
 }) => {
   return (
-    <Button label="Transfer tokens" onClick={() => setRecipient(recipient)} />
+    <Button
+      label="Transfer tokens"
+      onClick={() => setRecipient(recipient)}
+      startIcon={<Send />}
+    />
   );
 };

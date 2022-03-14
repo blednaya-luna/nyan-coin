@@ -1,3 +1,4 @@
+import { Print } from '@material-ui/icons';
 import React, { FC } from 'react';
 
 import { Button } from 'components/Button';
@@ -11,6 +12,10 @@ type ReissueAssetButtonProps = {
 
 export const ReissueAssetButton: FC<ReissueAssetButtonProps> = ({ asset }) => {
   return (
-    <Button label="Reissue asset" onClick={() => selectAssetToReissue(asset)} />
+    <Button
+      label="Reissue asset"
+      onClick={() => selectAssetToReissue(asset)}
+      startIcon={<Print />}
+    />
   );
 };

@@ -1,4 +1,5 @@
 import { Paper, Typography } from '@material-ui/core';
+import { AccountBalanceWallet } from '@material-ui/icons';
 import { useGate } from 'effector-react';
 import React from 'react';
 
@@ -19,7 +20,10 @@ export const DAppBalance = () => {
     <Paper className={classes.root}>
       <Typography variant="overline">dApp balance: </Typography>
       <DAppBalanceComponent />
-      <OpenReissueTokenModalButton label="Reissue token" />
+      <OpenReissueTokenModalButton
+        label="Reissue token"
+        startIcon={<AccountBalanceWallet />}
+      />
       <ReissueTokenModal />
     </Paper>
   );

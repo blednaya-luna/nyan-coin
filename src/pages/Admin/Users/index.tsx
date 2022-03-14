@@ -8,6 +8,7 @@ import {
   TableRow,
   Box,
 } from '@material-ui/core';
+import { Refresh } from '@material-ui/icons';
 import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
@@ -35,7 +36,11 @@ export const UsersTab: FC = () => {
         <DAppBalance />
       </Box>
       <Box className={classes.actions}>
-        <Button label="Refresh" onClick={() => refreshUsers()} />
+        <Button
+          label="Refresh"
+          onClick={() => refreshUsers()}
+          startIcon={<Refresh />}
+        />
       </Box>
       <TableContainer component={Paper}>
         <Table size="small">

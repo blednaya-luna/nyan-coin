@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
+import { Refresh } from '@material-ui/icons';
 import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
@@ -34,7 +35,11 @@ export const AssetsTab: FC = () => {
       </Box>
       <Box className={classes.actions}>
         <IssueAssetButton />
-        <Button label="Refresh" onClick={() => refreshAssets()} />
+        <Button
+          label="Refresh"
+          onClick={() => refreshAssets()}
+          startIcon={<Refresh />}
+        />
       </Box>
       <TableContainer component={Paper}>
         <Table size="small">
