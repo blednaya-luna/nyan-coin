@@ -1,24 +1,25 @@
 import { reflect } from '@effector/reflect';
-import { Slide } from '@material-ui/core';
 
 import { Balance } from 'components/Balance';
 import { Button } from 'components/Button';
+import { Dialog } from 'components/Dialog';
 import {
   TextField,
   textFieldOnChangePrependToNumber,
 } from 'components/TextField';
 
 import {
-  $reissueTokenViewIsOpen,
+  $reissueTokenModalIsOpen,
   $quantity,
   setQuantity,
   $dAppBalance,
   refreshDAppBalance,
   reissueTokenFx,
-  openReissueTokenView,
+  openReissueTokenModal,
+  closeReissueTokenModal,
 } from './model';
 
-export const DAppBalance = reflect({
+export const DAppBalanceComponent = reflect({
   view: Balance,
   bind: {
     balance: $dAppBalance,
@@ -26,17 +27,18 @@ export const DAppBalance = reflect({
   },
 });
 
-export const OpenReissueTokenViewButton = reflect({
+export const OpenReissueTokenModalButton = reflect({
   view: Button,
   bind: {
-    onClick: () => openReissueTokenView(),
+    onClick: () => openReissueTokenModal(),
   },
 });
 
-export const ReissueTokenView = reflect({
-  view: Slide,
+export const ReissueTokenDialog = reflect({
+  view: Dialog,
   bind: {
-    in: $reissueTokenViewIsOpen,
+    open: $reissueTokenModalIsOpen,
+    onClose: closeReissueTokenModal,
   },
 });
 
@@ -53,5 +55,12 @@ export const ReissueTokenButton = reflect({
   bind: {
     onClick: () => reissueTokenFx(),
     disabled: $quantity.map((quantity) => quantity <= 0),
+  },
+});
+
+export const CancelReissueTokenButton = reflect({
+  view: Button,
+  bind: {
+    onClick: () => closeReissueTokenModal(),
   },
 });

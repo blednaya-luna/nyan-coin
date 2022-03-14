@@ -26,16 +26,16 @@ export const $dAppBalance = restore(
 
 export const refreshDAppBalance = createEvent();
 
-export const openReissueTokenView = createEvent();
-export const closeReissueTokenView = createEvent();
-export const $reissueTokenViewIsOpen = createStore(false)
-  .on(openReissueTokenView, () => true)
-  .on(closeReissueTokenView, () => false);
+export const openReissueTokenModal = createEvent();
+export const closeReissueTokenModal = createEvent();
+export const $reissueTokenModalIsOpen = createStore(false)
+  .on(openReissueTokenModal, () => true)
+  .reset(closeReissueTokenModal);
 
 export const setQuantity = createEvent<number>();
 export const $quantity = restore(setQuantity, 0)
   .reset(refreshDAppBalance)
-  .reset(closeReissueTokenView);
+  .reset(closeReissueTokenModal);
 
 export const reissueTokenFx = attach<
   void,
@@ -67,5 +67,7 @@ forward({
 
 forward({
   from: reissueTokenFx.done,
-  to: closeReissueTokenView,
+  to: closeReissueTokenModal,
 });
+
+// TODO not reftech is exist balance

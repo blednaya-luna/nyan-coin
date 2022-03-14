@@ -15,16 +15,24 @@ import { Address } from 'components/Address';
 import { Balance } from 'components/Balance';
 import { Button } from 'components/Button';
 import { DAPP } from 'config';
+import { DAppBalance } from 'features/DAppBalance';
 import { IssueAssetButton, IssueAssetModal } from 'features/IssueAsset';
 import { ReissueAssetButton, ReissueAssetModal } from 'features/ReissueAsset';
 import { $assets, AssetsGate, refreshAssets } from 'stores/assets';
 
+import { useStyles } from './styles';
+
 export const AssetsTab: FC = () => {
   useGate(AssetsGate, { address: DAPP, withAssetsWithEmptyBalance: true });
 
+  const classes = useStyles();
+
   return (
     <>
-      <Box p={2} display="flex" justifyContent="space-between">
+      <Box className={classes.balance}>
+        <DAppBalance />
+      </Box>
+      <Box className={classes.actions}>
         <IssueAssetButton />
         <Button label="Refresh" onClick={() => refreshAssets()} />
       </Box>

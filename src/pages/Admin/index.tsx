@@ -11,7 +11,6 @@ import React, { FC } from 'react';
 import { AppBar } from 'containers/AppBar';
 
 import { AssetsTab } from './Assets';
-import { BalanceTab } from './Balance';
 import { AdminTabs, AdminTabPanel } from './components';
 import { UsersTab } from './Users';
 
@@ -23,7 +22,6 @@ const Admin: FC = () => {
         <AdminTabs centered>
           <Tab label="Users" icon={<Person />} wrapped />
           <Tab label="Assets" icon={<Redeem />} wrapped />
-          <Tab label="Balance" icon={<AccountBalanceWallet />} wrapped />
           <Tab label="Orders" icon={<FormatListBulleted />} wrapped disabled />
           <Tab label="Achievements" icon={<EmojiEvents />} wrapped disabled />
         </AdminTabs>
@@ -33,9 +31,6 @@ const Admin: FC = () => {
       </AdminTabPanel>
       <AdminTabPanel index={1}>
         <AssetsTab />
-      </AdminTabPanel>
-      <AdminTabPanel index={2}>
-        <BalanceTab />
       </AdminTabPanel>
     </>
   );

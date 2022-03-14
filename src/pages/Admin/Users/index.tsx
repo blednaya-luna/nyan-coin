@@ -15,18 +15,26 @@ import { Address } from 'components/Address';
 import { Avatar } from 'components/Avatar';
 import { Balance } from 'components/Balance';
 import { Button } from 'components/Button';
+import { DAppBalance } from 'features/DAppBalance';
 import {
   TransferTokensButton,
   TransferTokensModal,
 } from 'features/TransferTokens';
 import { UsersGate, $users, refreshUsers } from 'stores/users';
 
+import { useStyles } from './styles';
+
 export const UsersTab: FC = () => {
   useGate(UsersGate);
 
+  const classes = useStyles();
+
   return (
     <>
-      <Box p={2} display="flex" justifyContent="flex-end">
+      <Box className={classes.balance}>
+        <DAppBalance />
+      </Box>
+      <Box className={classes.actions}>
         <Button label="Refresh" onClick={() => refreshUsers()} />
       </Box>
       <TableContainer component={Paper}>

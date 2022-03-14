@@ -16,7 +16,6 @@ export const fetchOrdersFx = createEffect(() =>
     ...DAPP_DATA.order.data,
   }),
 );
-fetchOrdersFx.doneData.watch(console.table);
 
 forward({
   from: OrdersGate.open,
