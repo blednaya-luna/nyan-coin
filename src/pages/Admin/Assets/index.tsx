@@ -1,4 +1,5 @@
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -11,18 +12,21 @@ import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
 
 import { Address } from 'components/Address';
+import { Balance } from 'components/Balance';
+import { Button } from 'components/Button';
 import { DAPP } from 'config';
 import { IssueAssetButton, IssueAssetModal } from 'features/IssueAsset';
 import { ReissueAssetButton, ReissueAssetModal } from 'features/ReissueAsset';
-import { $assets, AssetsGate } from 'stores/assets';
-
-import { Balance } from '../../../components/Balance';
+import { $assets, AssetsGate, refreshAssets } from 'stores/assets';
 
 export const AssetsTab: FC = () => {
   useGate(AssetsGate, { address: DAPP, withAssetsWithEmptyBalance: true });
 
   return (
     <>
+      <Box p={2} display="flex" justifyContent="flex-end">
+        <Button label="Refresh" onClick={() => refreshAssets()} />
+      </Box>
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -44,10 +48,7 @@ export const AssetsTab: FC = () => {
                 <TableCell>
                   <Balance
                     balance={asset.balance}
-                    // TODO add refresh balance
-                    refreshBalance={() => {}}
                     type="token"
-                    disabled
                     disableTypography
                   />
                 </TableCell>

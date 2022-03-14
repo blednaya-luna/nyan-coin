@@ -5,6 +5,7 @@ import {
   createEvent,
   combine,
   attach,
+  forward,
 } from 'effector';
 import { createGate } from 'effector-react';
 import { combineEvents, debounce } from 'patronum';
@@ -45,6 +46,8 @@ export const assetsLoaded = combineEvents({
 
 export const $assets = restore<Asset[]>(assetsLoaded, []);
 
+export const refreshAssets = createEvent();
+
 export const setSearchFieldValue = createEvent<string>();
 export const $searchFieldValue = restore(setSearchFieldValue, '');
 
@@ -68,4 +71,9 @@ guard({
   clock: AssetsGate.open,
   filter: (assets) => assets.length === 0,
   target: [fetchAssetsDataFx, fetchAssetsBalanceFx],
+});
+
+forward({
+  from: refreshAssets,
+  to: [fetchAssetsDataFx, fetchAssetsBalanceFx],
 });
