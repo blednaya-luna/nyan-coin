@@ -24,7 +24,8 @@ export const AssetsTab: FC = () => {
 
   return (
     <>
-      <Box p={2} display="flex" justifyContent="flex-end">
+      <Box p={2} display="flex" justifyContent="space-between">
+        <IssueAssetButton />
         <Button label="Refresh" onClick={() => refreshAssets()} />
       </Box>
       <TableContainer component={Paper}>
@@ -67,7 +68,6 @@ export const AssetsTab: FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <IssueAssetButton />
       <IssueAssetModal />
       <ReissueAssetModal />
     </>
