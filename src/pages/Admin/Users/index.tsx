@@ -6,6 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Box,
 } from '@material-ui/core';
 import { useGate, useList } from 'effector-react';
 import React, { FC } from 'react';
@@ -13,17 +14,21 @@ import React, { FC } from 'react';
 import { Address } from 'components/Address';
 import { Avatar } from 'components/Avatar';
 import { Balance } from 'components/Balance';
+import { Button } from 'components/Button';
 import {
   TransferTokensButton,
   TransferTokensModal,
 } from 'features/TransferTokens';
-import { UsersGate, $users, refreshUserBalance } from 'stores/users';
+import { UsersGate, $users, refreshUsers } from 'stores/users';
 
 export const UsersTab: FC = () => {
   useGate(UsersGate);
 
   return (
     <>
+      <Box p={2} display="flex" justifyContent="flex-end">
+        <Button label="Refresh" onClick={() => refreshUsers()} />
+      </Box>
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -51,11 +56,7 @@ export const UsersTab: FC = () => {
                   />
                 </TableCell>
                 <TableCell>
-                  <Balance
-                    balance={user.balance}
-                    refreshBalance={() => refreshUserBalance(user)}
-                    disableTypography
-                  />
+                  <Balance balance={user.balance} disableTypography />
                 </TableCell>
                 <TableCell>
                   <TransferTokensButton recipient={user} />

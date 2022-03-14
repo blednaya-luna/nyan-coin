@@ -9,7 +9,7 @@ import { extractValueFromKey } from 'api/utils';
 import { DAPP_DATA } from 'config';
 
 import { User } from './types';
-import { parseUsers, updateUserBalance } from './utils';
+import { parseUsers } from './utils';
 
 export const UsersGate = createGate();
 
@@ -37,14 +37,9 @@ const usersLoaded = combineEvents({
   },
 }).map(parseUsers);
 
-export const refreshUserBalance = createEvent<User>();
-const refreshUserBalanceFx =
-  createEffect<User, RawAccountTokenBalance>(accountTokenBalance);
+export const $users = restore<User[]>(usersLoaded, []);
 
-export const $users = restore<User[]>(usersLoaded, []).on(
-  refreshUserBalanceFx.doneData,
-  updateUserBalance,
-);
+export const refreshUsers = createEvent();
 
 guard({
   source: $users,
@@ -59,6 +54,6 @@ forward({
 });
 
 forward({
-  from: refreshUserBalance,
-  to: refreshUserBalanceFx,
+  from: refreshUsers,
+  to: fetchUsersDataFx,
 });

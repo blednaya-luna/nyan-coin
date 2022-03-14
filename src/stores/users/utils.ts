@@ -22,17 +22,3 @@ export const parseUsers = ({
       balance: balance ? balance.balance : 0,
     };
   });
-
-export const updateUserBalance = (
-  users: User[],
-  updatedBalance: RawAccountTokenBalance,
-) =>
-  users.map((user) =>
-    user.address === updatedBalance.address &&
-    user.balance !== updatedBalance.balance
-      ? {
-          ...user,
-          balance: updatedBalance.balance,
-        }
-      : user,
-  );
