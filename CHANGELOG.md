@@ -1,3 +1,21 @@
+## [1.3.0](https://github.com/blednaya-luna/nyan-coin/compare/v1.2.0...v1.3.0) (2022-03-14)
+
+
+### Features
+
+* **admin:** added icons to button ([19ab46f](https://github.com/blednaya-luna/nyan-coin/commit/19ab46f7032a1e78c7bf353ab248b23cb2575166))
+* **admin:** refactor and added new dapp balance widget ([6190f05](https://github.com/blednaya-luna/nyan-coin/commit/6190f0558fa7f41d7037b0b3b7fc5540f3605b9f))
+* **dAppBalance:** fix mistype ([ae17a25](https://github.com/blednaya-luna/nyan-coin/commit/ae17a250c48fd6a74ee949de57bd577f69702d71))
+* **dAppBalance:** fix unneeded update dApp balance ([22006cb](https://github.com/blednaya-luna/nyan-coin/commit/22006cb003cfb2c6102624f69ec538e28fc8e2eb))
+* **user:** wip new user page [unstable] ([23d878a](https://github.com/blednaya-luna/nyan-coin/commit/23d878a340fb1adc1e3cada68b1c0390ae9842d7))
+
+
+### Refactor
+
+* **admin:** refactor assets page ([bebf8d3](https://github.com/blednaya-luna/nyan-coin/commit/bebf8d3b96a54273da9453f29f9f5f4e34b89c26))
+* **admin:** refactor assets page ([ba463f3](https://github.com/blednaya-luna/nyan-coin/commit/ba463f386c2b3d8749187786f6f4a97191f360b8))
+* **admin:** refactor users page ([e474678](https://github.com/blednaya-luna/nyan-coin/commit/e4746782cdd3b7c31ccb733dd888d2cde32a3b24))
+
 ## [1.2.0](https://github.com/blednaya-luna/nyan-coin/compare/v1.1.0...v1.2.0) (2021-12-09)
 
 
